@@ -23,6 +23,7 @@ public class test {
             Method method=cls.getMethod("printString",String.class,String.class);//方法名和对应的参数类型
             Object o=method.invoke(obj,"chen","leixing");//调用得到的上边的方法method
             System.out.println(String.valueOf(o));//输出"chenleixing"
+            System.out.println("杜晓健");
         } catch (Exception e) {
             e.printStackTrace();
         }
