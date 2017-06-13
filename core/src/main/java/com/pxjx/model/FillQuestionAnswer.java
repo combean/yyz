@@ -25,62 +25,6 @@ public class FillQuestionAnswer implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
     public Integer getFillAnswerId() {
         return fillAnswerId;
     }

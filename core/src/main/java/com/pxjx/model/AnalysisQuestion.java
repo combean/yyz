@@ -23,62 +23,6 @@ public class AnalysisQuestion implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
     public Integer getAnalysisQuestionId() {
         return analysisQuestionId;
     }

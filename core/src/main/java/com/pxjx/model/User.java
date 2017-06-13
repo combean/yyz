@@ -81,62 +81,6 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
-    private static final long serialVersionUID = 1L;
-
     public Integer getUserId() {
         return userId;
     }
