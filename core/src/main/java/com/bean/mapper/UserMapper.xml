@@ -111,12 +111,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.bean.model.User">
-    insert into exm_user (user_id, user_username, user_password, 
-      user_class_id, memo, del, 
+    insert into exm_user (user_username, user_password,
+      user_class_id, memo,
       addname, addid, addtime
       )
-    values (#{userId,jdbcType=INTEGER}, #{userUsername,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
-      #{userClassId,jdbcType=INTEGER}, #{memo,jdbcType=VARCHAR}, #{del,jdbcType=BIT}, 
+    values (#{userUsername,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR},
+      #{userClassId,jdbcType=INTEGER}, #{memo,jdbcType=VARCHAR},
       #{addname,jdbcType=VARCHAR}, #{addid,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -345,22 +345,18 @@
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.bean.model.User">
+  <update id="editUserById" parameterType="com.bean.model.User">
     update exm_user
-    set user_username = #{userUsername,jdbcType=VARCHAR},
+    set
       user_password = #{userPassword,jdbcType=VARCHAR},
       user_class_id = #{userClassId,jdbcType=INTEGER},
       memo = #{memo,jdbcType=VARCHAR},
-      del = #{del,jdbcType=BIT},
-      addname = #{addname,jdbcType=VARCHAR},
-      addid = #{addid,jdbcType=INTEGER},
-      addtime = #{addtime,jdbcType=TIMESTAMP},
+      <if test="del != null">
+        del = #{del,jdbcType=BIT},
+      </if>
       editname = #{editname,jdbcType=VARCHAR},
       editid = #{editid,jdbcType=INTEGER},
-      edittime = #{edittime,jdbcType=TIMESTAMP},
-      deleteid = #{deleteid,jdbcType=INTEGER},
-      deletename = #{deletename,jdbcType=VARCHAR},
-      deletetime = #{deletetime,jdbcType=TIMESTAMP}
+      edittime = #{edittime,jdbcType=TIMESTAMP}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
 </mapper>

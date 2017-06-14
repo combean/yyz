@@ -9,4 +9,6 @@ public interface UserMapper {
 
     int insert(User user);
 
+    boolean editUserById(User user);
+
 }

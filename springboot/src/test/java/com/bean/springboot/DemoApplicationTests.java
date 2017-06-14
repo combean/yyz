@@ -22,12 +22,25 @@ public class DemoApplicationTests {
 	public void insertUser() throws  Exception{
 		User user = new User();
 		user.setUserUsername("duhongda");
-		user.setUserPassword("6666666");
+		user.setUserPassword("666666666");
 		user.setUserClassId(1);
 		user.setAddname("zhaoyan");
 		user.setAddtime(new Date());
 		user.setAddid(1);
 		userService.insertUser(user);
+	}
+
+	@Test
+	public void updateUser() throws Exception{
+		User user = new User();
+		user.setUserPassword("7777777");
+		user.setUserId(2);
+		user.setUserClassId(1);
+		user.setDel(0);
+		user.setEditname("zhaoyan");
+		user.setEdittime(new Date());
+		user.setEditid(1);
+		userService.editUserById(user);
 	}
 
 }
