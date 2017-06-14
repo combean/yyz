@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bean.dao.UserExamAnswerMapper">
+  <resultMap id="BaseResultMap" type="com.bean.model.UserExamAnswer">
+    <id column="user_exam_answer_id" jdbcType="INTEGER" property="userExamAnswerId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="paper_id" jdbcType="INTEGER" property="paperId" />
+    <result column="pqt_question_id" jdbcType="INTEGER" property="pqtQuestionId" />
+    <result column="blank_no" jdbcType="INTEGER" property="blankNo" />
+    <result column="answer_info" jdbcType="VARCHAR" property="answerInfo" />
+    <result column="if_right" jdbcType="BIT" property="ifRight" />
+    <result column="answer_time" jdbcType="TIMESTAMP" property="answerTime" />
+    <result column="answer_edit_time" jdbcType="TIMESTAMP" property="answerEditTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    user_exam_answer_id, user_id, paper_id, pqt_question_id, blank_no, answer_info, if_right, 
+    answer_time, answer_edit_time
+  </sql>
+  <select id="selectByExample" parameterType="com.bean.model.UserExamAnswerExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from exm_user_exam_answer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from exm_user_exam_answer
+    where user_exam_answer_id = #{userExamAnswerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from exm_user_exam_answer
+    where user_exam_answer_id = #{userExamAnswerId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bean.model.UserExamAnswerExample">
+    delete from exm_user_exam_answer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bean.model.UserExamAnswer">
+    insert into exm_user_exam_answer (user_exam_answer_id, user_id, paper_id, 
+      pqt_question_id, blank_no, answer_info, 
+      if_right, answer_time, answer_edit_time
+      )
+    values (#{userExamAnswerId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{paperId,jdbcType=INTEGER}, 
+      #{pqtQuestionId,jdbcType=INTEGER}, #{blankNo,jdbcType=INTEGER}, #{answerInfo,jdbcType=VARCHAR}, 
+      #{ifRight,jdbcType=BIT}, #{answerTime,jdbcType=TIMESTAMP}, #{answerEditTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.bean.model.UserExamAnswer">
+    insert into exm_user_exam_answer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userExamAnswerId != null">
+        user_exam_answer_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="paperId != null">
+        paper_id,
+      </if>
+      <if test="pqtQuestionId != null">
+        pqt_question_id,
+      </if>
+      <if test="blankNo != null">
+        blank_no,
+      </if>
+      <if test="answerInfo != null">
+        answer_info,
+      </if>
+      <if test="ifRight != null">
+        if_right,
+      </if>
+      <if test="answerTime != null">
+        answer_time,
+      </if>
+      <if test="answerEditTime != null">
+        answer_edit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userExamAnswerId != null">
+        #{userExamAnswerId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="paperId != null">
+        #{paperId,jdbcType=INTEGER},
+      </if>
+      <if test="pqtQuestionId != null">
+        #{pqtQuestionId,jdbcType=INTEGER},
+      </if>
+      <if test="blankNo != null">
+        #{blankNo,jdbcType=INTEGER},
+      </if>
+      <if test="answerInfo != null">
+        #{answerInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="ifRight != null">
+        #{ifRight,jdbcType=BIT},
+      </if>
+      <if test="answerTime != null">
+        #{answerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="answerEditTime != null">
+        #{answerEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bean.model.UserExamAnswerExample" resultType="java.lang.Long">
+    select count(*) from exm_user_exam_answer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update exm_user_exam_answer
+    <set>
+      <if test="record.userExamAnswerId != null">
+        user_exam_answer_id = #{record.userExamAnswerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.paperId != null">
+        paper_id = #{record.paperId,jdbcType=INTEGER},
+      </if>
+      <if test="record.pqtQuestionId != null">
+        pqt_question_id = #{record.pqtQuestionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.blankNo != null">
+        blank_no = #{record.blankNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.answerInfo != null">
+        answer_info = #{record.answerInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ifRight != null">
+        if_right = #{record.ifRight,jdbcType=BIT},
+      </if>
+      <if test="record.answerTime != null">
+        answer_time = #{record.answerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.answerEditTime != null">
+        answer_edit_time = #{record.answerEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update exm_user_exam_answer
+    set user_exam_answer_id = #{record.userExamAnswerId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      paper_id = #{record.paperId,jdbcType=INTEGER},
+      pqt_question_id = #{record.pqtQuestionId,jdbcType=INTEGER},
+      blank_no = #{record.blankNo,jdbcType=INTEGER},
+      answer_info = #{record.answerInfo,jdbcType=VARCHAR},
+      if_right = #{record.ifRight,jdbcType=BIT},
+      answer_time = #{record.answerTime,jdbcType=TIMESTAMP},
+      answer_edit_time = #{record.answerEditTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bean.model.UserExamAnswer">
+    update exm_user_exam_answer
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="paperId != null">
+        paper_id = #{paperId,jdbcType=INTEGER},
+      </if>
+      <if test="pqtQuestionId != null">
+        pqt_question_id = #{pqtQuestionId,jdbcType=INTEGER},
+      </if>
+      <if test="blankNo != null">
+        blank_no = #{blankNo,jdbcType=INTEGER},
+      </if>
+      <if test="answerInfo != null">
+        answer_info = #{answerInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="ifRight != null">
+        if_right = #{ifRight,jdbcType=BIT},
+      </if>
+      <if test="answerTime != null">
+        answer_time = #{answerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="answerEditTime != null">
+        answer_edit_time = #{answerEditTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where user_exam_answer_id = #{userExamAnswerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bean.model.UserExamAnswer">
+    update exm_user_exam_answer
+    set user_id = #{userId,jdbcType=INTEGER},
+      paper_id = #{paperId,jdbcType=INTEGER},
+      pqt_question_id = #{pqtQuestionId,jdbcType=INTEGER},
+      blank_no = #{blankNo,jdbcType=INTEGER},
+      answer_info = #{answerInfo,jdbcType=VARCHAR},
+      if_right = #{ifRight,jdbcType=BIT},
+      answer_time = #{answerTime,jdbcType=TIMESTAMP},
+      answer_edit_time = #{answerEditTime,jdbcType=TIMESTAMP}
+    where user_exam_answer_id = #{userExamAnswerId,jdbcType=INTEGER}
+  </update>
+</mapper>

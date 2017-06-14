@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bean.dao.AnalysisQuestionMapper">
+  <resultMap id="BaseResultMap" type="com.bean.model.AnalysisQuestion">
+    <id column="analysis_question_id" jdbcType="INTEGER" property="analysisQuestionId" />
+    <result column="f_question_id" jdbcType="INTEGER" property="fQuestionId" />
+    <result column="s_question_id" jdbcType="INTEGER" property="sQuestionId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    analysis_question_id, f_question_id, s_question_id
+  </sql>
+  <select id="selectByExample" parameterType="com.bean.model.AnalysisQuestionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from exm_analysis_question
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from exm_analysis_question
+    where analysis_question_id = #{analysisQuestionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from exm_analysis_question
+    where analysis_question_id = #{analysisQuestionId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.bean.model.AnalysisQuestionExample">
+    delete from exm_analysis_question
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.bean.model.AnalysisQuestion">
+    insert into exm_analysis_question (analysis_question_id, f_question_id, 
+      s_question_id)
+    values (#{analysisQuestionId,jdbcType=INTEGER}, #{fQuestionId,jdbcType=INTEGER}, 
+      #{sQuestionId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bean.model.AnalysisQuestion">
+    insert into exm_analysis_question
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="analysisQuestionId != null">
+        analysis_question_id,
+      </if>
+      <if test="fQuestionId != null">
+        f_question_id,
+      </if>
+      <if test="sQuestionId != null">
+        s_question_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="analysisQuestionId != null">
+        #{analysisQuestionId,jdbcType=INTEGER},
+      </if>
+      <if test="fQuestionId != null">
+        #{fQuestionId,jdbcType=INTEGER},
+      </if>
+      <if test="sQuestionId != null">
+        #{sQuestionId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.bean.model.AnalysisQuestionExample" resultType="java.lang.Long">
+    select count(*) from exm_analysis_question
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update exm_analysis_question
+    <set>
+      <if test="record.analysisQuestionId != null">
+        analysis_question_id = #{record.analysisQuestionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.fQuestionId != null">
+        f_question_id = #{record.fQuestionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sQuestionId != null">
+        s_question_id = #{record.sQuestionId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update exm_analysis_question
+    set analysis_question_id = #{record.analysisQuestionId,jdbcType=INTEGER},
+      f_question_id = #{record.fQuestionId,jdbcType=INTEGER},
+      s_question_id = #{record.sQuestionId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bean.model.AnalysisQuestion">
+    update exm_analysis_question
+    <set>
+      <if test="fQuestionId != null">
+        f_question_id = #{fQuestionId,jdbcType=INTEGER},
+      </if>
+      <if test="sQuestionId != null">
+        s_question_id = #{sQuestionId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where analysis_question_id = #{analysisQuestionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bean.model.AnalysisQuestion">
+    update exm_analysis_question
+    set f_question_id = #{fQuestionId,jdbcType=INTEGER},
+      s_question_id = #{sQuestionId,jdbcType=INTEGER}
+    where analysis_question_id = #{analysisQuestionId,jdbcType=INTEGER}
+  </update>
+</mapper>

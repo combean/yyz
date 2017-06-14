@@ -1,0 +1,16 @@
+com\bean\service\WebServiceImpl.class
+com\pxjx\service\UserServiceImpl.class
+com\bean\service\CardRechargeService.class
+com\bean\service\CardRechargeServiceImpl.class
+com\bean\service\CardRecordServiceImpl.class
+com\bean\service\WebService.class
+com\bean\service\VendingServiceImpl.class
+com\bean\service\VendingService.class
+com\bean\service\CanbinetService.class
+com\bean\service\VendingManagerServiceImpl.class
+com\bean\service\CardRecordService.class
+com\bean\service\VendingManagerService.class
+com\pxjx\service\UserService.class
+com\bean\service\CanbinetServiceImpl.class
+com\bean\service\CustomerCardService.class
+com\bean\service\CustomerCardServiceImpl.class
