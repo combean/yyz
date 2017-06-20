@@ -27,6 +27,38 @@ public class User implements Serializable {
      */
     private Integer userClassId;
 
+    /**
+     * 用户/学员手机
+     */
+    private String userMobile;
+
+    /**
+     * 用户/学员邮箱地址
+     */
+    private String userEmail;
+
+    /**
+     * 用户/学员姓名
+     */
+    private String userName;
+
+    /**
+     * 用户/学员头像地址
+     */
+    private String userProfileImg;
+
+    /**
+     * 用户/学员性别 1:男 0:女
+     */
+    private int userSex;
+
+    /**
+     * 用户班级名称
+     */
+    private String userClassName;
+    /**
+     * 备注
+     */
     private String memo;
 
     /**
@@ -105,6 +137,54 @@ public class User implements Serializable {
 
     public void setMemo(String memo) {
         this.memo = memo;
+    }
+
+    public String getUserMobile() {
+        return userMobile;
+    }
+
+    public void setUserMobile(String userMobile) {
+        this.userMobile = userMobile;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserProfileImg() {
+        return userProfileImg;
+    }
+
+    public void setUserProfileImg(String userProfileImg) {
+        this.userProfileImg = userProfileImg;
+    }
+
+    public int getUserSex() {
+        return userSex;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public void setUserSex(int userSex) {
+        this.userSex = userSex;
+    }
+
+    public String getUserClassName() {
+        return userClassName;
+    }
+
+    public void setUserClassName(String userClassName) {
+        this.userClassName = userClassName;
     }
 
     public Integer getDel() {

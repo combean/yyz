@@ -5,10 +5,9 @@ import com.bean.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utils.MyLogger;
+import java.util.List;
+import java.util.Map;
 
-/**
- * Created by bean on 2016/6/22.
- */
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
@@ -23,7 +22,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean editUserById(User user) {
-        return userMapper.editUserById(user);
+    public boolean updateUser(User user) {
+        return userMapper.update(user);
+    }
+
+    @Override
+    public User getUserByInfo(Map<String,String> map) {
+        return userMapper.getUserByInfo(map);
+    }
+
+    @Override
+    public List<User> getUserListByInfo(Map<String, String> map) {
+        return userMapper.getUserList(map);
+    }
+
+    @Override
+    public Integer getUserCountByInfo(Map<String, String> map) {
+        return userMapper.getUserCount(map);
     }
 }

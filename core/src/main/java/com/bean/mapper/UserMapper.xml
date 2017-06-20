@@ -6,6 +6,12 @@
     <result column="user_username" jdbcType="VARCHAR" property="userUsername" />
     <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
     <result column="user_class_id" jdbcType="INTEGER" property="userClassId" />
+    <result column="user_mobile" jdbcType="INTEGER" property="userMobile" />
+    <result column="user_email" jdbcType="INTEGER" property="userEmail" />
+    <result column="user_profile_img" jdbcType="INTEGER" property="userProfileImg" />
+    <result column="user_name" jdbcType="INTEGER" property="userName" />
+    <result column="user_sex" jdbcType="INTEGER" property="userSex" />
+    <result column="class_name" jdbcType="VARCHAR" property="userClassName" />
     <result column="memo" jdbcType="VARCHAR" property="memo" />
     <result column="del" jdbcType="BIT" property="del" />
     <result column="addname" jdbcType="VARCHAR" property="addname" />
@@ -18,6 +24,192 @@
     <result column="deletename" jdbcType="VARCHAR" property="deletename" />
     <result column="deletetime" jdbcType="TIMESTAMP" property="deletetime" />
   </resultMap>
+
+  <sql id="where">
+    <where>
+      <if test="userUsername != null">
+        AND user_username = #{userUsername,jdbcType=BIGINT}
+      </if>
+      <if test="userClassId != null">
+        AND user_class_id = #{userClassId,jdbcType=VARCHAR}
+      </if>
+      <if test="userMobile != null">
+        AND user_mobile = #{userMobile,jdbcType=VARCHAR}
+      </if>
+      <if test="userEmail != null">
+        AND user_email = #{userEmail,jdbcType=VARCHAR}
+      </if>
+      <if test="userName != null">
+        AND user_name = #{userName,jdbcType=VARCHAR}
+      </if>
+      <if test="userSex != null">
+        AND user_sex = #{userSex,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    user_id, user_username, user_password, user_class_id, user_mobile,
+    user_email, user_profile_img, user_name, user_sex, memo,
+    del, addname, addid, addtime, editname, editid, edittime
+  </sql>
+  <sql id="Column_List_With_Class">
+      u.user_id, u.user_username, u.user_password, u.user_class_id, u.user_mobile,
+      u.user_email, u.user_profile_img, u.user_name, u.user_sex, u.memo, c.class_name,
+      u.del, u.addname, u.addid, u.addtime, u.editname, u.editid, u.edittime
+  </sql>
+  <insert id="insert" parameterType="com.bean.model.User">
+    insert into exm_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userUsername != null">
+        user_username,
+      </if>
+      <if test="userPassword != null">
+        user_password,
+      </if>
+      <if test="userClassId != null">
+        user_class_id,
+      </if>
+      <if test="userMobile != null">
+        user_mobile,
+      </if>
+      <if test="userEmail != null">
+        user_email,
+      </if>
+      <if test="userProfileImg != null">
+        user_profile_img,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userSex != null">
+        user_sex,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+      <if test="del != null">
+        del,
+      </if>
+      <if test="addname != null">
+        addname,
+      </if>
+      <if test="addid != null">
+        addid,
+      </if>
+      <if test="addtime != null">
+        addtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userUsername != null">
+        #{userUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null">
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userClassId != null">
+        #{userClassId,jdbcType=INTEGER},
+      </if>
+      <if test="userMobile != null">
+        #{userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userProfileImg != null">
+        #{userProfileImg,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        #{userSex,jdbcType=BIT},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="del != null">
+        #{del,jdbcType=BIT},
+      </if>
+      <if test="addname != null">
+        #{addname,jdbcType=VARCHAR},
+      </if>
+      <if test="addid != null">
+        #{addid,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.bean.model.User">
+    UPDATE exm_user
+    <set>
+      <if test="userUsername != null">
+        user_username = #{userUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="userPassword != null">
+        user_password = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userClassId != null">
+        user_class_id = #{userClassId,jdbcType=INTEGER},
+      </if>
+      <if test="userMobile != null">
+        user_mobile = #{userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userProfileImg != null">
+        user_profile_img = #{userProfileImg,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userSex != null">
+        user_sex = #{userSex,jdbcType=BIT},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=INTEGER},
+      </if>
+      <if test="del != null">
+        del = #{del,jdbcType=BIT},
+      </if>
+      <if test="editname != null">
+        editname = #{editname,jdbcType=VARCHAR},
+      </if>
+      <if test="editid != null">
+        editid = #{editid,jdbcType=INTEGER},
+      </if>
+      <if test="edittime != null">
+        edittime = #{edittime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <where>
+      user_id = #{userId,jdbcType=INTEGER}
+    </where>
+  </update>
+  <select id="getUserByInfo" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Column_List_With_Class" />
+    FROM exm_user AS u
+    INNER JOIN exm_class AS c ON u.user_class_id = c.class_id
+    <include refid="where" />
+  </select>
+  <select id="getUserList" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Column_List_With_Class" />
+    FROM exm_user AS u
+    INNER JOIN exm_class AS c ON u.user_class_id = c.class_id
+    <include refid="where" />
+  </select>
+  <select id="getUserCount" parameterType="java.util.Map" resultType="int">
+    SELECT
+      COUNT(*)
+    FROM exm_user
+    <include refid="where" />
+  </select>
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -76,10 +268,7 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List">
-    user_id, user_username, user_password, user_class_id, memo, del, addname, addid, 
-    addtime, editname, editid, edittime, deleteid, deletename, deletetime
-  </sql>
+
   <select id="selectByExample" parameterType="com.bean.model.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -110,113 +299,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.bean.model.User">
-    insert into exm_user (user_username, user_password,
-      user_class_id, memo,
-      addname, addid, addtime
-      )
-    values (#{userUsername,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR},
-      #{userClassId,jdbcType=INTEGER}, #{memo,jdbcType=VARCHAR},
-      #{addname,jdbcType=VARCHAR}, #{addid,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.bean.model.User">
-    insert into exm_user
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="userUsername != null">
-        user_username,
-      </if>
-      <if test="userPassword != null">
-        user_password,
-      </if>
-      <if test="userClassId != null">
-        user_class_id,
-      </if>
-      <if test="memo != null">
-        memo,
-      </if>
-      <if test="del != null">
-        del,
-      </if>
-      <if test="addname != null">
-        addname,
-      </if>
-      <if test="addid != null">
-        addid,
-      </if>
-      <if test="addtime != null">
-        addtime,
-      </if>
-      <if test="editname != null">
-        editname,
-      </if>
-      <if test="editid != null">
-        editid,
-      </if>
-      <if test="edittime != null">
-        edittime,
-      </if>
-      <if test="deleteid != null">
-        deleteid,
-      </if>
-      <if test="deletename != null">
-        deletename,
-      </if>
-      <if test="deletetime != null">
-        deletetime,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="userUsername != null">
-        #{userUsername,jdbcType=VARCHAR},
-      </if>
-      <if test="userPassword != null">
-        #{userPassword,jdbcType=VARCHAR},
-      </if>
-      <if test="userClassId != null">
-        #{userClassId,jdbcType=INTEGER},
-      </if>
-      <if test="memo != null">
-        #{memo,jdbcType=VARCHAR},
-      </if>
-      <if test="del != null">
-        #{del,jdbcType=BIT},
-      </if>
-      <if test="addname != null">
-        #{addname,jdbcType=VARCHAR},
-      </if>
-      <if test="addid != null">
-        #{addid,jdbcType=INTEGER},
-      </if>
-      <if test="addtime != null">
-        #{addtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="editname != null">
-        #{editname,jdbcType=VARCHAR},
-      </if>
-      <if test="editid != null">
-        #{editid,jdbcType=INTEGER},
-      </if>
-      <if test="edittime != null">
-        #{edittime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="deleteid != null">
-        #{deleteid,jdbcType=INTEGER},
-      </if>
-      <if test="deletename != null">
-        #{deletename,jdbcType=VARCHAR},
-      </if>
-      <if test="deletetime != null">
-        #{deletetime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
+
   <select id="countByExample" parameterType="com.bean.model.UserExample" resultType="java.lang.Long">
     select count(*) from exm_user
     <if test="_parameter != null">
@@ -343,20 +426,6 @@
         deletetime = #{deletetime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where user_id = #{userId,jdbcType=INTEGER}
-  </update>
-  <update id="editUserById" parameterType="com.bean.model.User">
-    update exm_user
-    set
-      user_password = #{userPassword,jdbcType=VARCHAR},
-      user_class_id = #{userClassId,jdbcType=INTEGER},
-      memo = #{memo,jdbcType=VARCHAR},
-      <if test="del != null">
-        del = #{del,jdbcType=BIT},
-      </if>
-      editname = #{editname,jdbcType=VARCHAR},
-      editid = #{editid,jdbcType=INTEGER},
-      edittime = #{edittime,jdbcType=TIMESTAMP}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
 </mapper>
