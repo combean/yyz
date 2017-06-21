@@ -27,11 +27,14 @@
 
   <sql id="where">
     <where>
+      <if test="user_id !=null">
+        AND user_id = #{}
+      </if>
       <if test="userUsername != null">
-        AND user_username = #{userUsername,jdbcType=BIGINT}
+        AND user_username = #{userUsername,jdbcType=VARCHAR}
       </if>
       <if test="userClassId != null">
-        AND user_class_id = #{userClassId,jdbcType=VARCHAR}
+        AND user_class_id = #{userClassId,jdbcType=INTERGER}
       </if>
       <if test="userMobile != null">
         AND user_mobile = #{userMobile,jdbcType=VARCHAR}
