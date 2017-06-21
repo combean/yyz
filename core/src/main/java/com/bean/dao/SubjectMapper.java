@@ -1,30 +1,17 @@
 package com.bean.dao;
 
 import com.bean.model.Subject;
-import com.bean.model.SubjectExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import java.util.Map;
 
 public interface SubjectMapper {
-    long countByExample(SubjectExample example);
+    int insert(Subject subject);
 
-    int deleteByExample(SubjectExample example);
+    boolean update(Subject subject);
 
-    int deleteByPrimaryKey(Integer subjectId);
+    Subject getSubjectByInfo(Map<String,String> map);
 
-    int insert(Subject record);
+    List<Subject> getSubjectListByInfo(Map<String,String> map);
 
-    int insertSelective(Subject record);
-
-    List<Subject> selectByExample(SubjectExample example);
-
-    Subject selectByPrimaryKey(Integer subjectId);
-
-    int updateByExampleSelective(@Param("record") Subject record, @Param("example") SubjectExample example);
-
-    int updateByExample(@Param("record") Subject record, @Param("example") SubjectExample example);
-
-    int updateByPrimaryKeySelective(Subject record);
-
-    int updateByPrimaryKey(Subject record);
+    Integer getSubjectCountByInfo(Map<String,String> map);
 }
