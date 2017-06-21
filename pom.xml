@@ -19,42 +19,38 @@
      <provider-common.version>1.0-SNAPSHOT</provider-common.version>
  </properties>
 
-    <profiles>
-        <profile>
-            <id>jdk18</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-                <jdk>1.8</jdk>
-            </activation>
-            <properties>
-                <maven.compiler.source>1.8</maven.compiler.source>
-                <maven.compiler.target>1.8</maven.compiler.target>
-                <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
-            </properties>
-        </profile>
-        <profile>
-            <id>product</id>
-            <properties>
-                <package.environment>product</package.environment>
-            </properties>
-        </profile>
-        <profile>
-            <id>dev</id>
-            <properties>
-                <package.environment>dev</package.environment>
-            </properties>
-        </profile>
-        <profile>
-            <id>local</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <package.environment>local</package.environment>
-            </properties>
-        </profile>
+    <!--<profiles>-->
+        <!--<profile>-->
+            <!--<id>jdk18</id>-->
+            <!--<activation>-->
+                <!--<activeByDefault>true</activeByDefault>-->
+                <!--<jdk>1.8</jdk>-->
+            <!--</activation>-->
 
-    </profiles>
+        <!--</profile>-->
+        <!--<profile>-->
+            <!--<id>product</id>-->
+            <!--<properties>-->
+                <!--<package.environment>product</package.environment>-->
+            <!--</properties>-->
+        <!--</profile>-->
+        <!--<profile>-->
+            <!--<id>dev</id>-->
+            <!--<properties>-->
+                <!--<package.environment>dev</package.environment>-->
+            <!--</properties>-->
+        <!--</profile>-->
+        <!--<profile>-->
+            <!--<id>local</id>-->
+            <!--<activation>-->
+                <!--<activeByDefault>true</activeByDefault>-->
+            <!--</activation>-->
+            <!--<properties>-->
+                <!--<package.environment>local</package.environment>-->
+            <!--</properties>-->
+        <!--</profile>-->
+
+    <!--</profiles>-->
     <build>
         <plugins>
             <plugin>
