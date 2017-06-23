@@ -10,7 +10,11 @@ public class ClassSubject implements Serializable {
 
     private Integer classId;
 
+    private String className;
+
     private Integer subjectId;
+
+    private String subjectName;
 
     private static final long serialVersionUID = 1L;
 
@@ -36,5 +40,21 @@ public class ClassSubject implements Serializable {
 
     public void setSubjectId(Integer subjectId) {
         this.subjectId = subjectId;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public String getSubjectName() {
+        return subjectName;
+    }
+
+    public void setSubjectName(String subjectName) {
+        this.subjectName = subjectName;
     }
 }

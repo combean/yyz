@@ -24,7 +24,17 @@ public class ClassSubjectServiceImpl implements ClassSubjectService {
     }
 
     @Override
-    public boolean deleteByClassId(Integer classId) {
+    public Integer deleteByClassId(Integer classId) {
         return classSubjectMapper.deleteByClassId(classId);
+    }
+
+    @Override
+    public List<ClassSubject> getClassSubjectListByClassId(Integer classId) {
+        return classSubjectMapper.getClassSubjectListByClassId(classId);
+    }
+
+    @Override
+    public Integer deleteByClassSubjectId(Integer classId) {
+        return classSubjectMapper.deleteByClassSubjectId(classId);
     }
 }

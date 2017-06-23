@@ -7,5 +7,9 @@ public interface ClassSubjectMapper {
 
     void insert(List<ClassSubject> record);
 
-    boolean deleteByClassId(Integer classId);
+    Integer deleteByClassId(Integer classId);
+
+    List<ClassSubject> getClassSubjectListByClassId(Integer classId);
+
+    Integer deleteByClassSubjectId(Integer classId);
 }

@@ -16,6 +16,19 @@ public interface ClassSubjectService {
      * @param classId 班级ID
      * @return
      */
-    boolean deleteByClassId(Integer classId);
+    Integer deleteByClassId(Integer classId);
 
+    /**
+     * 根据班级ID获取班级科目对应关系List
+     * @param classId 班级ID
+     * @return 班级科目对应关系List
+     */
+    List<ClassSubject> getClassSubjectListByClassId(Integer classId);
+
+    /**
+     * 根据主键ID删除班级科目对应关系
+     * @param classId
+     * @return
+     */
+    Integer deleteByClassSubjectId(Integer classId);
 }

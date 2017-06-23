@@ -26,10 +26,10 @@ public class ClassSubjectApplicationTests {
 		classSubject.setSubjectId(1);
 		list.add(classSubject);
 
-		ClassSubject classSubject1 = new ClassSubject();
-		classSubject1.setClassId(2);
-		classSubject1.setSubjectId(2);
-		list.add(classSubject1);
+//		ClassSubject classSubject1 = new ClassSubject();
+//		classSubject1.setClassId(2);
+//		classSubject1.setSubjectId(2);
+//		list.add(classSubject1);
 
 		ClassSubject classSubject2 = new ClassSubject();
 		classSubject2.setClassId(1);
@@ -46,6 +46,16 @@ public class ClassSubjectApplicationTests {
 
 	@Test
 	public void deleteByClassId() throws Exception{
-		classSubjectService.deleteByClassId(1);
+		Integer i=classSubjectService.deleteByClassId(1);
+	}
+
+	@Test
+	public void getClassSubjectListByClassId() throws Exception{
+		List<ClassSubject> list=classSubjectService.getClassSubjectListByClassId(1);
+	}
+
+	@Test
+	public void deleteByClassSubjectId() throws Exception{
+		Integer i = classSubjectService.deleteByClassSubjectId(2);
 	}
 }
