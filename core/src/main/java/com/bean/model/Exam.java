@@ -28,36 +28,51 @@ public class Exam implements Serializable {
     private Integer paperId;
 
     /**
+     * 科目ID
+     */
+    private Integer subjectId;
+
+    /**
      * 开始时间 不填随时开始
      */
     private Date startTime;
 
     /**
-     * 结束时间
+     * 结束(失效)时间
      */
     private Date endTime;
 
     /**
-     * 考试持续时长
+     * 考试持续时长 0:不限时间
      */
     private Integer examMinutes;
 
     /**
      * 考试类型 0:练习考试 1:正式考试 2:练习正式均可
      */
-    private Boolean examType;
+    private Integer examType;
 
     /**
      * 0:理论考试 1:实际操作考试
      */
-    private Boolean optionTheory;
+    private Integer optionTheory;
+
+    /**
+     * 考试地点
+     */
+    private String placeName;
+
+    /**
+     * 科目名称
+     */
+    private String subjectName;
 
     private String memo;
 
     /**
      * 1正常 0删除
      */
-    private Boolean del;
+    private Integer del;
 
     /**
      * 添加人
@@ -89,20 +104,6 @@ public class Exam implements Serializable {
      */
     private Date edittime;
 
-    /**
-     * 操作（删除）人ID
-     */
-    private Integer deleteid;
-
-    /**
-     * 操作（删除）人姓名
-     */
-    private String deletename;
-
-    /**
-     * 操作（删除）时间
-     */
-    private Date deletetime;
 
     private static final long serialVersionUID = 1L;
 
@@ -138,6 +139,30 @@ public class Exam implements Serializable {
         this.paperId = paperId;
     }
 
+    public String getPlaceName() {
+        return placeName;
+    }
+
+    public void setPlaceName(String placeName) {
+        this.placeName = placeName;
+    }
+
+    public String getSubjectName() {
+        return subjectName;
+    }
+
+    public void setSubjectName(String subjectName) {
+        this.subjectName = subjectName;
+    }
+
+    public Integer getSubjectId() {
+        return subjectId;
+    }
+
+    public void setSubjectId(Integer subjectId) {
+        this.subjectId = subjectId;
+    }
+
     public Date getStartTime() {
         return startTime;
     }
@@ -162,19 +187,19 @@ public class Exam implements Serializable {
         this.examMinutes = examMinutes;
     }
 
-    public Boolean getExamType() {
+    public Integer getExamType() {
         return examType;
     }
 
-    public void setExamType(Boolean examType) {
+    public void setExamType(Integer examType) {
         this.examType = examType;
     }
 
-    public Boolean getOptionTheory() {
+    public Integer getOptionTheory() {
         return optionTheory;
     }
 
-    public void setOptionTheory(Boolean optionTheory) {
+    public void setOptionTheory(Integer optionTheory) {
         this.optionTheory = optionTheory;
     }
 
@@ -186,11 +211,11 @@ public class Exam implements Serializable {
         this.memo = memo;
     }
 
-    public Boolean getDel() {
+    public Integer getDel() {
         return del;
     }
 
-    public void setDel(Boolean del) {
+    public void setDel(Integer del) {
         this.del = del;
     }
 
@@ -242,27 +267,4 @@ public class Exam implements Serializable {
         this.edittime = edittime;
     }
 
-    public Integer getDeleteid() {
-        return deleteid;
-    }
-
-    public void setDeleteid(Integer deleteid) {
-        this.deleteid = deleteid;
-    }
-
-    public String getDeletename() {
-        return deletename;
-    }
-
-    public void setDeletename(String deletename) {
-        this.deletename = deletename;
-    }
-
-    public Date getDeletetime() {
-        return deletetime;
-    }
-
-    public void setDeletetime(Date deletetime) {
-        this.deletetime = deletetime;
-    }
 }

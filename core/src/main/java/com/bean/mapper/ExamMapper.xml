@@ -6,11 +6,14 @@
     <result column="exam_name" jdbcType="VARCHAR" property="examName" />
     <result column="place_id" jdbcType="INTEGER" property="placeId" />
     <result column="paper_id" jdbcType="INTEGER" property="paperId" />
+    <result column="subject_id" jdbcType="INTEGER" property="subjectId" />
     <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
     <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
     <result column="exam_minutes" jdbcType="INTEGER" property="examMinutes" />
     <result column="exam_type" jdbcType="BIT" property="examType" />
     <result column="option_theory" jdbcType="BIT" property="optionTheory" />
+    <result column="place_name" jdbcType="VARCHAR" property="placeName" />
+    <result column="subject_name" jdbcType="VARCHAR" property="subjectName" />
     <result column="memo" jdbcType="VARCHAR" property="memo" />
     <result column="del" jdbcType="BIT" property="del" />
     <result column="addname" jdbcType="VARCHAR" property="addname" />
@@ -23,6 +26,207 @@
     <result column="deletename" jdbcType="VARCHAR" property="deletename" />
     <result column="deletetime" jdbcType="TIMESTAMP" property="deletetime" />
   </resultMap>
+  <sql id="Base_Column_List">
+    exam_id, exam_name, place_id, paper_id, subject_id, start_time, end_time, exam_minutes, exam_type,
+    option_theory, memo, del, addname, addid, addtime, editname, editid, edittime
+  </sql>
+  <sql id="Column_With_Place_Subject">
+    e.exam_id, e.exam_name, e.place_id, e.paper_id, e.subject_id, e.start_time, e.end_time, e.exam_minutes, e.exam_type,
+    e.option_theory, e.memo, e.del, e.addname, e.addid, e.addtime, e.editname, e.editid, e.edittime, p.place_name, s.subject_name
+  </sql>
+  <sql id="where">
+    <where>
+      <if test="examId != null">
+        AND e.exam_id = #{examId,jdbcType=INTEGER}
+      </if>
+      <if test="examName != null">
+        AND e.exam_name = #{examName,jdbcType=VARCHAR} OR e.exam_name LIKE CONCAT('%',#{examName,jdbcType=VARCHAR},'%' )
+      </if>
+      <if test="placeId != null">
+        AND e.place_id = #{placeId,jdbcType=INTEGER}
+      </if>
+      <if test="paperId != null">
+        AND e.paper_id = #{paperId,jdbcType=INTEGER}
+      </if>
+      <if test="subjectId != null">
+        AND e.subject_id = #{subjectId,jdbcType=INTEGER}
+      </if>
+      <if test="startTime != null">
+        AND e.start_time = #{startTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="endTime != null">
+        AND e.end_time = #{endTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="examMinutes != null">
+        AND e.exam_minutes = #{examMinutes,jdbcType=INTEGER}
+      </if>
+      <if test="examType != null">
+        AND e.exam_type = #{examType,jdbcType=INTEGER}
+      </if>
+      <if test="optionTheory != null">
+        AND e.option_theory = #{optionTheory,jdbcType=INTEGER}
+      </if>
+    </where>
+  </sql>
+  <insert id="insert" parameterType="com.bean.model.Exam"  useGeneratedKeys="true" keyProperty="examId">
+    insert into exm_exam
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="examName != null">
+        exam_name,
+      </if>
+      <if test="placeId != null">
+        place_id,
+      </if>
+      <if test="paperId != null">
+        paper_id,
+      </if>
+      <if test="subjectId != null">
+        subject_id,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="examMinutes != null">
+        exam_minutes,
+      </if>
+      <if test="examType != null">
+        exam_type,
+      </if>
+      <if test="optionTheory != null">
+        option_theory,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+      <if test="addname != null">
+        addname,
+      </if>
+      <if test="addid != null">
+        addid,
+      </if>
+      <if test="addtime != null">
+        addtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="examName != null">
+        #{examName,jdbcType=VARCHAR},
+      </if>
+      <if test="placeId != null">
+        #{placeId,jdbcType=INTEGER},
+      </if>
+      <if test="paperId != null">
+        #{paperId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectId != null">
+        #{subjectId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examMinutes != null">
+        #{examMinutes,jdbcType=INTEGER},
+      </if>
+      <if test="examType != null">
+        #{examType,jdbcType=INTEGER},
+      </if>
+      <if test="optionTheory != null">
+        #{optionTheory,jdbcType=INTEGER},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="addname != null">
+        #{addname,jdbcType=VARCHAR},
+      </if>
+      <if test="addid != null">
+        #{addid,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.bean.model.Subject">
+    UPDATE exm_exam
+    <trim prefix="set" suffixOverrides=",">
+      <if test="examName != null">
+        exam_Name = #{examName,jdbcType=VARCHAR},
+      </if>
+      <if test="placeId != null">
+        place_id = #{placeId,jdbcType=INTEGER},
+      </if>
+      <if test="paperId != null">
+        paper_id = #{paperId,jdbcType=INTEGER},
+      </if>
+      <if test="subjectId != null">
+        subject_id = #{subjectId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examMinutes != null">
+        exam_minutes = #{examMinutes,jdbcType=INTEGER},
+      </if>
+      <if test="examType != null">
+        exam_type = #{examType,jdbcType=INTEGER},
+      </if>
+      <if test="optionTheory != null">
+        option_theory = #{optionTheory,jdbcType=INTEGER},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="del != null">
+        del = #{del,jdbcType=BIT},
+      </if>
+      <if test="editname != null">
+        editname = #{editname,jdbcType=VARCHAR},
+      </if>
+      <if test="editid != null">
+        editid = #{editid,jdbcType=INTEGER},
+      </if>
+      <if test="edittime != null">
+        edittime = #{edittime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+    <where>
+      exam_id = #{examId,jdbcType=INTEGER}
+    </where>
+  </update>
+  <select id="getExamByInfo" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Column_With_Place_Subject" />
+    FROM exm_exam AS e
+    INNER JOIN exm_subject AS s ON e.subject_id=s.subject_id
+    INNER JOIN exm_place AS p ON e.place_id=p.place_id
+    <include refid="where" />
+  </select>
+  <select id="getExamListByInfo" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Column_With_Place_Subject" />
+    FROM exm_exam AS e
+    INNER JOIN exm_subject AS s ON e.subject_id=s.subject_id
+    INNER JOIN exm_place AS p ON e.place_id=p.place_id
+    <include refid="where" />
+  </select>
+  <select id="getExamCountByInfo" parameterType="java.util.Map" resultType="int">
+    SELECT
+    COUNT(*)
+    FROM exm_exam AS e
+    <include refid="where" />
+  </select>
+
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -81,11 +285,6 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List">
-    exam_id, exam_name, place_id, paper_id, start_time, end_time, exam_minutes, exam_type, 
-    option_theory, memo, del, addname, addid, addtime, editname, editid, edittime, deleteid, 
-    deletename, deletetime
-  </sql>
   <select id="selectByExample" parameterType="com.bean.model.ExamExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -116,22 +315,6 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.bean.model.Exam">
-    insert into exm_exam (exam_id, exam_name, place_id, 
-      paper_id, start_time, end_time, 
-      exam_minutes, exam_type, option_theory, 
-      memo, del, addname, addid, 
-      addtime, editname, editid, 
-      edittime, deleteid, deletename, 
-      deletetime)
-    values (#{examId,jdbcType=INTEGER}, #{examName,jdbcType=VARCHAR}, #{placeId,jdbcType=INTEGER}, 
-      #{paperId,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
-      #{examMinutes,jdbcType=INTEGER}, #{examType,jdbcType=BIT}, #{optionTheory,jdbcType=BIT}, 
-      #{memo,jdbcType=VARCHAR}, #{del,jdbcType=BIT}, #{addname,jdbcType=VARCHAR}, #{addid,jdbcType=INTEGER}, 
-      #{addtime,jdbcType=TIMESTAMP}, #{editname,jdbcType=VARCHAR}, #{editid,jdbcType=INTEGER}, 
-      #{edittime,jdbcType=TIMESTAMP}, #{deleteid,jdbcType=INTEGER}, #{deletename,jdbcType=VARCHAR}, 
-      #{deletetime,jdbcType=TIMESTAMP})
-  </insert>
   <insert id="insertSelective" parameterType="com.bean.model.Exam">
     insert into exm_exam
     <trim prefix="(" suffix=")" suffixOverrides=",">
