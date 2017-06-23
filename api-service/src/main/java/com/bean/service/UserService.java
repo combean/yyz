@@ -8,7 +8,9 @@ public interface UserService {
     /**
      * 添加用户
      * @param user 用户对象
-     * @return 添加用户的 id
+     * @return 插入条数
+     *
+     * 插入数据的主键 User.getUserId();
      */
     int insertUser(User user);
 

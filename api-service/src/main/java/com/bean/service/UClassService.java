@@ -8,7 +8,9 @@ public interface UClassService {
     /**
      * 添加班级
      * @param uClass 班级对象
-     * @return 添加班级的 id
+     * @return 插入条数
+     *
+     * 插入数据主键 UClass.getClassId();
      */
     int insertUClass(UClass uClass);
 
