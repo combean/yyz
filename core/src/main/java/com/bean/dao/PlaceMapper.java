@@ -1,30 +1,17 @@
 package com.bean.dao;
 
 import com.bean.model.Place;
-import com.bean.model.PlaceExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import java.util.Map;
 
 public interface PlaceMapper {
-    long countByExample(PlaceExample example);
+    int insert(Place place);
 
-    int deleteByExample(PlaceExample example);
+    Integer update(Place place);
 
-    int deleteByPrimaryKey(Integer placeId);
+    Place getPlaceByInfo(Map<String,String> map);
 
-    int insert(Place record);
+    List<Place> getPlaceListByInfo(Map<String,String> map);
 
-    int insertSelective(Place record);
-
-    List<Place> selectByExample(PlaceExample example);
-
-    Place selectByPrimaryKey(Integer placeId);
-
-    int updateByExampleSelective(@Param("record") Place record, @Param("example") PlaceExample example);
-
-    int updateByExample(@Param("record") Place record, @Param("example") PlaceExample example);
-
-    int updateByPrimaryKeySelective(Place record);
-
-    int updateByPrimaryKey(Place record);
+    Integer getPlaceCountByInfo(Map<String,String> map);
 }
