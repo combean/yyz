@@ -21,7 +21,7 @@ public interface SubjectService {
      *
      * 删除时 setDel(0)
      */
-    boolean updateSubject(Subject subject);
+    Integer updateSubject(Subject subject);
 
     /**
      * 根据传入的map信息获取班级对象

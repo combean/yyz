@@ -7,7 +7,7 @@ import java.util.Map;
 public interface SubjectMapper {
     int insert(Subject subject);
 
-    boolean update(Subject subject);
+    Integer update(Subject subject);
 
     Subject getSubjectByInfo(Map<String,String> map);
 

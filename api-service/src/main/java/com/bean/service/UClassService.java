@@ -19,7 +19,7 @@ public interface UClassService {
      *
      * 删除时 setDel(0)
      */
-    boolean updateUClass(UClass uClass);
+    Integer updateUClass(UClass uClass);
 
     /**
      * 根据传入的map信息获取班级对象

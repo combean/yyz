@@ -10,7 +10,7 @@ public interface UserMapper {
 
     int insert(User user);
 
-    boolean update(User user);
+    Integer update(User user);
 
     User getUserByInfo(Map<String,String> map);
 

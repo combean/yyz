@@ -19,7 +19,7 @@ public interface UserService {
      *
      * 删除时 setDel(0)
      */
-    boolean updateUser(User user);
+    Integer updateUser(User user);
 
     /**
      * 根据传入的map信息获取用户对象
