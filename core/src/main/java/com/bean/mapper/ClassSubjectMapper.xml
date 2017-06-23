@@ -6,6 +6,30 @@
     <result column="class_id" jdbcType="INTEGER" property="classId" />
     <result column="subject_id" jdbcType="INTEGER" property="subjectId" />
   </resultMap>
+  <sql id="where">
+    <where>
+      <if test="classId != null">
+        AND class_id = #{classId,jdbcType=INTEGER}
+      </if>
+      <if test="subjectId != null">
+        AND subject_id = #{subjectId,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+  <insert id="insert" parameterType="java.util.List">
+    insert into exm_class_subject (class_id, subject_id
+    )
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.classId,jdbcType=INTEGER}, #{item.subjectId,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+
+  <delete id="deleteByClassId" parameterType="java.lang.Integer">
+    delete from exm_class_subject
+    where class_id = #{classId,jdbcType=INTEGER}
+  </delete>
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -97,12 +121,6 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.bean.model.ClassSubject">
-    insert into exm_class_subject (class_subject_id, class_id, subject_id
-      )
-    values (#{classSubjectId,jdbcType=INTEGER}, #{classId,jdbcType=INTEGER}, #{subjectId,jdbcType=INTEGER}
-      )
-  </insert>
   <insert id="insertSelective" parameterType="com.bean.model.ClassSubject">
     insert into exm_class_subject
     <trim prefix="(" suffix=")" suffixOverrides=",">
