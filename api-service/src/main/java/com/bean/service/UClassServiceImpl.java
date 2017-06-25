@@ -25,7 +25,7 @@ public class UClassServiceImpl implements UClassService {
     }
 
     @Override
-    public boolean updateUClass(UClass uClass) {
+    public Integer updateUClass(UClass uClass) {
         return uClassMapper.update(uClass);
     }
 

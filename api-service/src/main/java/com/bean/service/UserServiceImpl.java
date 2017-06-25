@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean updateUser(User user) {
+    public Integer updateUser(User user) {
         return userMapper.update(user);
     }
 

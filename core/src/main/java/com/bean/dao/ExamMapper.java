@@ -1,30 +1,17 @@
 package com.bean.dao;
 
-import com.bean.model.Exam;
-import com.bean.model.ExamExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import java.util.Map;
+import com.bean.model.Exam;
 
 public interface ExamMapper {
-    long countByExample(ExamExample example);
+    int insert(Exam exam);
 
-    int deleteByExample(ExamExample example);
+    Integer update(Exam exam);
 
-    int deleteByPrimaryKey(Integer examId);
+    Exam getExamByInfo(Map<String,String> map);
 
-    int insert(Exam record);
+    List<Exam> getExamListByInfo(Map<String,String> map);
 
-    int insertSelective(Exam record);
-
-    List<Exam> selectByExample(ExamExample example);
-
-    Exam selectByPrimaryKey(Integer examId);
-
-    int updateByExampleSelective(@Param("record") Exam record, @Param("example") ExamExample example);
-
-    int updateByExample(@Param("record") Exam record, @Param("example") ExamExample example);
-
-    int updateByPrimaryKeySelective(Exam record);
-
-    int updateByPrimaryKey(Exam record);
+    Integer getExamCountByInfo(Map<String,String> map);
 }

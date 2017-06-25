@@ -30,7 +30,7 @@
   <sql id="Base_Column_List">
     subject_id, subject_name, parent_id, memo, del, addname, addid, addtime, editname, editid, edittime
   </sql>
-  <insert id="insert" parameterType="com.bean.model.Subject">
+  <insert id="insert" parameterType="com.bean.model.Subject"  useGeneratedKeys="true" keyProperty="subjectId">
     insert into exm_subject
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="subjectName != null">

@@ -26,7 +26,7 @@
   <sql id="Base_Column_List">
     class_id, class_name, memo, del, addname, addid, addtime, editname, editid, edittime
   </sql>
-  <insert id="insert" parameterType="com.bean.model.UClass">
+  <insert id="insert" parameterType="com.bean.model.UClass" useGeneratedKeys="true" keyProperty="classId">
     insert into exm_class
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="className != null">

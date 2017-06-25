@@ -8,7 +8,7 @@ public interface UClassMapper {
 
     int insert(UClass uClass);
 
-    boolean update(UClass uClass);
+    Integer update(UClass uClass);
 
     UClass getUClassByInfo(Map<String,String> map);
 

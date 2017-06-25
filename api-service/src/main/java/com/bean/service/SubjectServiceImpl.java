@@ -25,7 +25,7 @@ public class SubjectServiceImpl implements SubjectService {
     }
 
     @Override
-    public boolean updateSubject(Subject subject) {
+    public Integer updateSubject(Subject subject) {
         return subjectMapper.update(subject);
     }
 

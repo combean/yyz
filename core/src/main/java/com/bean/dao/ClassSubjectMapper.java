@@ -1,30 +1,15 @@
 package com.bean.dao;
 
 import com.bean.model.ClassSubject;
-import com.bean.model.ClassSubjectExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface ClassSubjectMapper {
-    long countByExample(ClassSubjectExample example);
 
-    int deleteByExample(ClassSubjectExample example);
+    void insert(List<ClassSubject> record);
 
-    int deleteByPrimaryKey(Integer classSubjectId);
+    Integer deleteByClassId(Integer classId);
 
-    int insert(ClassSubject record);
+    List<ClassSubject> getClassSubjectListByClassId(Integer classId);
 
-    int insertSelective(ClassSubject record);
-
-    List<ClassSubject> selectByExample(ClassSubjectExample example);
-
-    ClassSubject selectByPrimaryKey(Integer classSubjectId);
-
-    int updateByExampleSelective(@Param("record") ClassSubject record, @Param("example") ClassSubjectExample example);
-
-    int updateByExample(@Param("record") ClassSubject record, @Param("example") ClassSubjectExample example);
-
-    int updateByPrimaryKeySelective(ClassSubject record);
-
-    int updateByPrimaryKey(ClassSubject record);
+    Integer deleteByClassSubjectId(Integer classId);
 }

@@ -60,7 +60,7 @@
       u.user_email, u.user_profile_img, u.user_name, u.user_sex, u.memo, c.class_name,
       u.del, u.addname, u.addid, u.addtime, u.editname, u.editid, u.edittime
   </sql>
-  <insert id="insert" parameterType="com.bean.model.User">
+  <insert id="insert" parameterType="com.bean.model.User" useGeneratedKeys="true" keyProperty="userId">
     insert into exm_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userUsername != null">

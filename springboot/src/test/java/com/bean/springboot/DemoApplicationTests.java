@@ -30,13 +30,13 @@ public class DemoApplicationTests {
 		User user = new User();
 		user.setUserUsername("zhaoyan");
 		user.setUserPassword("1234567");
-		user.setUserName("赵岩");
+		user.setUserName("赵岩111");
 		user.setUserMobile("15021464551");
 		user.setUserClassId(1);
 		user.setAddname("zhaoyan");
 		user.setAddtime(new Date());
 		user.setAddid(1);
-		userService.insertUser(user);
+		Integer i = userService.insertUser(user);
 	}
 
 	@Test
