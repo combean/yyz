@@ -6,25 +6,15 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface RoleMenuMapper {
-    long countByExample(RoleMenuExample example);
+    int insert(RoleMenu roleMenu);
 
-    int deleteByExample(RoleMenuExample example);
+    int insertList(List<RoleMenu> roleMenu);
 
-    int deleteByPrimaryKey(Integer roleMenuId);
+    Integer deleteByRoleId(Integer managerId);
 
-    int insert(RoleMenu record);
+    List<RoleMenu> getRoleMenuListByInfo(RoleMenu roleMenu);
 
-    int insertSelective(RoleMenu record);
+    Integer deleteByRoleMenuId(Integer roleMenuId);
 
-    List<RoleMenu> selectByExample(RoleMenuExample example);
-
-    RoleMenu selectByPrimaryKey(Integer roleMenuId);
-
-    int updateByExampleSelective(@Param("record") RoleMenu record, @Param("example") RoleMenuExample example);
-
-    int updateByExample(@Param("record") RoleMenu record, @Param("example") RoleMenuExample example);
-
-    int updateByPrimaryKeySelective(RoleMenu record);
-
-    int updateByPrimaryKey(RoleMenu record);
+    int getCountByInfo (RoleMenu roleMenu);
 }
