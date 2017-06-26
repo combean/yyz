@@ -1,7 +1,6 @@
 package com.bean.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @author 
