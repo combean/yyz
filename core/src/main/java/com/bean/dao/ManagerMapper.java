@@ -1,30 +1,18 @@
 package com.bean.dao;
 
-import com.bean.model.Manager;
-import com.bean.model.ManagerExample;
 import java.util.List;
+import java.util.Map;
+import com.bean.model.Manager;
 import org.apache.ibatis.annotations.Param;
 
 public interface ManagerMapper {
-    long countByExample(ManagerExample example);
+    int insert(Manager manager);
 
-    int deleteByExample(ManagerExample example);
+    Integer update(Manager manager);
 
-    int deleteByPrimaryKey(Integer managerId);
+    Manager getManagerByInfo(Map<String,String> map);
 
-    int insert(Manager record);
+    List<Manager> getManagerListByInfo(Map<String,String> map);
 
-    int insertSelective(Manager record);
-
-    List<Manager> selectByExample(ManagerExample example);
-
-    Manager selectByPrimaryKey(Integer managerId);
-
-    int updateByExampleSelective(@Param("record") Manager record, @Param("example") ManagerExample example);
-
-    int updateByExample(@Param("record") Manager record, @Param("example") ManagerExample example);
-
-    int updateByPrimaryKeySelective(Manager record);
-
-    int updateByPrimaryKey(Manager record);
+    Integer getManagerCount(Map<String,String> map);
 }

@@ -5,6 +5,11 @@
     <id column="manager_id" jdbcType="INTEGER" property="managerId" />
     <result column="manager_username" jdbcType="VARCHAR" property="managerUsername" />
     <result column="manager_password" jdbcType="VARCHAR" property="managerPassword" />
+    <result column="manager_mobile" jdbcType="VARCHAR" property="managerMobile" />
+    <result column="manager_name" jdbcType="VARCHAR" property="managerName" />
+    <result column="manager_sex" jdbcType="VARCHAR" property="managerSex" />
+    <result column="manager_profile_img" jdbcType="VARCHAR" property="managerProfileImg" />
+    <result column="manager_email" jdbcType="VARCHAR" property="managerEmail" />
     <result column="memo" jdbcType="VARCHAR" property="memo" />
     <result column="del" jdbcType="BIT" property="del" />
     <result column="addname" jdbcType="VARCHAR" property="addname" />
@@ -13,10 +18,176 @@
     <result column="editname" jdbcType="VARCHAR" property="editname" />
     <result column="editid" jdbcType="INTEGER" property="editid" />
     <result column="edittime" jdbcType="TIMESTAMP" property="edittime" />
-    <result column="deleteid" jdbcType="INTEGER" property="deleteid" />
-    <result column="deletename" jdbcType="VARCHAR" property="deletename" />
-    <result column="deletetime" jdbcType="TIMESTAMP" property="deletetime" />
   </resultMap>
+  <sql id="where">
+    <where>
+      <if test="managerId !=null">
+        AND manager_id = #{managerId,jdbcType=INTEGER}
+      </if>
+      <if test="managerUsername != null">
+        AND manager_managername = #{managerUsername,jdbcType=VARCHAR}
+      </if>
+      <if test="managerMobile != null">
+        AND manager_mobile = #{managerMobile,jdbcType=VARCHAR}
+      </if>
+      <if test="managerEmail != null">
+        AND manager_email = #{managerEmail,jdbcType=VARCHAR}
+      </if>
+      <if test="managerName != null">
+        AND manager_name = #{managerName,jdbcType=VARCHAR}  OR manager_name LIKE CONCAT('%',#{managerName,jdbcType=VARCHAR},'%' )
+      </if>
+      <if test="managerSex != null">
+        AND manager_sex = #{managerSex,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    manager_id, manager_username, manager_password, manager_mobile, manager_name, manager_sex, manager_profile_img, manager_email, memo, del,
+    addname, addid, addtime, editname, editid, edittime
+  </sql>
+  <insert id="insert" parameterType="com.bean.model.Manager" useGeneratedKeys="true" keyProperty="managerId">
+    insert into exm_manager
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="managerUsername != null">
+        manager_username,
+      </if>
+      <if test="managerPassword != null">
+        manager_password,
+      </if>
+      <if test="managerMobile != null">
+        manager_mobile,
+      </if>
+      <if test="managerEmail != null">
+        manager_email,
+      </if>
+      <if test="managerProfileImg != null">
+        manager_profile_img,
+      </if>
+      <if test="managerName != null">
+        manager_name,
+      </if>
+      <if test="managerSex != null">
+        manager_sex,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+      <if test="del != null">
+        del,
+      </if>
+      <if test="addname != null">
+        addname,
+      </if>
+      <if test="addid != null">
+        addid,
+      </if>
+      <if test="addtime != null">
+        addtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="managerUsername != null">
+        #{managerUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="managerPassword != null">
+        #{managerPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="managerMobile != null">
+        #{managerMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="managerEmail != null">
+        #{managerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="managerProfileImg != null">
+        #{managerProfileImg,jdbcType=VARCHAR},
+      </if>
+      <if test="managerName != null">
+        #{managerName,jdbcType=VARCHAR},
+      </if>
+      <if test="managerSex != null">
+        #{managerSex,jdbcType=BIT},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="del != null">
+        #{del,jdbcType=BIT},
+      </if>
+      <if test="addname != null">
+        #{addname,jdbcType=VARCHAR},
+      </if>
+      <if test="addid != null">
+        #{addid,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.bean.model.Manager">
+    UPDATE exm_manager
+    <set>
+      <if test="managerUsername != null">
+        manager_managername = #{managerUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="managerPassword != null">
+        manager_password = #{managerPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="managerMobile != null">
+        manager_mobile = #{managerMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="managerEmail != null">
+        manager_email = #{managerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="managerProfileImg != null">
+        manager_profile_img = #{managerProfileImg,jdbcType=VARCHAR},
+      </if>
+      <if test="managerName != null">
+        manager_name = #{managerName,jdbcType=VARCHAR},
+      </if>
+      <if test="managerSex != null">
+        manager_sex = #{managerSex,jdbcType=BIT},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=INTEGER},
+      </if>
+      <if test="del != null">
+        del = #{del,jdbcType=BIT},
+      </if>
+      <if test="editname != null">
+        editname = #{editname,jdbcType=VARCHAR},
+      </if>
+      <if test="editid != null">
+        editid = #{editid,jdbcType=INTEGER},
+      </if>
+      <if test="edittime != null">
+        edittime = #{edittime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <where>
+      manager_id = #{managerId,jdbcType=INTEGER}
+    </where>
+  </update>
+  <select id="getManagerByInfo" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM exm_manager
+    <include refid="where" />
+  </select>
+  <select id="getManagerListByInfo" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM exm_manager
+    <include refid="where" />
+  </select>
+  <select id="getManagerCount" parameterType="java.util.Map" resultType="int">
+    SELECT
+    COUNT(*)
+    FROM exm_manager
+    <include refid="where" />
+  </select>
+
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -75,10 +246,6 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List">
-    manager_id, manager_username, manager_password, memo, del, addname, addid, addtime, 
-    editname, editid, edittime, deleteid, deletename, deletetime
-  </sql>
   <select id="selectByExample" parameterType="com.bean.model.ManagerExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -109,18 +276,6 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.bean.model.Manager">
-    insert into exm_manager (manager_id, manager_username, manager_password, 
-      memo, del, addname, addid, 
-      addtime, editname, editid, 
-      edittime, deleteid, deletename, 
-      deletetime)
-    values (#{managerId,jdbcType=INTEGER}, #{managerUsername,jdbcType=VARCHAR}, #{managerPassword,jdbcType=VARCHAR}, 
-      #{memo,jdbcType=VARCHAR}, #{del,jdbcType=BIT}, #{addname,jdbcType=VARCHAR}, #{addid,jdbcType=INTEGER}, 
-      #{addtime,jdbcType=TIMESTAMP}, #{editname,jdbcType=VARCHAR}, #{editid,jdbcType=INTEGER}, 
-      #{edittime,jdbcType=TIMESTAMP}, #{deleteid,jdbcType=INTEGER}, #{deletename,jdbcType=VARCHAR}, 
-      #{deletetime,jdbcType=TIMESTAMP})
-  </insert>
   <insert id="insertSelective" parameterType="com.bean.model.Manager">
     insert into exm_manager
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -128,7 +283,7 @@
         manager_id,
       </if>
       <if test="managerUsername != null">
-        manager_username,
+        manager_managername,
       </if>
       <if test="managerPassword != null">
         manager_password,
@@ -225,7 +380,7 @@
         manager_id = #{record.managerId,jdbcType=INTEGER},
       </if>
       <if test="record.managerUsername != null">
-        manager_username = #{record.managerUsername,jdbcType=VARCHAR},
+        manager_managername = #{record.managerUsername,jdbcType=VARCHAR},
       </if>
       <if test="record.managerPassword != null">
         manager_password = #{record.managerPassword,jdbcType=VARCHAR},
@@ -271,7 +426,7 @@
   <update id="updateByExample" parameterType="map">
     update exm_manager
     set manager_id = #{record.managerId,jdbcType=INTEGER},
-      manager_username = #{record.managerUsername,jdbcType=VARCHAR},
+      manager_managername = #{record.managerUsername,jdbcType=VARCHAR},
       manager_password = #{record.managerPassword,jdbcType=VARCHAR},
       memo = #{record.memo,jdbcType=VARCHAR},
       del = #{record.del,jdbcType=BIT},
@@ -292,7 +447,7 @@
     update exm_manager
     <set>
       <if test="managerUsername != null">
-        manager_username = #{managerUsername,jdbcType=VARCHAR},
+        manager_managername = #{managerUsername,jdbcType=VARCHAR},
       </if>
       <if test="managerPassword != null">
         manager_password = #{managerPassword,jdbcType=VARCHAR},
@@ -335,7 +490,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.bean.model.Manager">
     update exm_manager
-    set manager_username = #{managerUsername,jdbcType=VARCHAR},
+    set manager_managername = #{managerUsername,jdbcType=VARCHAR},
       manager_password = #{managerPassword,jdbcType=VARCHAR},
       memo = #{memo,jdbcType=VARCHAR},
       del = #{del,jdbcType=BIT},
