@@ -5,17 +5,62 @@
     <id column="manager_role_id" jdbcType="INTEGER" property="managerRoleId" />
     <result column="manager_id" jdbcType="INTEGER" property="managerId" />
     <result column="role_id" jdbcType="INTEGER" property="roleId" />
-    <result column="del" jdbcType="BIT" property="del" />
-    <result column="addname" jdbcType="VARCHAR" property="addname" />
-    <result column="addid" jdbcType="INTEGER" property="addid" />
-    <result column="addtime" jdbcType="TIMESTAMP" property="addtime" />
-    <result column="editname" jdbcType="VARCHAR" property="editname" />
-    <result column="editid" jdbcType="INTEGER" property="editid" />
-    <result column="edittime" jdbcType="TIMESTAMP" property="edittime" />
-    <result column="deleteid" jdbcType="INTEGER" property="deleteid" />
-    <result column="deletename" jdbcType="VARCHAR" property="deletename" />
-    <result column="deletetime" jdbcType="TIMESTAMP" property="deletetime" />
+    <result column="manager_username" jdbcType="VARCHAR" property="managerUsername" />
+    <result column="manager_name" jdbcType="VARCHAR" property="managerName" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="role_key" jdbcType="VARCHAR" property="roleKey" />
   </resultMap>
+  <sql id="where">
+    <where>
+      <if test="managerRoleId != null">
+        AND mr.manager_role_id = #{managerRoleId,jdbcType=INTEGER}
+      </if>
+      <if test="managerId != null">
+        AND mr.manager_id = #{managerId,jdbcType=INTEGER}
+      </if>
+      <if test="roleId != null">
+        AND mr.role_id = #{roleId,jdbcType=INTEGER}
+      </if>
+    </where>
+  </sql>
+  <insert id="insertList" parameterType="java.util.List">
+    insert into exm_manager_role (manager_id, role_id
+    )
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.managerId,jdbcType=INTEGER}, #{item.roleId,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+  <insert id="insert" parameterType="com.bean.model.ManagerRole">
+    insert into exm_manager_role (manager_id, role_id
+    )
+    values
+      (#{managerId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER})
+  </insert>
+  <delete id="deleteByManagerId" parameterType="java.lang.Integer">
+    delete from exm_manager_role
+    where manager_id = #{managerId,jdbcType=INTEGER}
+  </delete>
+  <select id="getManagerRoleListByInfo" parameterType="com.bean.model.ManagerRole" resultMap="BaseResultMap">
+    SELECT
+      mr.manager_role_id, mr.manager_id, mr.role_id, m.manager_username, m.manager_name, r.role_name, r.role_key
+    FROM
+    exm_manager_role  AS mr
+    INNER JOIN exm_manager AS m ON mr.manager_id=m.manager_id
+    INNER JOIN exm_role AS r ON mr.role_id=r.role_id
+    <include refid="where" />
+  </select>
+  <delete id="deleteByManagerRoleId" parameterType="java.lang.Integer">
+    delete from exm_manager_role
+    where manager_role_id = #{managerRoleId,jdbcType=INTEGER}
+  </delete>
+  <select id="getCountByInfo" parameterType="com.bean.model.ManagerRole" resultType="int">
+    SELECT COUNT(*)
+      FROM exm_manager_role AS mr
+    <include refid="where" />
+  </select>
+
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -108,18 +153,6 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.bean.model.ManagerRole">
-    insert into exm_manager_role (manager_role_id, manager_id, role_id, 
-      del, addname, addid, addtime, 
-      editname, editid, edittime, 
-      deleteid, deletename, deletetime
-      )
-    values (#{managerRoleId,jdbcType=INTEGER}, #{managerId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, 
-      #{del,jdbcType=BIT}, #{addname,jdbcType=VARCHAR}, #{addid,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, 
-      #{editname,jdbcType=VARCHAR}, #{editid,jdbcType=INTEGER}, #{edittime,jdbcType=TIMESTAMP}, 
-      #{deleteid,jdbcType=INTEGER}, #{deletename,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP}
-      )
-  </insert>
   <insert id="insertSelective" parameterType="com.bean.model.ManagerRole">
     insert into exm_manager_role
     <trim prefix="(" suffix=")" suffixOverrides=",">

@@ -1,30 +1,18 @@
 package com.bean.dao;
 
 import com.bean.model.ManagerRole;
-import com.bean.model.ManagerRoleExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface ManagerRoleMapper {
-    long countByExample(ManagerRoleExample example);
+    int insert(ManagerRole managerRole);
 
-    int deleteByExample(ManagerRoleExample example);
+    int insertList(List<ManagerRole> managerRole);
 
-    int deleteByPrimaryKey(Integer managerRoleId);
+    Integer deleteByManagerId(Integer managerId);
 
-    int insert(ManagerRole record);
+    List<ManagerRole> getManagerRoleListByInfo(ManagerRole managerRole);
 
-    int insertSelective(ManagerRole record);
+    Integer deleteByManagerRoleId(Integer managerRoleId);
 
-    List<ManagerRole> selectByExample(ManagerRoleExample example);
-
-    ManagerRole selectByPrimaryKey(Integer managerRoleId);
-
-    int updateByExampleSelective(@Param("record") ManagerRole record, @Param("example") ManagerRoleExample example);
-
-    int updateByExample(@Param("record") ManagerRole record, @Param("example") ManagerRoleExample example);
-
-    int updateByPrimaryKeySelective(ManagerRole record);
-
-    int updateByPrimaryKey(ManagerRole record);
+    int getCountByInfo (ManagerRole managerRole);
 }
