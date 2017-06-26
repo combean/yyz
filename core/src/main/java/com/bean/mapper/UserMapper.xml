@@ -27,7 +27,7 @@
 
   <sql id="where">
     <where>
-      <if test="user_id !=null">
+      <if test="userId !=null">
         AND user_id = #{}
       </if>
       <if test="userUsername != null">
