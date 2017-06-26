@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * @author 
  */
-public class Kowledge implements Serializable {
+public class Knowledge implements Serializable {
     /**
      * 知识点ID
      */
@@ -19,7 +19,7 @@ public class Kowledge implements Serializable {
     /**
      * 1正常 0删除
      */
-    private Boolean del;
+    private Integer del;
 
     /**
      * 添加人
@@ -51,21 +51,6 @@ public class Kowledge implements Serializable {
      */
     private Date edittime;
 
-    /**
-     * 操作（删除）人ID
-     */
-    private Integer deleteid;
-
-    /**
-     * 操作（删除）人姓名
-     */
-    private String deletename;
-
-    /**
-     * 操作（删除）时间
-     */
-    private Date deletetime;
-
     private static final long serialVersionUID = 1L;
 
     public Integer getKnowledgeId() {
@@ -92,11 +77,11 @@ public class Kowledge implements Serializable {
         this.memo = memo;
     }
 
-    public Boolean getDel() {
+    public Integer getDel() {
         return del;
     }
 
-    public void setDel(Boolean del) {
+    public void setDel(Integer del) {
         this.del = del;
     }
 
@@ -146,29 +131,5 @@ public class Kowledge implements Serializable {
 
     public void setEdittime(Date edittime) {
         this.edittime = edittime;
-    }
-
-    public Integer getDeleteid() {
-        return deleteid;
-    }
-
-    public void setDeleteid(Integer deleteid) {
-        this.deleteid = deleteid;
-    }
-
-    public String getDeletename() {
-        return deletename;
-    }
-
-    public void setDeletename(String deletename) {
-        this.deletename = deletename;
-    }
-
-    public Date getDeletetime() {
-        return deletetime;
-    }
-
-    public void setDeletetime(Date deletetime) {
-        this.deletetime = deletetime;
     }
 }
