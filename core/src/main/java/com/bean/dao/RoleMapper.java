@@ -3,28 +3,18 @@ package com.bean.dao;
 import com.bean.model.Role;
 import com.bean.model.RoleExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface RoleMapper {
-    long countByExample(RoleExample example);
+    int insert(Role role);
 
-    int deleteByExample(RoleExample example);
+    Integer update(Role role);
 
-    int deleteByPrimaryKey(Integer roleId);
+    Role getRoleByInfo(Map<String,String> map);
 
-    int insert(Role record);
+    List<Role> getRoleListByInfo(Map<String,String> map);
 
-    int insertSelective(Role record);
-
-    List<Role> selectByExample(RoleExample example);
-
-    Role selectByPrimaryKey(Integer roleId);
-
-    int updateByExampleSelective(@Param("record") Role record, @Param("example") RoleExample example);
-
-    int updateByExample(@Param("record") Role record, @Param("example") RoleExample example);
-
-    int updateByPrimaryKeySelective(Role record);
-
-    int updateByPrimaryKey(Role record);
+    Integer getRoleCountByInfo(Map<String,String> map);
 }

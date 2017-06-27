@@ -3,14 +3,14 @@ package com.bean.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourseKnowlegeExample {
+public class CourseKnowledgeExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public CourseKnowlegeExample() {
+    public CourseKnowledgeExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -104,63 +104,63 @@ public class CourseKnowlegeExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andCourseKnowlegeIdIsNull() {
-            addCriterion("course_knowlege_id is null");
+        public Criteria andCourseKnowledgeIdIsNull() {
+            addCriterion("course_knowledge_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andCourseKnowlegeIdIsNotNull() {
-            addCriterion("course_knowlege_id is not null");
+        public Criteria andCourseKnowledgeIdIsNotNull() {
+            addCriterion("course_knowledge_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCourseKnowlegeIdEqualTo(Integer value) {
-            addCriterion("course_knowlege_id =", value, "courseKnowlegeId");
+        public Criteria andCourseKnowledgeIdEqualTo(Integer value) {
+            addCriterion("course_knowledge_id =", value, "courseKnowledgeId");
             return (Criteria) this;
         }
 
-        public Criteria andCourseKnowlegeIdNotEqualTo(Integer value) {
-            addCriterion("course_knowlege_id <>", value, "courseKnowlegeId");
+        public Criteria andCourseKnowledgeIdNotEqualTo(Integer value) {
+            addCriterion("course_knowledge_id <>", value, "courseKnowledgeId");
             return (Criteria) this;
         }
 
-        public Criteria andCourseKnowlegeIdGreaterThan(Integer value) {
-            addCriterion("course_knowlege_id >", value, "courseKnowlegeId");
+        public Criteria andCourseKnowledgeIdGreaterThan(Integer value) {
+            addCriterion("course_knowledge_id >", value, "courseKnowledgeId");
             return (Criteria) this;
         }
 
-        public Criteria andCourseKnowlegeIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("course_knowlege_id >=", value, "courseKnowlegeId");
+        public Criteria andCourseKnowledgeIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("course_knowledge_id >=", value, "courseKnowledgeId");
             return (Criteria) this;
         }
 
-        public Criteria andCourseKnowlegeIdLessThan(Integer value) {
-            addCriterion("course_knowlege_id <", value, "courseKnowlegeId");
+        public Criteria andCourseKnowledgeIdLessThan(Integer value) {
+            addCriterion("course_knowledge_id <", value, "courseKnowledgeId");
             return (Criteria) this;
         }
 
-        public Criteria andCourseKnowlegeIdLessThanOrEqualTo(Integer value) {
-            addCriterion("course_knowlege_id <=", value, "courseKnowlegeId");
+        public Criteria andCourseKnowledgeIdLessThanOrEqualTo(Integer value) {
+            addCriterion("course_knowledge_id <=", value, "courseKnowledgeId");
             return (Criteria) this;
         }
 
-        public Criteria andCourseKnowlegeIdIn(List<Integer> values) {
-            addCriterion("course_knowlege_id in", values, "courseKnowlegeId");
+        public Criteria andCourseKnowledgeIdIn(List<Integer> values) {
+            addCriterion("course_knowledge_id in", values, "courseKnowledgeId");
             return (Criteria) this;
         }
 
-        public Criteria andCourseKnowlegeIdNotIn(List<Integer> values) {
-            addCriterion("course_knowlege_id not in", values, "courseKnowlegeId");
+        public Criteria andCourseKnowledgeIdNotIn(List<Integer> values) {
+            addCriterion("course_knowledge_id not in", values, "courseKnowledgeId");
             return (Criteria) this;
         }
 
-        public Criteria andCourseKnowlegeIdBetween(Integer value1, Integer value2) {
-            addCriterion("course_knowlege_id between", value1, value2, "courseKnowlegeId");
+        public Criteria andCourseKnowledgeIdBetween(Integer value1, Integer value2) {
+            addCriterion("course_knowledge_id between", value1, value2, "courseKnowledgeId");
             return (Criteria) this;
         }
 
-        public Criteria andCourseKnowlegeIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("course_knowlege_id not between", value1, value2, "courseKnowlegeId");
+        public Criteria andCourseKnowledgeIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("course_knowledge_id not between", value1, value2, "courseKnowledgeId");
             return (Criteria) this;
         }
 
@@ -224,63 +224,63 @@ public class CourseKnowlegeExample {
             return (Criteria) this;
         }
 
-        public Criteria andKnowlegeIdIsNull() {
-            addCriterion("knowlege_id is null");
+        public Criteria andKnowledgeIdIsNull() {
+            addCriterion("knowledge_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andKnowlegeIdIsNotNull() {
-            addCriterion("knowlege_id is not null");
+        public Criteria andKnowledgeIdIsNotNull() {
+            addCriterion("knowledge_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andKnowlegeIdEqualTo(Integer value) {
-            addCriterion("knowlege_id =", value, "knowlegeId");
+        public Criteria andKnowledgeIdEqualTo(Integer value) {
+            addCriterion("knowledge_id =", value, "knowledgeId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowlegeIdNotEqualTo(Integer value) {
-            addCriterion("knowlege_id <>", value, "knowlegeId");
+        public Criteria andKnowledgeIdNotEqualTo(Integer value) {
+            addCriterion("knowledge_id <>", value, "knowledgeId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowlegeIdGreaterThan(Integer value) {
-            addCriterion("knowlege_id >", value, "knowlegeId");
+        public Criteria andKnowledgeIdGreaterThan(Integer value) {
+            addCriterion("knowledge_id >", value, "knowledgeId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowlegeIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("knowlege_id >=", value, "knowlegeId");
+        public Criteria andKnowledgeIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("knowledge_id >=", value, "knowledgeId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowlegeIdLessThan(Integer value) {
-            addCriterion("knowlege_id <", value, "knowlegeId");
+        public Criteria andKnowledgeIdLessThan(Integer value) {
+            addCriterion("knowledge_id <", value, "knowledgeId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowlegeIdLessThanOrEqualTo(Integer value) {
-            addCriterion("knowlege_id <=", value, "knowlegeId");
+        public Criteria andKnowledgeIdLessThanOrEqualTo(Integer value) {
+            addCriterion("knowledge_id <=", value, "knowledgeId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowlegeIdIn(List<Integer> values) {
-            addCriterion("knowlege_id in", values, "knowlegeId");
+        public Criteria andKnowledgeIdIn(List<Integer> values) {
+            addCriterion("knowledge_id in", values, "knowledgeId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowlegeIdNotIn(List<Integer> values) {
-            addCriterion("knowlege_id not in", values, "knowlegeId");
+        public Criteria andKnowledgeIdNotIn(List<Integer> values) {
+            addCriterion("knowledge_id not in", values, "knowledgeId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowlegeIdBetween(Integer value1, Integer value2) {
-            addCriterion("knowlege_id between", value1, value2, "knowlegeId");
+        public Criteria andKnowledgeIdBetween(Integer value1, Integer value2) {
+            addCriterion("knowledge_id between", value1, value2, "knowledgeId");
             return (Criteria) this;
         }
 
-        public Criteria andKnowlegeIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("knowlege_id not between", value1, value2, "knowlegeId");
+        public Criteria andKnowledgeIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("knowledge_id not between", value1, value2, "knowledgeId");
             return (Criteria) this;
         }
     }

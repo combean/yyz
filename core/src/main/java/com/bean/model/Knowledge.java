@@ -6,26 +6,13 @@ import java.util.Date;
 /**
  * @author 
  */
-public class Course implements Serializable {
+public class Knowledge implements Serializable {
     /**
-     * 课程ID
+     * 知识点ID
      */
-    private Integer courseId;
+    private Integer knowledgeId;
 
-    /**
-     * 课程名称
-     */
-    private String courseName;
-
-    /**
-     * 科目ID
-     */
-    private Integer subjectId;
-
-    /**
-     * 课程类型 0:分配可见 1:公开课程
-     */
-    private Integer courseType;
+    private String knowledgeName;
 
     private String memo;
 
@@ -66,36 +53,20 @@ public class Course implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Integer getCourseId() {
-        return courseId;
+    public Integer getKnowledgeId() {
+        return knowledgeId;
     }
 
-    public void setCourseId(Integer courseId) {
-        this.courseId = courseId;
+    public void setKnowledgeId(Integer knowledgeId) {
+        this.knowledgeId = knowledgeId;
     }
 
-    public String getCourseName() {
-        return courseName;
+    public String getKnowledgeName() {
+        return knowledgeName;
     }
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
-    }
-
-    public Integer getSubjectId() {
-        return subjectId;
-    }
-
-    public void setSubjectId(Integer subjectId) {
-        this.subjectId = subjectId;
-    }
-
-    public Integer getCourseType() {
-        return courseType;
-    }
-
-    public void setCourseType(Integer courseType) {
-        this.courseType = courseType;
+    public void setKnowledgeName(String knowledgeName) {
+        this.knowledgeName = knowledgeName;
     }
 
     public String getMemo() {

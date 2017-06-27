@@ -1,7 +1,6 @@
 package com.bean.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @author 
@@ -20,54 +19,24 @@ public class ManagerRole implements Serializable {
     private Integer roleId;
 
     /**
-     * 1正常 0删除
+     * 管理员用户名
      */
-    private Boolean del;
+    private String managerUsername;
 
     /**
-     * 添加人
+     * 管理员姓名
      */
-    private String addname;
+    private String managerName;
 
     /**
-     * 添加人的ID
+     * 角色名称
      */
-    private Integer addid;
+    private String roleName;
 
     /**
-     * 添加时间
+     * 角色KEY
      */
-    private Date addtime;
-
-    /**
-     * 编辑人用户名
-     */
-    private String editname;
-
-    /**
-     * 编辑ID
-     */
-    private Integer editid;
-
-    /**
-     * 编辑时间
-     */
-    private Date edittime;
-
-    /**
-     * 操作（删除）人ID
-     */
-    private Integer deleteid;
-
-    /**
-     * 操作（删除）人姓名
-     */
-    private String deletename;
-
-    /**
-     * 操作（删除）时间
-     */
-    private Date deletetime;
+    private String roleKey;
 
     private static final long serialVersionUID = 1L;
 
@@ -95,83 +64,35 @@ public class ManagerRole implements Serializable {
         this.roleId = roleId;
     }
 
-    public Boolean getDel() {
-        return del;
+    public String getManagerUsername() {
+        return managerUsername;
     }
 
-    public void setDel(Boolean del) {
-        this.del = del;
+    public void setManagerUsername(String managerUsername) {
+        this.managerUsername = managerUsername;
     }
 
-    public String getAddname() {
-        return addname;
+    public String getManagerName() {
+        return managerName;
     }
 
-    public void setAddname(String addname) {
-        this.addname = addname;
+    public void setManagerName(String managerName) {
+        this.managerName = managerName;
     }
 
-    public Integer getAddid() {
-        return addid;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setAddid(Integer addid) {
-        this.addid = addid;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
-    public Date getAddtime() {
-        return addtime;
+    public String getRoleKey() {
+        return roleKey;
     }
 
-    public void setAddtime(Date addtime) {
-        this.addtime = addtime;
-    }
-
-    public String getEditname() {
-        return editname;
-    }
-
-    public void setEditname(String editname) {
-        this.editname = editname;
-    }
-
-    public Integer getEditid() {
-        return editid;
-    }
-
-    public void setEditid(Integer editid) {
-        this.editid = editid;
-    }
-
-    public Date getEdittime() {
-        return edittime;
-    }
-
-    public void setEdittime(Date edittime) {
-        this.edittime = edittime;
-    }
-
-    public Integer getDeleteid() {
-        return deleteid;
-    }
-
-    public void setDeleteid(Integer deleteid) {
-        this.deleteid = deleteid;
-    }
-
-    public String getDeletename() {
-        return deletename;
-    }
-
-    public void setDeletename(String deletename) {
-        this.deletename = deletename;
-    }
-
-    public Date getDeletetime() {
-        return deletetime;
-    }
-
-    public void setDeletetime(Date deletetime) {
-        this.deletetime = deletetime;
+    public void setRoleKey(String roleKey) {
+        this.roleKey = roleKey;
     }
 }

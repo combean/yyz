@@ -6,20 +6,39 @@ import java.util.Date;
 /**
  * @author 
  */
-public class Kowledge implements Serializable {
-    /**
-     * 知识点ID
-     */
-    private Integer knowledgeId;
+public class Content implements Serializable {
 
-    private String knowledgeName;
+    /**
+     * 课程内容/课件ID
+     */
+    private Integer contentId;
+
+    /**
+     * 课程内容/课件名称
+     */
+    private String contentName;
+
+    /**
+     * 内容/课件内容
+     */
+    private String contentInfo;
+
+    /**
+     * 0:普通内容 1:PPT 2:视频 3:音频
+     */
+    private Integer contentType;
+
+    /**
+     * 课程ID
+     */
+    private Integer courseId;
 
     private String memo;
 
     /**
      * 1正常 0删除
      */
-    private Boolean del;
+    private Integer del;
 
     /**
      * 添加人
@@ -51,37 +70,44 @@ public class Kowledge implements Serializable {
      */
     private Date edittime;
 
-    /**
-     * 操作（删除）人ID
-     */
-    private Integer deleteid;
-
-    /**
-     * 操作（删除）人姓名
-     */
-    private String deletename;
-
-    /**
-     * 操作（删除）时间
-     */
-    private Date deletetime;
-
-    private static final long serialVersionUID = 1L;
-
-    public Integer getKnowledgeId() {
-        return knowledgeId;
+    public Integer getContentId() {
+        return contentId;
     }
 
-    public void setKnowledgeId(Integer knowledgeId) {
-        this.knowledgeId = knowledgeId;
+    public void setContentId(Integer contentId) {
+        this.contentId = contentId;
     }
 
-    public String getKnowledgeName() {
-        return knowledgeName;
+    public String getContentName() {
+        return contentName;
     }
 
-    public void setKnowledgeName(String knowledgeName) {
-        this.knowledgeName = knowledgeName;
+    public void setContentName(String contentName) {
+        this.contentName = contentName;
+    }
+
+    public String getContentInfo() {
+        return contentInfo;
+    }
+
+    public void setContentInfo(String contentInfo) {
+        this.contentInfo = contentInfo;
+    }
+
+    public Integer getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(Integer contentType) {
+        this.contentType = contentType;
+    }
+
+    public Integer getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(Integer courseId) {
+        this.courseId = courseId;
     }
 
     public String getMemo() {
@@ -92,11 +118,11 @@ public class Kowledge implements Serializable {
         this.memo = memo;
     }
 
-    public Boolean getDel() {
+    public Integer getDel() {
         return del;
     }
 
-    public void setDel(Boolean del) {
+    public void setDel(Integer del) {
         this.del = del;
     }
 
@@ -146,29 +172,5 @@ public class Kowledge implements Serializable {
 
     public void setEdittime(Date edittime) {
         this.edittime = edittime;
-    }
-
-    public Integer getDeleteid() {
-        return deleteid;
-    }
-
-    public void setDeleteid(Integer deleteid) {
-        this.deleteid = deleteid;
-    }
-
-    public String getDeletename() {
-        return deletename;
-    }
-
-    public void setDeletename(String deletename) {
-        this.deletename = deletename;
-    }
-
-    public Date getDeletetime() {
-        return deletetime;
-    }
-
-    public void setDeletetime(Date deletetime) {
-        this.deletetime = deletetime;
     }
 }

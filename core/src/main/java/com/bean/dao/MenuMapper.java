@@ -1,30 +1,17 @@
 package com.bean.dao;
 
 import com.bean.model.Menu;
-import com.bean.model.MenuExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import java.util.Map;
 
 public interface MenuMapper {
-    long countByExample(MenuExample example);
+    int insert(Menu menu);
 
-    int deleteByExample(MenuExample example);
+    Integer update(Menu menu);
 
-    int deleteByPrimaryKey(Integer menuId);
+    Menu getMenuByInfo(Map<String,String> map);
 
-    int insert(Menu record);
+    List<Menu> getMenuListByInfo(Map<String,String> map);
 
-    int insertSelective(Menu record);
-
-    List<Menu> selectByExample(MenuExample example);
-
-    Menu selectByPrimaryKey(Integer menuId);
-
-    int updateByExampleSelective(@Param("record") Menu record, @Param("example") MenuExample example);
-
-    int updateByExample(@Param("record") Menu record, @Param("example") MenuExample example);
-
-    int updateByPrimaryKeySelective(Menu record);
-
-    int updateByPrimaryKey(Menu record);
+    Integer getMenuCountByInfo(Map<String,String> map);
 }

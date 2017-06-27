@@ -11,10 +11,13 @@
   <sql id="where">
     <where>
       <if test="classId != null">
-        AND class_id = #{classId,jdbcType=INTEGER}
+        AND cs.class_id = #{classId,jdbcType=INTEGER}
       </if>
       <if test="subjectId != null">
-        AND subject_id = #{subjectId,jdbcType=VARCHAR}
+        AND cs.subject_id = #{subjectId,jdbcType=INTEGER}
+      </if>
+      <if test="classSubjectId != null">
+        AND cs.class_subject_id = #{classSubjectId,jdbcType=INTEGER}
       </if>
     </where>
   </sql>
@@ -30,20 +33,18 @@
     delete from exm_class_subject
     where class_id = #{classId,jdbcType=INTEGER}
   </delete>
-  <select id="getClassSubjectListByClassId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="getClassSubjectListByClassId" parameterType="com.bean.model.ClassSubject" resultMap="BaseResultMap">
     SELECT cs.class_subject_id,cs.class_id,cs.subject_id,c.class_name,s.subject_name
      FROM
      exm_class_subject  AS cs
      INNER JOIN exm_class AS c ON cs.class_id=c.class_id
      INNER JOIN exm_subject AS s ON cs.subject_id=s.subject_id
-     WHERE cs.class_id = #{classId,jdbcType=INTEGER}
+    <include refid="where" />
   </select>
   <delete id="deleteByClassSubjectId" parameterType="java.lang.Integer">
     delete from exm_class_subject
     where class_subject_id = #{classSubjectId,jdbcType=INTEGER}
   </delete>
-
-
 
   <sql id="Example_Where_Clause">
     <where>

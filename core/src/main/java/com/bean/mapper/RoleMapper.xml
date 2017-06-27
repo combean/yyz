@@ -14,10 +14,134 @@
     <result column="editname" jdbcType="VARCHAR" property="editname" />
     <result column="editid" jdbcType="INTEGER" property="editid" />
     <result column="edittime" jdbcType="TIMESTAMP" property="edittime" />
-    <result column="deleteid" jdbcType="INTEGER" property="deleteid" />
-    <result column="deletename" jdbcType="VARCHAR" property="deletename" />
-    <result column="deletetime" jdbcType="TIMESTAMP" property="deletetime" />
   </resultMap>
+  <sql id="where">
+    <where>
+      <if test="roleId !=null">
+        AND role_id = #{roleId,jdbcType=INTEGER}
+      </if>
+      <if test="roleName != null">
+        AND role_name = #{roleName,jdbcType=VARCHAR} OR role_name LIKE CONCAT('%',#{roleName,jdbcType=VARCHAR},'%' )
+      </if>
+      <if test="roleEnable != null">
+        AND role_enable = #{roleEnable,jdbcType=BIT}
+      </if>
+      <if test="roleKey != null">
+        AND role_key = #{roleKey,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    role_id, role_name, role_enable, role_key, memo, del,
+    addname, addid, addtime, editname, editid, edittime
+  </sql>
+  <insert id="insert" parameterType="com.bean.model.User" useGeneratedKeys="true" keyProperty="roleId">
+    insert into exm_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleName != null">
+        role_name,
+      </if>
+      <if test="roleEnable != null">
+        role_enable,
+      </if>
+      <if test="roleKey != null">
+        role_key,
+      </if>
+      <if test="memo != null">
+        memo,
+      </if>
+      <if test="del != null">
+        del,
+      </if>
+      <if test="addname != null">
+        addname,
+      </if>
+      <if test="addid != null">
+        addid,
+      </if>
+      <if test="addtime != null">
+        addtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleEnable != null">
+        #{roleEnable,jdbcType=BIT},
+      </if>
+      <if test="roleKey != null">
+        #{roleKey,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="del != null">
+        #{del,jdbcType=BIT},
+      </if>
+      <if test="addname != null">
+        #{addname,jdbcType=VARCHAR},
+      </if>
+      <if test="addid != null">
+        #{addid,jdbcType=INTEGER},
+      </if>
+      <if test="addtime != null">
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.bean.model.User">
+    UPDATE exm_role
+    <set>
+      <if test="roleName != null">
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleEnable != null">
+        role_enable = #{roleEnable,jdbcType=BIT},
+      </if>
+      <if test="roleKey != null">
+        role_key = #{roleKey,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        memo = #{memo,jdbcType=INTEGER},
+      </if>
+      <if test="del != null">
+        del = #{del,jdbcType=BIT},
+      </if>
+      <if test="editname != null">
+        editname = #{editname,jdbcType=VARCHAR},
+      </if>
+      <if test="editid != null">
+        editid = #{editid,jdbcType=INTEGER},
+      </if>
+      <if test="edittime != null">
+        edittime = #{edittime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <where>
+      role_id = #{roleId,jdbcType=INTEGER}
+    </where>
+  </update>
+  <select id="getRoleByInfo" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM exm_role
+    <include refid="where" />
+  </select>
+  <select id="getRoleListByInfo" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM exm_role
+    <include refid="where" />
+  </select>
+  <select id="getRoleCountByInfo" parameterType="java.util.Map" resultType="int">
+    SELECT
+    COUNT(*)
+    FROM exm_role
+    <include refid="where" />
+  </select>
+
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -76,10 +200,6 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List">
-    role_id, role_name, role_enable, role_key, memo, del, addname, addid, addtime, editname, 
-    editid, edittime, deleteid, deletename, deletetime
-  </sql>
   <select id="selectByExample" parameterType="com.bean.model.RoleExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -110,18 +230,6 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.bean.model.Role">
-    insert into exm_role (role_id, role_name, role_enable, 
-      role_key, memo, del, addname, 
-      addid, addtime, editname, 
-      editid, edittime, deleteid, 
-      deletename, deletetime)
-    values (#{roleId,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{roleEnable,jdbcType=INTEGER}, 
-      #{roleKey,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{del,jdbcType=BIT}, #{addname,jdbcType=VARCHAR}, 
-      #{addid,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, #{editname,jdbcType=VARCHAR}, 
-      #{editid,jdbcType=INTEGER}, #{edittime,jdbcType=TIMESTAMP}, #{deleteid,jdbcType=INTEGER}, 
-      #{deletename,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP})
-  </insert>
   <insert id="insertSelective" parameterType="com.bean.model.Role">
     insert into exm_role
     <trim prefix="(" suffix=")" suffixOverrides=",">
