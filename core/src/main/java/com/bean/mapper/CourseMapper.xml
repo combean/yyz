@@ -18,142 +18,29 @@
     <result column="deletename" jdbcType="VARCHAR" property="deletename" />
     <result column="deletetime" jdbcType="TIMESTAMP" property="deletetime" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.bean.model.Course">
-    <result column="course_content" jdbcType="LONGVARCHAR" property="courseContent" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
+  <sql id="where">
     <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
+      <if test="courseId != null">
+        AND course_id = #{courseId,jdbcType=INTEGER}
+      </if>
+      <if test="courseName != null">
+        AND course_name = #{courseName,jdbcType=VARCHAR} OR course_name LIKE CONCAT('%',#{courseName,jdbcType=VARCHAR},'%' )
+      </if>
+      <if test="subjectId != null">
+        AND subject_id = #{subjectId,jdbcType=BIT}
+      </if>
+      <if test="courseType != null">
+        AND course_type = #{courseType,jdbcType=INTEGER}
+      </if>
     </where>
   </sql>
   <sql id="Base_Column_List">
-    course_id, course_name, subject_id, course_type, memo, del, addname, addid, addtime, 
-    editname, editid, edittime, deleteid, deletename, deletetime
+    course_id, course_name, subject_id, course_type, memo, del,
+    addname, addid, addtime, editname, editid, edittime
   </sql>
-  <sql id="Blob_Column_List">
-    course_content
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.bean.model.CourseExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from exm_course
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByExample" parameterType="com.bean.model.CourseExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from exm_course
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from exm_course
-    where course_id = #{courseId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from exm_course
-    where course_id = #{courseId,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.bean.model.CourseExample">
-    delete from exm_course
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.bean.model.Course">
-    insert into exm_course (course_id, course_name, subject_id, 
-      course_type, memo, del, addname, 
-      addid, addtime, editname, 
-      editid, edittime, deleteid, 
-      deletename, deletetime, course_content
-      )
-    values (#{courseId,jdbcType=INTEGER}, #{courseName,jdbcType=VARCHAR}, #{subjectId,jdbcType=INTEGER}, 
-      #{courseType,jdbcType=BIT}, #{memo,jdbcType=VARCHAR}, #{del,jdbcType=BIT}, #{addname,jdbcType=VARCHAR}, 
-      #{addid,jdbcType=INTEGER}, #{addtime,jdbcType=TIMESTAMP}, #{editname,jdbcType=VARCHAR}, 
-      #{editid,jdbcType=INTEGER}, #{edittime,jdbcType=TIMESTAMP}, #{deleteid,jdbcType=INTEGER}, 
-      #{deletename,jdbcType=VARCHAR}, #{deletetime,jdbcType=TIMESTAMP}, #{courseContent,jdbcType=LONGVARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.bean.model.Course">
+  <insert id="insert" parameterType="com.bean.model.Content" useGeneratedKeys="true" keyProperty="courseId">
     insert into exm_course
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="courseId != null">
-        course_id,
-      </if>
       <if test="courseName != null">
         course_name,
       </if>
@@ -166,9 +53,6 @@
       <if test="memo != null">
         memo,
       </if>
-      <if test="del != null">
-        del,
-      </if>
       <if test="addname != null">
         addname,
       </if>
@@ -178,46 +62,19 @@
       <if test="addtime != null">
         addtime,
       </if>
-      <if test="editname != null">
-        editname,
-      </if>
-      <if test="editid != null">
-        editid,
-      </if>
-      <if test="edittime != null">
-        edittime,
-      </if>
-      <if test="deleteid != null">
-        deleteid,
-      </if>
-      <if test="deletename != null">
-        deletename,
-      </if>
-      <if test="deletetime != null">
-        deletetime,
-      </if>
-      <if test="courseContent != null">
-        course_content,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="courseId != null">
-        #{courseId,jdbcType=INTEGER},
-      </if>
       <if test="courseName != null">
         #{courseName,jdbcType=VARCHAR},
       </if>
       <if test="subjectId != null">
-        #{subjectId,jdbcType=INTEGER},
+        #{subjectId,jdbcType=LONGVARCHAR},
       </if>
       <if test="courseType != null">
         #{courseType,jdbcType=BIT},
       </if>
       <if test="memo != null">
         #{memo,jdbcType=VARCHAR},
-      </if>
-      <if test="del != null">
-        #{del,jdbcType=BIT},
       </if>
       <if test="addname != null">
         #{addname,jdbcType=VARCHAR},
@@ -228,136 +85,10 @@
       <if test="addtime != null">
         #{addtime,jdbcType=TIMESTAMP},
       </if>
-      <if test="editname != null">
-        #{editname,jdbcType=VARCHAR},
-      </if>
-      <if test="editid != null">
-        #{editid,jdbcType=INTEGER},
-      </if>
-      <if test="edittime != null">
-        #{edittime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="deleteid != null">
-        #{deleteid,jdbcType=INTEGER},
-      </if>
-      <if test="deletename != null">
-        #{deletename,jdbcType=VARCHAR},
-      </if>
-      <if test="deletetime != null">
-        #{deletetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="courseContent != null">
-        #{courseContent,jdbcType=LONGVARCHAR},
-      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.bean.model.CourseExample" resultType="java.lang.Long">
-    select count(*) from exm_course
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update exm_course
-    <set>
-      <if test="record.courseId != null">
-        course_id = #{record.courseId,jdbcType=INTEGER},
-      </if>
-      <if test="record.courseName != null">
-        course_name = #{record.courseName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.subjectId != null">
-        subject_id = #{record.subjectId,jdbcType=INTEGER},
-      </if>
-      <if test="record.courseType != null">
-        course_type = #{record.courseType,jdbcType=BIT},
-      </if>
-      <if test="record.memo != null">
-        memo = #{record.memo,jdbcType=VARCHAR},
-      </if>
-      <if test="record.del != null">
-        del = #{record.del,jdbcType=BIT},
-      </if>
-      <if test="record.addname != null">
-        addname = #{record.addname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.addid != null">
-        addid = #{record.addid,jdbcType=INTEGER},
-      </if>
-      <if test="record.addtime != null">
-        addtime = #{record.addtime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.editname != null">
-        editname = #{record.editname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.editid != null">
-        editid = #{record.editid,jdbcType=INTEGER},
-      </if>
-      <if test="record.edittime != null">
-        edittime = #{record.edittime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.deleteid != null">
-        deleteid = #{record.deleteid,jdbcType=INTEGER},
-      </if>
-      <if test="record.deletename != null">
-        deletename = #{record.deletename,jdbcType=VARCHAR},
-      </if>
-      <if test="record.deletetime != null">
-        deletetime = #{record.deletetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.courseContent != null">
-        course_content = #{record.courseContent,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update exm_course
-    set course_id = #{record.courseId,jdbcType=INTEGER},
-      course_name = #{record.courseName,jdbcType=VARCHAR},
-      subject_id = #{record.subjectId,jdbcType=INTEGER},
-      course_type = #{record.courseType,jdbcType=BIT},
-      memo = #{record.memo,jdbcType=VARCHAR},
-      del = #{record.del,jdbcType=BIT},
-      addname = #{record.addname,jdbcType=VARCHAR},
-      addid = #{record.addid,jdbcType=INTEGER},
-      addtime = #{record.addtime,jdbcType=TIMESTAMP},
-      editname = #{record.editname,jdbcType=VARCHAR},
-      editid = #{record.editid,jdbcType=INTEGER},
-      edittime = #{record.edittime,jdbcType=TIMESTAMP},
-      deleteid = #{record.deleteid,jdbcType=INTEGER},
-      deletename = #{record.deletename,jdbcType=VARCHAR},
-      deletetime = #{record.deletetime,jdbcType=TIMESTAMP},
-      course_content = #{record.courseContent,jdbcType=LONGVARCHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update exm_course
-    set course_id = #{record.courseId,jdbcType=INTEGER},
-      course_name = #{record.courseName,jdbcType=VARCHAR},
-      subject_id = #{record.subjectId,jdbcType=INTEGER},
-      course_type = #{record.courseType,jdbcType=BIT},
-      memo = #{record.memo,jdbcType=VARCHAR},
-      del = #{record.del,jdbcType=BIT},
-      addname = #{record.addname,jdbcType=VARCHAR},
-      addid = #{record.addid,jdbcType=INTEGER},
-      addtime = #{record.addtime,jdbcType=TIMESTAMP},
-      editname = #{record.editname,jdbcType=VARCHAR},
-      editid = #{record.editid,jdbcType=INTEGER},
-      edittime = #{record.edittime,jdbcType=TIMESTAMP},
-      deleteid = #{record.deleteid,jdbcType=INTEGER},
-      deletename = #{record.deletename,jdbcType=VARCHAR},
-      deletetime = #{record.deletetime,jdbcType=TIMESTAMP}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.bean.model.Course">
-    update exm_course
+  <update id="update" parameterType="com.bean.model.Content">
+    UPDATE exm_course
     <set>
       <if test="courseName != null">
         course_name = #{courseName,jdbcType=VARCHAR},
@@ -374,15 +105,6 @@
       <if test="del != null">
         del = #{del,jdbcType=BIT},
       </if>
-      <if test="addname != null">
-        addname = #{addname,jdbcType=VARCHAR},
-      </if>
-      <if test="addid != null">
-        addid = #{addid,jdbcType=INTEGER},
-      </if>
-      <if test="addtime != null">
-        addtime = #{addtime,jdbcType=TIMESTAMP},
-      </if>
       <if test="editname != null">
         editname = #{editname,jdbcType=VARCHAR},
       </if>
@@ -392,56 +114,27 @@
       <if test="edittime != null">
         edittime = #{edittime,jdbcType=TIMESTAMP},
       </if>
-      <if test="deleteid != null">
-        deleteid = #{deleteid,jdbcType=INTEGER},
-      </if>
-      <if test="deletename != null">
-        deletename = #{deletename,jdbcType=VARCHAR},
-      </if>
-      <if test="deletetime != null">
-        deletetime = #{deletetime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="courseContent != null">
-        course_content = #{courseContent,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    where course_id = #{courseId,jdbcType=INTEGER}
+    <where>
+      course_id = #{courseId,jdbcType=INTEGER}
+    </where>
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.bean.model.Course">
-    update exm_course
-    set course_name = #{courseName,jdbcType=VARCHAR},
-      subject_id = #{subjectId,jdbcType=INTEGER},
-      course_type = #{courseType,jdbcType=BIT},
-      memo = #{memo,jdbcType=VARCHAR},
-      del = #{del,jdbcType=BIT},
-      addname = #{addname,jdbcType=VARCHAR},
-      addid = #{addid,jdbcType=INTEGER},
-      addtime = #{addtime,jdbcType=TIMESTAMP},
-      editname = #{editname,jdbcType=VARCHAR},
-      editid = #{editid,jdbcType=INTEGER},
-      edittime = #{edittime,jdbcType=TIMESTAMP},
-      deleteid = #{deleteid,jdbcType=INTEGER},
-      deletename = #{deletename,jdbcType=VARCHAR},
-      deletetime = #{deletetime,jdbcType=TIMESTAMP},
-      course_content = #{courseContent,jdbcType=LONGVARCHAR}
-    where course_id = #{courseId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.bean.model.Course">
-    update exm_course
-    set course_name = #{courseName,jdbcType=VARCHAR},
-      subject_id = #{subjectId,jdbcType=INTEGER},
-      course_type = #{courseType,jdbcType=BIT},
-      memo = #{memo,jdbcType=VARCHAR},
-      del = #{del,jdbcType=BIT},
-      addname = #{addname,jdbcType=VARCHAR},
-      addid = #{addid,jdbcType=INTEGER},
-      addtime = #{addtime,jdbcType=TIMESTAMP},
-      editname = #{editname,jdbcType=VARCHAR},
-      editid = #{editid,jdbcType=INTEGER},
-      edittime = #{edittime,jdbcType=TIMESTAMP},
-      deleteid = #{deleteid,jdbcType=INTEGER},
-      deletename = #{deletename,jdbcType=VARCHAR},
-      deletetime = #{deletetime,jdbcType=TIMESTAMP}
-    where course_id = #{courseId,jdbcType=INTEGER}
-  </update>
+  <select id="getCourseByInfo" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM exm_course
+    <include refid="where" />
+  </select>
+  <select id="getCourseListByInfo" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM exm_course
+    <include refid="where" />
+  </select>
+  <select id="getCourseCountByInfo" parameterType="java.util.Map" resultType="int">
+    SELECT
+    COUNT(*)
+    FROM exm_course
+    <include refid="where" />
+  </select>
 </mapper>

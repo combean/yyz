@@ -25,14 +25,14 @@ public class Course implements Serializable {
     /**
      * 课程类型 0:分配可见 1:公开课程
      */
-    private Boolean courseType;
+    private Integer courseType;
 
     private String memo;
 
     /**
      * 1正常 0删除
      */
-    private Boolean del;
+    private Integer del;
 
     /**
      * 添加人
@@ -64,26 +64,6 @@ public class Course implements Serializable {
      */
     private Date edittime;
 
-    /**
-     * 操作（删除）人ID
-     */
-    private Integer deleteid;
-
-    /**
-     * 操作（删除）人姓名
-     */
-    private String deletename;
-
-    /**
-     * 操作（删除）时间
-     */
-    private Date deletetime;
-
-    /**
-     * 课程内容 可以有视频、PPT、PDF等媒体文件
-     */
-    private String courseContent;
-
     private static final long serialVersionUID = 1L;
 
     public Integer getCourseId() {
@@ -110,11 +90,11 @@ public class Course implements Serializable {
         this.subjectId = subjectId;
     }
 
-    public Boolean getCourseType() {
+    public Integer getCourseType() {
         return courseType;
     }
 
-    public void setCourseType(Boolean courseType) {
+    public void setCourseType(Integer courseType) {
         this.courseType = courseType;
     }
 
@@ -126,11 +106,11 @@ public class Course implements Serializable {
         this.memo = memo;
     }
 
-    public Boolean getDel() {
+    public Integer getDel() {
         return del;
     }
 
-    public void setDel(Boolean del) {
+    public void setDel(Integer del) {
         this.del = del;
     }
 
@@ -180,37 +160,5 @@ public class Course implements Serializable {
 
     public void setEdittime(Date edittime) {
         this.edittime = edittime;
-    }
-
-    public Integer getDeleteid() {
-        return deleteid;
-    }
-
-    public void setDeleteid(Integer deleteid) {
-        this.deleteid = deleteid;
-    }
-
-    public String getDeletename() {
-        return deletename;
-    }
-
-    public void setDeletename(String deletename) {
-        this.deletename = deletename;
-    }
-
-    public Date getDeletetime() {
-        return deletetime;
-    }
-
-    public void setDeletetime(Date deletetime) {
-        this.deletetime = deletetime;
-    }
-
-    public String getCourseContent() {
-        return courseContent;
-    }
-
-    public void setCourseContent(String courseContent) {
-        this.courseContent = courseContent;
     }
 }

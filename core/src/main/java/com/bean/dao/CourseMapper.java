@@ -3,34 +3,18 @@ package com.bean.dao;
 import com.bean.model.Course;
 import com.bean.model.CourseExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface CourseMapper {
-    long countByExample(CourseExample example);
+    int insert(Course course);
 
-    int deleteByExample(CourseExample example);
+    Integer update(Course course);
 
-    int deleteByPrimaryKey(Integer courseId);
+    Course getCourseByInfo(Map<String, String> map);
 
-    int insert(Course record);
+    List<Course> getCourseListByInfo(Map<String, String> map);
 
-    int insertSelective(Course record);
-
-    List<Course> selectByExampleWithBLOBs(CourseExample example);
-
-    List<Course> selectByExample(CourseExample example);
-
-    Course selectByPrimaryKey(Integer courseId);
-
-    int updateByExampleSelective(@Param("record") Course record, @Param("example") CourseExample example);
-
-    int updateByExampleWithBLOBs(@Param("record") Course record, @Param("example") CourseExample example);
-
-    int updateByExample(@Param("record") Course record, @Param("example") CourseExample example);
-
-    int updateByPrimaryKeySelective(Course record);
-
-    int updateByPrimaryKeyWithBLOBs(Course record);
-
-    int updateByPrimaryKey(Course record);
+    Integer getCourseCountByInfo(Map<String, String> map);
 }
