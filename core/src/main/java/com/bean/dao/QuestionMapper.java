@@ -1,30 +1,19 @@
 package com.bean.dao;
 
 import com.bean.model.Question;
-import com.bean.model.QuestionExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface QuestionMapper {
-    long countByExample(QuestionExample example);
+    int insert(Question question);
 
-    int deleteByExample(QuestionExample example);
+    Integer update(Question question);
 
-    int deleteByPrimaryKey(Integer questionId);
+    Question getQuestionByInfo(Map<String,String> map);
 
-    int insert(Question record);
+    List<Question> getQuestionListByInfo(Map<String,String> map);
 
-    int insertSelective(Question record);
-
-    List<Question> selectByExample(QuestionExample example);
-
-    Question selectByPrimaryKey(Integer questionId);
-
-    int updateByExampleSelective(@Param("record") Question record, @Param("example") QuestionExample example);
-
-    int updateByExample(@Param("record") Question record, @Param("example") QuestionExample example);
-
-    int updateByPrimaryKeySelective(Question record);
-
-    int updateByPrimaryKey(Question record);
+    Integer getQuestionCount(Map<String,String> map);
 }

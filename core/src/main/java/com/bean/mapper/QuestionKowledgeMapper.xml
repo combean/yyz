@@ -1,11 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bean.dao.QuestionKowledgeMapper">
-  <resultMap id="BaseResultMap" type="com.bean.model.QuestionKowledge">
-    <id column="question_kowledge_id" jdbcType="INTEGER" property="questionKowledgeId" />
+<mapper namespace="com.bean.dao.QuestionKnowledgeMapper">
+  <resultMap id="BaseResultMap" type="com.bean.model.QuestionKnowledge">
+    <id column="question_knowledge_id" jdbcType="INTEGER" property="questionKnowledgeId" />
     <result column="question_id" jdbcType="INTEGER" property="questionId" />
-    <result column="kowledge_id" jdbcType="INTEGER" property="kowledgeId" />
+    <result column="knowledge_id" jdbcType="INTEGER" property="knowledgeId" />
+    <result column="knowledge_name" jdbcType="VARCHAR" property="knowledgeName" />
+    <result column="question_title" jdbcType="VARCHAR" property="questionTitle" />
   </resultMap>
+  <sql id="where">
+    <where>
+      <if test="questionKnowledgeId != null">
+        AND qk.question_knowledge_id = #{questionKnowledgeId,jdbcType=INTEGER}
+      </if>
+      <if test="questionId != null">
+        AND qk.question_id = #{questionId,jdbcType=INTEGER}
+      </if>
+      <if test="knowledgeId != null">
+        AND qk.knowledge_id = #{knowledgeId,jdbcType=INTEGER}
+      </if>
+    </where>
+  </sql>
+  <insert id="insertList" parameterType="java.util.List">
+    insert into exm_question_knowledge (question_id, knowledge_id
+    )
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.questionId,jdbcType=INTEGER}, #{item.knowledgeId,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+  <insert id="insert" parameterType="com.bean.model.QuestionKnowledge">
+    insert into exm_question_knowledge (question_id, knowledge_id
+    )
+    values
+    (#{questionId,jdbcType=INTEGER}, #{knowledgeId,jdbcType=INTEGER})
+  </insert>
+  <delete id="deleteByQuestionId" parameterType="java.lang.Integer">
+    delete from exm_question_knowledge
+    where question_id = #{questionId,jdbcType=INTEGER}
+  </delete>
+  <select id="getQuestionKnowledgeListByInfo" parameterType="com.bean.model.QuestionKnowledge" resultMap="BaseResultMap">
+    SELECT
+    qk.question_knowledge_id, qk.question_id, qk.knowledge_id, q.question_title, k.knowledge_name
+    FROM
+    exm_question_knowledge AS qk
+    INNER JOIN exm_question AS q ON qk.question_id=q.question_id
+    INNER JOIN exm_knowledge AS k ON qk.knowledge_id=k.knowledge_id
+    <include refid="where" />
+  </select>
+  <delete id="deleteByQuestionKnowledgeId" parameterType="java.lang.Integer">
+    delete from exm_question_knowledge
+    where question_knowledge_id = #{questionKnowledgeId,jdbcType=INTEGER}
+  </delete>
+  <select id="getCountByInfo" parameterType="com.bean.model.QuestionKnowledge" resultType="int">
+    SELECT COUNT(*)
+    FROM exm_question_knowledge AS qk
+    <include refid="where" />
+  </select>
+
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -67,7 +120,7 @@
   <sql id="Base_Column_List">
     question_kowledge_id, question_id, kowledge_id
   </sql>
-  <select id="selectByExample" parameterType="com.bean.model.QuestionKowledgeExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.bean.model.QuestionKnowledgeExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -82,7 +135,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from exm_question_kowledge
     where question_kowledge_id = #{questionKowledgeId,jdbcType=INTEGER}
@@ -91,19 +144,13 @@
     delete from exm_question_kowledge
     where question_kowledge_id = #{questionKowledgeId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.bean.model.QuestionKowledgeExample">
+  <delete id="deleteByExample" parameterType="com.bean.model.QuestionKnowledgeExample">
     delete from exm_question_kowledge
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.bean.model.QuestionKowledge">
-    insert into exm_question_kowledge (question_kowledge_id, question_id, kowledge_id
-      )
-    values (#{questionKowledgeId,jdbcType=INTEGER}, #{questionId,jdbcType=INTEGER}, #{kowledgeId,jdbcType=INTEGER}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.bean.model.QuestionKowledge">
+  <insert id="insertSelective" parameterType="com.bean.model.QuestionKnowledge">
     insert into exm_question_kowledge
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="questionKowledgeId != null">
@@ -128,7 +175,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.bean.model.QuestionKowledgeExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.bean.model.QuestionKnowledgeExample" resultType="java.lang.Long">
     select count(*) from exm_question_kowledge
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -160,7 +207,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.bean.model.QuestionKowledge">
+  <update id="updateByPrimaryKeySelective" parameterType="com.bean.model.QuestionKnowledge">
     update exm_question_kowledge
     <set>
       <if test="questionId != null">
@@ -172,7 +219,7 @@
     </set>
     where question_kowledge_id = #{questionKowledgeId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.bean.model.QuestionKowledge">
+  <update id="updateByPrimaryKey" parameterType="com.bean.model.QuestionKnowledge">
     update exm_question_kowledge
     set question_id = #{questionId,jdbcType=INTEGER},
       kowledge_id = #{kowledgeId,jdbcType=INTEGER}

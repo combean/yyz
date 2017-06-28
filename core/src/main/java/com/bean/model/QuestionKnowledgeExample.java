@@ -3,14 +3,14 @@ package com.bean.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionKowledgeExample {
+public class QuestionKnowledgeExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public QuestionKowledgeExample() {
+    public QuestionKnowledgeExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 

@@ -18,9 +18,34 @@ public class Paper implements Serializable {
     private String paperName;
 
     /**
+     * 考卷类型 0:练习考试 1:正式考试 2:练习正式均可
+     */
+    private Integer paperType;
+
+    /**
      * 考卷关联科目
      */
     private Integer subjectId;
+
+    /**
+     * 科目名称
+     */
+    private String subjectName;
+
+    /**
+     * 考试时长
+     */
+    private Integer examMinutes;
+
+    /**
+     * 开始时间 不填随时开始
+     */
+    private Date startTime;
+
+    /**
+     * 结束(失效)时间 不填永久有效
+     */
+    private Date endTime;
 
     /**
      * 备注
@@ -30,7 +55,7 @@ public class Paper implements Serializable {
     /**
      * 1正常 0删除
      */
-    private Boolean del;
+    private Integer del;
 
     /**
      * 添加人
@@ -62,21 +87,6 @@ public class Paper implements Serializable {
      */
     private Date edittime;
 
-    /**
-     * 操作（删除）人ID
-     */
-    private Integer deleteid;
-
-    /**
-     * 操作（删除）人姓名
-     */
-    private String deletename;
-
-    /**
-     * 操作（删除）时间
-     */
-    private Date deletetime;
-
     private static final long serialVersionUID = 1L;
 
     public Integer getPaperId() {
@@ -95,12 +105,52 @@ public class Paper implements Serializable {
         this.paperName = paperName;
     }
 
+    public Integer getPaperType() {
+        return paperType;
+    }
+
+    public void setPaperType(Integer paperType) {
+        this.paperType = paperType;
+    }
+
     public Integer getSubjectId() {
         return subjectId;
     }
 
     public void setSubjectId(Integer subjectId) {
         this.subjectId = subjectId;
+    }
+
+    public String getSubjectName() {
+        return subjectName;
+    }
+
+    public void setSubjectName(String subjectName) {
+        this.subjectName = subjectName;
+    }
+
+    public Integer getExamMinutes() {
+        return examMinutes;
+    }
+
+    public void setExamMinutes(Integer examMinutes) {
+        this.examMinutes = examMinutes;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 
     public String getMemo() {
@@ -111,11 +161,11 @@ public class Paper implements Serializable {
         this.memo = memo;
     }
 
-    public Boolean getDel() {
+    public Integer getDel() {
         return del;
     }
 
-    public void setDel(Boolean del) {
+    public void setDel(Integer del) {
         this.del = del;
     }
 
@@ -165,29 +215,5 @@ public class Paper implements Serializable {
 
     public void setEdittime(Date edittime) {
         this.edittime = edittime;
-    }
-
-    public Integer getDeleteid() {
-        return deleteid;
-    }
-
-    public void setDeleteid(Integer deleteid) {
-        this.deleteid = deleteid;
-    }
-
-    public String getDeletename() {
-        return deletename;
-    }
-
-    public void setDeletename(String deletename) {
-        this.deletename = deletename;
-    }
-
-    public Date getDeletetime() {
-        return deletetime;
-    }
-
-    public void setDeletetime(Date deletetime) {
-        this.deletetime = deletetime;
     }
 }

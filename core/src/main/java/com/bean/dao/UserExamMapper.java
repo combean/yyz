@@ -6,25 +6,15 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserExamMapper {
-    long countByExample(UserExamExample example);
+    int insert(UserExam userExam);
 
-    int deleteByExample(UserExamExample example);
+    int insertList(List<UserExam> userExam);
 
-    int deleteByPrimaryKey(Integer userExamId);
+    Integer deleteByUserId(Integer managerId);
 
-    int insert(UserExam record);
+    List<UserExam> getUserExamListByInfo(UserExam userExam);
 
-    int insertSelective(UserExam record);
+    Integer deleteByUserExamId(Integer userExamId);
 
-    List<UserExam> selectByExample(UserExamExample example);
-
-    UserExam selectByPrimaryKey(Integer userExamId);
-
-    int updateByExampleSelective(@Param("record") UserExam record, @Param("example") UserExamExample example);
-
-    int updateByExample(@Param("record") UserExam record, @Param("example") UserExamExample example);
-
-    int updateByPrimaryKeySelective(UserExam record);
-
-    int updateByPrimaryKey(UserExam record);
+    int getCountByInfo (UserExam userExam);
 }

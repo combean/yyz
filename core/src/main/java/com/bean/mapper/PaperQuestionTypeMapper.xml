@@ -7,6 +7,55 @@
     <result column="type_id" jdbcType="INTEGER" property="typeId" />
     <result column="paper_id" jdbcType="INTEGER" property="paperId" />
   </resultMap>
+  <sql id="where">
+    <where>
+      <if test="paperQuestionTypeId != null">
+        AND paper_question_type_id = #{paperQuestionTypeId,jdbcType=INTEGER}
+      </if>
+      <if test="typeId != null">
+        AND type_id = #{typeId,jdbcType=INTEGER}
+      </if>
+      <if test="paperId != null">
+        AND paper_id = #{paperId,jdbcType=INTEGER}
+      </if>
+    </where>
+  </sql>
+  <insert id="insertList" parameterType="java.util.List">
+    insert into exm_paper_question_type (type_sequence, type_id, paper_id
+    )
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.typeSequence,jdbcType=INTEGER}, #{item.typeId,jdbcType=INTEGER}, #{item.paperId,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+  <insert id="insert" parameterType="com.bean.model.PaperQuestionType">
+    insert into exm_paper_question_type (type_sequence, type_id, paper_id
+    )
+    values
+    (#{typeSequence,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER}, #{paperId,jdbcType=INTEGER})
+  </insert>
+  <delete id="deleteByPaperId" parameterType="java.lang.Integer">
+    delete from exm_paper_question_type
+    where paper_id = #{paperId,jdbcType=INTEGER}
+  </delete>
+  <select id="getPaperQuestionTypeListByInfo" parameterType="com.bean.model.PaperQuestionType" resultMap="BaseResultMap">
+    SELECT
+    paper_question_type_id, type_sequence, type_id, paper_id
+    FROM
+    exm_paper_question_type
+    <include refid="where" />
+  </select>
+  <delete id="deleteByPaperQuestionTypeId" parameterType="java.lang.Integer">
+    delete from exm_paper_question_type
+    where paper_question_type_id = #{paperQuestionTypeId,jdbcType=INTEGER}
+  </delete>
+  <select id="getCountByInfo" parameterType="com.bean.model.PaperQuestionType" resultType="int">
+    SELECT COUNT(*)
+    FROM exm_paper_question_type
+    <include refid="where" />
+  </select>
+
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -98,12 +147,6 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.bean.model.PaperQuestionType">
-    insert into exm_paper_question_type (paper_question_type_id, type_sequence, 
-      type_id, paper_id)
-    values (#{paperQuestionTypeId,jdbcType=INTEGER}, #{typeSequence,jdbcType=INTEGER}, 
-      #{typeId,jdbcType=INTEGER}, #{paperId,jdbcType=INTEGER})
-  </insert>
   <insert id="insertSelective" parameterType="com.bean.model.PaperQuestionType">
     insert into exm_paper_question_type
     <trim prefix="(" suffix=")" suffixOverrides=",">
