@@ -5,7 +5,79 @@
     <id column="user_exam_id" jdbcType="INTEGER" property="userExamId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="exam_id" jdbcType="INTEGER" property="examId" />
+    <result column="user_username" jdbcType="VARCHAR" property="userUsername" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_class_id" jdbcType="INTEGER" property="userClassId" />
+    <result column="class_name" jdbcType="VARCHAR" property="className" />
+    <result column="user_mobile" jdbcType="VARCHAR" property="userMobile" />
+    <result column="user_sex" jdbcType="BIT" property="userSex" />
+    <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+    <result column="exam_name" jdbcType="VARCHAR" property="examName" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="exam_minutes" jdbcType="INTEGER" property="examMinutes" />
+    <result column="exam_type" jdbcType="BIT" property="examType" />
+    <result column="subject_id" jdbcType="INTEGER" property="subjectId" />
+    <result column="subject_name" jdbcType="VARCHAR" property="subjectName" />
+    <result column="place_id" jdbcType="INTEGER" property="placeId" />
+    <result column="place_name" jdbcType="VARCHAR" property="placeName" />
   </resultMap>
+  <sql id="where">
+    <where>
+      <if test="userExamId != null">
+        AND ue.user_exam_id = #{userExamId,jdbcType=INTEGER}
+      </if>
+      <if test="userId != null">
+        AND ue.user_id = #{userId,jdbcType=INTEGER}
+      </if>
+      <if test="examId != null">
+        AND ue.exam_id = #{examId,jdbcType=INTEGER}
+      </if>
+    </where>
+  </sql>
+  <insert id="insertList" parameterType="java.util.List">
+    insert into exm_user_exam (user_id, exam_id
+    )
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.userId,jdbcType=INTEGER}, #{item.examId,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+  <insert id="insert" parameterType="com.bean.model.UserExam">
+    insert into exm_user_exam (user_id, exam_id
+    )
+    values
+    (#{userId,jdbcType=INTEGER}, #{examId,jdbcType=INTEGER})
+  </insert>
+  <delete id="deleteByUserId" parameterType="java.lang.Integer">
+    delete from exm_user_exam
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <select id="getUserExamListByInfo" parameterType="com.bean.model.UserExam" resultMap="BaseResultMap">
+    SELECT
+    ue.user_exam_id, ue.user_id, ue.exam_id,
+    u.user_username, u.user_password, u.user_class_id, u.user_mobile, u.user_email, u.user_name, u.user_sex, c.class_name,
+    e.exam_name, e.start_time, e.end_time, e.exam_minutes, e.exam_type, e.place_id, p.place_name, e.paper_id, e.subject_id, s.subject_name
+    FROM
+    exm_user_exam  AS ue
+    INNER JOIN exm_user AS u ON ue.user_id=u.user_id
+    INNER JOIN exm_class AS c ON u.user_class_id=c.class_id
+    INNER JOIN exm_exam AS e ON ue.exam_id=e.exam_id
+    INNER JOIN exm_subject AS s ON e.subject_id=s.subject_id
+    INNER JOIN exm_place AS p ON e.place_id=p.place_id
+    <include refid="where" />
+  </select>
+  <delete id="deleteByUserExamId" parameterType="java.lang.Integer">
+    delete from exm_user_exam
+    where user_exam_id = #{userExamId,jdbcType=INTEGER}
+  </delete>
+  <select id="getCountByInfo" parameterType="com.bean.model.ManagerRole" resultType="int">
+    SELECT COUNT(*)
+    FROM exm_user_exam AS ue
+    <include refid="where" />
+  </select>
+
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -97,12 +169,6 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.bean.model.UserExam">
-    insert into exm_user_exam (user_exam_id, user_id, exam_id
-      )
-    values (#{userExamId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{examId,jdbcType=INTEGER}
-      )
-  </insert>
   <insert id="insertSelective" parameterType="com.bean.model.UserExam">
     insert into exm_user_exam
     <trim prefix="(" suffix=")" suffixOverrides=",">
