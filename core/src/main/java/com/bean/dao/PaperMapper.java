@@ -3,28 +3,18 @@ package com.bean.dao;
 import com.bean.model.Paper;
 import com.bean.model.PaperExample;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface PaperMapper {
-    long countByExample(PaperExample example);
+    int insert(Paper paper);
 
-    int deleteByExample(PaperExample example);
+    Integer update(Paper paper);
 
-    int deleteByPrimaryKey(Integer paperId);
+    Paper getPaperByInfo(Map<String,String> map);
 
-    int insert(Paper record);
+    List<Paper> getPaperListByInfo(Map<String,String> map);
 
-    int insertSelective(Paper record);
-
-    List<Paper> selectByExample(PaperExample example);
-
-    Paper selectByPrimaryKey(Integer paperId);
-
-    int updateByExampleSelective(@Param("record") Paper record, @Param("example") PaperExample example);
-
-    int updateByExample(@Param("record") Paper record, @Param("example") PaperExample example);
-
-    int updateByPrimaryKeySelective(Paper record);
-
-    int updateByPrimaryKey(Paper record);
+    Integer getPaperCountByInfo(Map<String,String> map);
 }
