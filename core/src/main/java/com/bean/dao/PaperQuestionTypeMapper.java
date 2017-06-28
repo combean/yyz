@@ -6,25 +6,15 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface PaperQuestionTypeMapper {
-    long countByExample(PaperQuestionTypeExample example);
+    int insert(PaperQuestionType paperQuestionType);
 
-    int deleteByExample(PaperQuestionTypeExample example);
+    int insertList(List<PaperQuestionType> paperQuestionType);
 
-    int deleteByPrimaryKey(Integer paperQuestionTypeId);
+    Integer deleteByPaperId(Integer paperId);
 
-    int insert(PaperQuestionType record);
+    List<PaperQuestionType> getPaperQuestionTypeListByInfo(PaperQuestionType paperQuestionType);
 
-    int insertSelective(PaperQuestionType record);
+    Integer deleteByPaperQuestionTypeId(Integer paperQuestionTypeId);
 
-    List<PaperQuestionType> selectByExample(PaperQuestionTypeExample example);
-
-    PaperQuestionType selectByPrimaryKey(Integer paperQuestionTypeId);
-
-    int updateByExampleSelective(@Param("record") PaperQuestionType record, @Param("example") PaperQuestionTypeExample example);
-
-    int updateByExample(@Param("record") PaperQuestionType record, @Param("example") PaperQuestionTypeExample example);
-
-    int updateByPrimaryKeySelective(PaperQuestionType record);
-
-    int updateByPrimaryKey(PaperQuestionType record);
+    int getCountByInfo (PaperQuestionType paperQuestionType);
 }
