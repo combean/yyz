@@ -9,7 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -46,7 +48,7 @@ public class UserExamServiceTest {
         userExam3.setExamId(3);
         list.add(userExam3);
 
-        userExamService.insertUserExamList(list);
+        userExamService.insertList(list);
     }
 
     @Test
@@ -54,7 +56,7 @@ public class UserExamServiceTest {
         UserExam userExam = new UserExam();
         userExam.setUserId(2);
         userExam.setExamId(2);
-        userExamService.insertUserExam(userExam);
+        userExamService.insert(userExam);
     }
 
     @Test
@@ -64,21 +66,25 @@ public class UserExamServiceTest {
 
     @Test
     public void getUserExamListByInfo() throws Exception {
-        UserExam userExam = new UserExam();
-        userExam.setUserId(2);
-        List<UserExam> list=userExamService.getUserExamListByInfo(userExam);
+//        UserExam userExam = new UserExam();
+//        userExam.setUserId(2);
+        Map<String,Object> map = new HashMap<>();
+        map.put("userId",2);
+        List<UserExam> list=userExamService.getListByMap(map);
     }
 
     @Test
     public void deleteByUserExamId() throws Exception {
-        Integer i = userExamService.deleteByUserExamId(5);
+        Integer i = userExamService.deleteById(5);
     }
 
     @Test
-    public void getCountByInfo() throws Exception {
-        UserExam userExam = new UserExam();
-        userExam.setUserId(2);
-        Integer i = userExamService.getCountByInfo(userExam);
+    public void getCountByMap() throws Exception {
+//        UserExam userExam = new UserExam();
+//        userExam.setUserId(2);
+        Map<String,Object> map = new HashMap<>();
+        map.put("userId",2);
+        Integer i = userExamService.getCountByMap(map);
     }
 
 }

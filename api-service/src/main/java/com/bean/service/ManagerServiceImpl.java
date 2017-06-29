@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utils.MyLogger;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -19,27 +20,32 @@ public class ManagerServiceImpl implements ManagerService {
 
 
     @Override
-    public int insertManager(Manager manager) {
+    public int insert(Manager manager) throws SQLException {
         return managerMapper.insert(manager);
     }
 
     @Override
-    public Integer updateManager(Manager manager) {
+    public Integer update(Manager manager) throws SQLException {
         return managerMapper.update(manager);
     }
 
     @Override
-    public Manager getManagerByInfo(Map<String, String> map) {
-        return managerMapper.getManagerByInfo(map);
+    public Manager getByMap(Map<String, Object> map) throws SQLException {
+        return managerMapper.getByMap(map);
     }
 
     @Override
-    public List<Manager> getManagerListByInfo(Map<String, String> map) {
-        return managerMapper.getManagerListByInfo(map);
+    public List<Manager> getListByMap(Map<String, Object> map) throws SQLException {
+        return managerMapper.getListByMap(map);
     }
 
     @Override
-    public Integer getManagerCountByInfo(Map<String, String> map) {
-        return managerMapper.getManagerCount(map);
+    public Integer getCountByMap(Map<String, Object> map) throws SQLException {
+        return managerMapper.getCountByMap(map);
+    }
+
+    @Override
+    public Manager getById(Integer id) throws SQLException {
+        return managerMapper.getById(id);
     }
 }

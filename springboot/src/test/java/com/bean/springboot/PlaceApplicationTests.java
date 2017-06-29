@@ -20,7 +20,7 @@ public class PlaceApplicationTests {
 	private PlaceService placeService;
 
 	@Test
-	public void insertPlace() throws  Exception{
+	public void insert() throws  Exception{
 		Place place=new Place();
 		place.setPlaceType(1);
 		place.setMemo("测试考场地点备注2");
@@ -28,11 +28,11 @@ public class PlaceApplicationTests {
 		place.setAddname("duxiaoda");
 		place.setAddid(2);
 		place.setAddtime(new Date());
-		placeService.insertPlace(place);
+		placeService.insert(place);
 	}
 
 	@Test
-	public void updatePlace() throws Exception{
+	public void update() throws Exception{
 		Place place=new Place();
 		place.setPlaceName("测试考试地点名称修改");
 		place.setPlaceId(1);
@@ -40,29 +40,29 @@ public class PlaceApplicationTests {
 		place.setEditname("zhaoyan");
 		place.setEditid(1);
 		place.setEdittime(new Date());
-		placeService.updatePlace(place);
+		placeService.update(place);
 	}
 
 	@Test
-	public void getPlaceByInfo() throws Exception{
-		Map<String,String> map = new HashMap<>();
+	public void getByMap() throws Exception{
+		Map<String,Object> map = new HashMap<>();
 		map.put("placeName","测试考试地点名称修改");
-		Place place=placeService.getPlaceByInfo(map);
+		Place place=placeService.getByMap(map);
 		System.out.print(place);
 	}
 
 	@Test
-	public void getPlaceListByInfo() throws Exception{
-		Map<String,String> map = new HashMap<>();
+	public void getListByMap() throws Exception{
+		Map<String,Object> map = new HashMap<>();
 		map.put("placeName","测试");
-		List<Place> place=placeService.getPlaceListByInfo(map);
+		List<Place> place=placeService.getListByMap(map);
 		System.out.print(place);
 	}
 
 	@Test
-	public void getPlaceCountByInfo() throws Exception{
-		Map<String,String> map = new HashMap<>();
+	public void getCountByMap() throws Exception{
+		Map<String,Object> map = new HashMap<>();
 		map.put("placeName","测试");
-		Integer place=placeService.getPlaceCountByInfo(map);
+		Integer place=placeService.getCountByMap(map);
 	}
 }

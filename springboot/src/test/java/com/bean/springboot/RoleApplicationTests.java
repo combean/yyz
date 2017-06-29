@@ -23,7 +23,7 @@ public class RoleApplicationTests {
 
 
 	@Test
-	public void insertRole() throws  Exception{
+	public void insert() throws  Exception{
 		Role role = new Role();
 		role.setRoleName("超级管理员");
 		role.setRoleKey("role_admin");
@@ -31,7 +31,7 @@ public class RoleApplicationTests {
 		role.setAddname("zhaoyan");
 		role.setAddtime(new Date());
 		role.setAddid(1);
-		Integer i = roleService.insertRole(role);
+		Integer i = roleService.insert(role);
 
 		Role role1 = new Role();
 		role1.setRoleName("教师");
@@ -40,11 +40,11 @@ public class RoleApplicationTests {
 		role1.setAddname("zhaoyan");
 		role1.setAddtime(new Date());
 		role1.setAddid(1);
-		Integer i1 = roleService.insertRole(role1);
+		Integer i1 = roleService.insert(role1);
 	}
 
 	@Test
-	public void updateRole() throws Exception{
+	public void update() throws Exception{
 		Role role = new Role();
 		role.setRoleName("超级管理员update");
 		role.setRoleKey("role_admin");
@@ -54,29 +54,29 @@ public class RoleApplicationTests {
 		role.setEditname("zhaoyan");
 		role.setEdittime(new Date());
 		role.setEditid(1);
-		roleService.updateRole(role);
+		roleService.update(role);
 	}
 
 	@Test
 	public void getRoleObj() throws Exception{
-		Map<String,String> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>();
 		map.put("roleName","超级管理员update");
-		Role roleSelect = roleService.getRoleByInfo(map);
+		Role roleSelect = roleService.getByMap(map);
 		System.out.println(roleSelect);
 	}
 
 	@Test
 	public void getRoleList() throws Exception{
-		Map<String,String> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>();
 		map.put("roleName","超级管理员");
-		List<Role> roleSelect = roleService.getRoleListByInfo(map);
+		List<Role> roleSelect = roleService.getListByMap(map);
 		System.out.println(roleSelect);
 	}
 
 	@Test
-	public void getRoleCountByInfo() throws Exception{
-		Map<String,String> map = new HashMap<>();
+	public void getCountByMap() throws Exception{
+		Map<String,Object> map = new HashMap<>();
 		map.put("roleName","超级管理员");
-		int count = roleService.getRoleCountByInfo(map);
+		int count = roleService.getCountByMap(map);
 	}
 }

@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utils.MyLogger;
 
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 
 @Service("roleMenuService")
@@ -18,12 +20,12 @@ public class RoleMenuServiceImpl implements RoleMenuService {
     private MyLogger LOGGER = new MyLogger(RoleMenuServiceImpl.class);
 
     @Override
-    public int insertRoleMenuList(List<RoleMenu> roleMenu){
+    public int insertList(List<RoleMenu> roleMenu) throws SQLException {
         return roleMenuMapper.insertList(roleMenu);
     }
 
     @Override
-    public int insertRoleMenu(RoleMenu roleMenu) {
+    public int insert(RoleMenu roleMenu) throws SQLException {
         return roleMenuMapper.insert(roleMenu);
     }
 
@@ -33,17 +35,17 @@ public class RoleMenuServiceImpl implements RoleMenuService {
     }
 
     @Override
-    public List<RoleMenu> getRoleMenuListByInfo(RoleMenu roleMenu) {
-        return roleMenuMapper.getRoleMenuListByInfo(roleMenu);
+    public List<RoleMenu> getListByMap(Map<String,Object> map) throws SQLException {
+        return roleMenuMapper.getListByMap(map);
     }
 
     @Override
-    public Integer deleteByRoleMenuId(Integer roleMenuId) {
-        return roleMenuMapper.deleteByRoleMenuId(roleMenuId);
+    public int deleteById(Integer id) throws SQLException {
+        return roleMenuMapper.deleteById(id);
     }
 
     @Override
-    public Integer getCountByInfo(RoleMenu roleMenu) {
-        return roleMenuMapper.getCountByInfo(roleMenu);
+    public int getCountByMap(Map<String,Object> map) throws SQLException {
+        return roleMenuMapper.getCountByMap(map);
     }
 }

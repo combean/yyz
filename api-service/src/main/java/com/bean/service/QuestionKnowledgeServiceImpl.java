@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utils.MyLogger;
 
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 
 @Service("questionKnowledgeService")
@@ -18,32 +20,32 @@ public class QuestionKnowledgeServiceImpl implements QuestionKnowledgeService {
     private MyLogger LOGGER = new MyLogger(QuestionKnowledgeServiceImpl.class);
 
     @Override
-    public int insertQuestionKnowledgeList(List<QuestionKnowledge> questionKnowledge){
+    public int insertList(List<QuestionKnowledge> questionKnowledge) throws SQLException {
         return questionKnowledgeMapper.insertList(questionKnowledge);
     }
 
     @Override
-    public int insertQuestionKnowledge(QuestionKnowledge questionKnowledge) {
+    public int insert(QuestionKnowledge questionKnowledge) throws SQLException {
         return questionKnowledgeMapper.insert(questionKnowledge);
     }
 
     @Override
-    public Integer deleteByQuestionId(Integer managerId) {
+    public int deleteByQuestionId(Integer managerId) {
         return questionKnowledgeMapper.deleteByQuestionId(managerId);
     }
 
     @Override
-    public List<QuestionKnowledge> getQuestionKnowledgeListByInfo(QuestionKnowledge questionKnowledge) {
-        return questionKnowledgeMapper.getQuestionKnowledgeListByInfo(questionKnowledge);
+    public List<QuestionKnowledge> getListByMap(Map<String, Object> map) throws SQLException {
+        return questionKnowledgeMapper.getListByMap(map);
     }
 
     @Override
-    public Integer deleteByQuestionKnowledgeId(Integer questionKnowledgeId) {
-        return questionKnowledgeMapper.deleteByQuestionKnowledgeId(questionKnowledgeId);
+    public int deleteById(Integer id) throws SQLException {
+        return questionKnowledgeMapper.deleteById(id);
     }
 
     @Override
-    public Integer getCountByInfo(QuestionKnowledge questionKnowledge) {
-        return questionKnowledgeMapper.getCountByInfo(questionKnowledge);
+    public int getCountByMap(Map<String, Object> map) throws SQLException {
+        return questionKnowledgeMapper.getCountByMap(map);
     }
 }

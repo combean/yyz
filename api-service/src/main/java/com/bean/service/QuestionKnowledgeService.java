@@ -2,7 +2,9 @@ package com.bean.service;
 
 import com.bean.model.QuestionKnowledge;
 
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 public interface QuestionKnowledgeService {
 
@@ -11,40 +13,40 @@ public interface QuestionKnowledgeService {
      * @param questionKnowledge 添加试题知识点关系对象
      * @return 添加条数
      */
-    int insertQuestionKnowledge(QuestionKnowledge questionKnowledge);
+    int insert(QuestionKnowledge questionKnowledge) throws SQLException;
 
     /**
      * 添加试题知识点关系
      * @param questionKnowledge 添加试题知识点关系List
      * @return 添加条数
      */
-    int insertQuestionKnowledgeList(List<QuestionKnowledge> questionKnowledge);
+    int insertList(List<QuestionKnowledge> questionKnowledge) throws SQLException;
 
     /**
      * 编辑试题知识点关系
      * @param questionId 试题ID
      * @return
      */
-    Integer deleteByQuestionId(Integer questionId);
+    int deleteByQuestionId(Integer questionId);
 
     /**
      * 根据试题ID获取试题知识点对应关系List
-     * @param questionKnowledge 试题ID
+     * @param map
      * @return 试题知识点对应关系List
      */
-    List<QuestionKnowledge> getQuestionKnowledgeListByInfo(QuestionKnowledge questionKnowledge);
+    List<QuestionKnowledge> getListByMap(Map<String, Object> map) throws SQLException;
 
     /**
      * 根据主键ID删除试题知识点对应关系
-     * @param questionKnowledgeId
+     * @param id 主键
      * @return
      */
-    Integer deleteByQuestionKnowledgeId(Integer questionKnowledgeId);
+    int deleteById(Integer id) throws SQLException;
 
     /**
      * 获取试题知识点对应关系数量
-     * @param questionKnowledge 试题知识点对应关系 对象
+     * @param map
      * @return
      */
-    Integer getCountByInfo(QuestionKnowledge questionKnowledge);
+    int getCountByMap(Map<String, Object> map) throws SQLException;
 }

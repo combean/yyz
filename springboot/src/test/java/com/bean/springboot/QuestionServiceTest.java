@@ -34,7 +34,7 @@ public class QuestionServiceTest {
         question.setAddname("zhaoyan");
         question.setAddtime(new Date());
         question.setAddid(1);
-        Integer i = questionService.insertQuestion(question);
+        Integer i = questionService.insert(question);
 
         Question question1 = new Question();
         question1.setQuestionTitle("测试试题题干1");
@@ -44,7 +44,7 @@ public class QuestionServiceTest {
         question1.setAddname("zhaoyan");
         question1.setAddtime(new Date());
         question1.setAddid(1);
-        Integer i1 = questionService.insertQuestion(question1);
+        Integer i1 = questionService.insert(question1);
     }
 
     @Test
@@ -59,29 +59,29 @@ public class QuestionServiceTest {
         question.setEditname("zhaoyan");
         question.setEdittime(new Date());
         question.setEditid(1);
-        questionService.updateQuestion(question);
+        questionService.update(question);
     }
 
     @Test
-    public void getQuestionByInfo() throws Exception {
-        Map<String,String> map = new HashMap<>();
+    public void getByMap() throws Exception {
+        Map<String,Object> map = new HashMap<>();
         map.put("questionId","1");
         map.put("questionTitle","测试试题题干修改");
-        Question m = questionService.getQuestionByInfo(map);
+        Question m = questionService.getByMap(map);
         System.out.print(m);
     }
 
     @Test
-    public void getQuestionListByInfo() throws Exception {
-        Map<String,String> map = new HashMap<>();
+    public void getListByMap() throws Exception {
+        Map<String,Object> map = new HashMap<>();
         map.put("questionTitle","测试");
-        List<Question> m = questionService.getQuestionListByInfo(map);
+        List<Question> m = questionService.getListByMap(map);
         System.out.print(m);
     }
 
     @Test
     public void getQuestionCountByInfo() throws Exception {
-        Map<String,String> map = new HashMap<>();
+        Map<String,Object> map = new HashMap<>();
         map.put("questionTitle","测试");
         int count = questionService.getQuestionCountByInfo(map);
     }

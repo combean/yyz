@@ -40,7 +40,7 @@
     delete from exm_course_knowledge
     where course_id = #{courseId,jdbcType=INTEGER}
   </delete>
-  <select id="getCourseKnowledgeListByInfo" parameterType="com.bean.model.CourseKnowledge" resultMap="BaseResultMap">
+  <select id="getListByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
     SELECT
     ck.course_knowledge_id, ck.course_id, ck.knowledge_id, c.course_name, k.knowledge_name
     FROM
@@ -49,11 +49,11 @@
     INNER JOIN exm_knowledge AS k ON ck.knowledge_id=k.knowledge_id
     <include refid="where" />
   </select>
-  <delete id="deleteByCourseKnowledgeId" parameterType="java.lang.Integer">
+  <delete id="deleteById" parameterType="java.lang.Integer">
     delete from exm_course_knowledge
     where course_knowledge_id = #{CourseKnowledgeId,jdbcType=INTEGER}
   </delete>
-  <select id="getCountByInfo" parameterType="com.bean.model.CourseKnowledge" resultType="int">
+  <select id="getCountByMap" parameterType="java.util.Map" resultType="int">
     SELECT COUNT(*)
     FROM exm_course_knowledge AS ck
     <include refid="where" />

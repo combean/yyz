@@ -112,7 +112,7 @@ public class Utils {
         return vcode;
     }
 
-    public static Map<String, String> array2Map(String str) throws IOException {
+    public static Map<String, Object> array2Map(String str) throws IOException {
         String retrunStr = "";
         String retrunDate = "";
 
@@ -131,7 +131,7 @@ public class Utils {
 //
 //        String a1=Base64.encodeBase64String(a);
 
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, Object> map = new HashMap<String, Object>();
 
         byte[] decodeStr = Base64.decodeBase64(str.getBytes());
 

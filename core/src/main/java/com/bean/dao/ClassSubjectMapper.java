@@ -1,15 +1,12 @@
 package com.bean.dao;
 
 import com.bean.model.ClassSubject;
+import mybatis.basemapper.BaseMapper;
+
 import java.util.List;
 
-public interface ClassSubjectMapper {
+public interface ClassSubjectMapper extends BaseMapper<ClassSubject>{
 
-    void insert(List<ClassSubject> record);
+    int deleteByClassId(Integer classId);
 
-    Integer deleteByClassId(Integer classId);
-
-    List<ClassSubject> getClassSubjectListByClassId(Integer classId);
-
-    Integer deleteByClassSubjectId(Integer classId);
 }

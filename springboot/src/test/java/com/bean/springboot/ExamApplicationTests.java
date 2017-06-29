@@ -19,7 +19,7 @@ public class ExamApplicationTests {
 	private ExamService examService;
 
 	@Test
-	public void insertExam() throws  Exception{
+	public void insert() throws  Exception{
 		Exam exam=new Exam();
 		exam.setExamName("测试考试名称3");
 		exam.setPlaceId(2);
@@ -33,11 +33,11 @@ public class ExamApplicationTests {
 		exam.setAddname("zhaoyan");
 		exam.setAddid(1);
 		exam.setAddtime(new Date());
-		examService.insertExam(exam);
+		examService.insert(exam);
 	}
 
 	@Test
-	public void updateExam() throws Exception{
+	public void update() throws Exception{
 		Exam exam=new Exam();
 		exam.setExamName("测试考试名称修改");
 		exam.setExamId(1);
@@ -52,30 +52,35 @@ public class ExamApplicationTests {
 		exam.setEditname("zhaoyan");
 		exam.setEditid(1);
 		exam.setEdittime(new Date());
-		examService.updateExam(exam);
+		examService.update(exam);
 	}
 
 	@Test
-	public void getExamByInfo() throws Exception{
-		Map<String,String> map = new HashMap<>();
+	public void getByMap() throws Exception{
+		Map<String,Object> map = new HashMap<>();
 		map.put("examName","测试考试名称修改");
-		Exam exam=examService.getExamByInfo(map);
+		Exam exam=examService.getByMap(map);
 		System.out.print(exam);
 	}
 
 	@Test
-	public void getExamListByInfo() throws Exception{
-		Map<String,String> map = new HashMap<>();
+	public void getListByMap() throws Exception{
+		Map<String,Object> map = new HashMap<>();
 		map.put("examName","测试");
-		List<Exam> exam=examService.getExamListByInfo(map);
+		List<Exam> exam=examService.getListByMap(map);
 		System.out.print(exam);
 	}
 
 	@Test
-	public void getExamCountByInfo() throws Exception{
-		Map<String,String> map = new HashMap<>();
+	public void getCountByMap() throws Exception{
+		Map<String,Object> map = new HashMap<>();
 		map.put("examName","测试");
-		Integer exam=examService.getExamCountByInfo(map);
+		Integer exam=examService.getCountByMap(map);
 		System.out.print(exam);
+	}
+
+	@Test
+	public void getById() throws Exception{
+		Exam exam = examService.getById(1);
 	}
 }

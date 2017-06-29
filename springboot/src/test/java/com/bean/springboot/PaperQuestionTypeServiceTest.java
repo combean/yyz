@@ -9,7 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -24,7 +26,7 @@ public class PaperQuestionTypeServiceTest {
     private PaperQuestionTypeService paperQuestionTypeService;
 
     @Test
-    public void insertPaperQuestionType() throws Exception {
+    public void insert() throws Exception {
         List<PaperQuestionType> list = new ArrayList<>();
         PaperQuestionType paperQuestionType = new PaperQuestionType();
         paperQuestionType.setTypeSequence(1);
@@ -50,16 +52,16 @@ public class PaperQuestionTypeServiceTest {
         paperQuestionType3.setPaperId(1);;
         list.add(paperQuestionType3);
 
-        paperQuestionTypeService.insertPaperQuestionTypeList(list);
+        paperQuestionTypeService.insertList(list);
     }
 
     @Test
-    public void insertPaperQuestionTypeList() throws Exception {
+    public void insertList() throws Exception {
         PaperQuestionType paperQuestionType = new PaperQuestionType();
         paperQuestionType.setTypeSequence(5);
         paperQuestionType.setTypeId(5);
         paperQuestionType.setPaperId(1);;
-        paperQuestionTypeService.insertPaperQuestionType(paperQuestionType);
+        paperQuestionTypeService.insert(paperQuestionType);
     }
 
     @Test
@@ -68,22 +70,26 @@ public class PaperQuestionTypeServiceTest {
     }
 
     @Test
-    public void getPaperQuestionTypeListByInfo() throws Exception {
-        PaperQuestionType paperQuestionType = new PaperQuestionType();
-        paperQuestionType.setPaperId(1);
-        List<PaperQuestionType> list=paperQuestionTypeService.getPaperQuestionTypeListByInfo(paperQuestionType);
+    public void getListByMap() throws Exception {
+//        PaperQuestionType paperQuestionType = new PaperQuestionType();
+//        paperQuestionType.setPaperId(1);
+        Map<String,Object> map = new HashMap<>();
+        map.put("paperId",1);
+        List<PaperQuestionType> list=paperQuestionTypeService.getListByMap(map);
     }
 
     @Test
     public void deleteByPaperQuestionTypeId() throws Exception {
-        Integer i = paperQuestionTypeService.deleteByPaperQuestionTypeId(6);
+        Integer i = paperQuestionTypeService.deleteById(6);
     }
 
     @Test
-    public void getCountByInfo() throws Exception {
-        PaperQuestionType paperQuestionType = new PaperQuestionType();
-        paperQuestionType.setPaperId(1);
-        Integer i = paperQuestionTypeService.getCountByInfo(paperQuestionType);
+    public void getCountByMap() throws Exception {
+//        PaperQuestionType paperQuestionType = new PaperQuestionType();
+//        paperQuestionType.setPaperId(1);
+        Map<String,Object> map = new HashMap<>();
+        map.put("paperId",1);
+        Integer i = paperQuestionTypeService.getCountByMap(map);
     }
 
 }

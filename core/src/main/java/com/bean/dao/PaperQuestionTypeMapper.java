@@ -3,18 +3,12 @@ package com.bean.dao;
 import com.bean.model.PaperQuestionType;
 import com.bean.model.PaperQuestionTypeExample;
 import java.util.List;
+
+import mybatis.basemapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
-public interface PaperQuestionTypeMapper {
-    int insert(PaperQuestionType paperQuestionType);
+public interface PaperQuestionTypeMapper extends BaseMapper<PaperQuestionType> {
 
-    int insertList(List<PaperQuestionType> paperQuestionType);
+    int deleteByPaperId(Integer paperId);
 
-    Integer deleteByPaperId(Integer paperId);
-
-    List<PaperQuestionType> getPaperQuestionTypeListByInfo(PaperQuestionType paperQuestionType);
-
-    Integer deleteByPaperQuestionTypeId(Integer paperQuestionTypeId);
-
-    int getCountByInfo (PaperQuestionType paperQuestionType);
 }

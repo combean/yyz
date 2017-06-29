@@ -38,18 +38,18 @@
     delete from exm_paper_question_type
     where paper_id = #{paperId,jdbcType=INTEGER}
   </delete>
-  <select id="getPaperQuestionTypeListByInfo" parameterType="com.bean.model.PaperQuestionType" resultMap="BaseResultMap">
+  <select id="getListByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
     SELECT
     paper_question_type_id, type_sequence, type_id, paper_id
     FROM
     exm_paper_question_type
     <include refid="where" />
   </select>
-  <delete id="deleteByPaperQuestionTypeId" parameterType="java.lang.Integer">
+  <delete id="deleteById" parameterType="java.lang.Integer">
     delete from exm_paper_question_type
     where paper_question_type_id = #{paperQuestionTypeId,jdbcType=INTEGER}
   </delete>
-  <select id="getCountByInfo" parameterType="com.bean.model.PaperQuestionType" resultType="int">
+  <select id="getCountByMap" parameterType="java.util.Map" resultType="int">
     SELECT COUNT(*)
     FROM exm_paper_question_type
     <include refid="where" />

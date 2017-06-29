@@ -1,16 +1,25 @@
 package com.bean.service;
 
 import com.bean.model.ClassSubject;
+
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 public interface ClassSubjectService {
     /**
      * 添加班级科目关系
-     * @param classsubject 添加班级科目关系对象
-     * @return 添加添加班级科目关系 id
+     * @param classSubject 添加班级科目关系List
+     * @return 添加条数
      */
-    void insertClassSubject(List<ClassSubject> classsubject);
+    int insertList(List<ClassSubject> classSubject) throws SQLException;
 
+    /**
+     * 添加班级科目关系
+     * @param classSubject 添加班级科目关系对象
+     * @return 添加条数
+     */
+    int insert(ClassSubject classSubject) throws SQLException;
     /**
      * 编辑班级科目关系
      * @param classId 班级ID
@@ -20,15 +29,22 @@ public interface ClassSubjectService {
 
     /**
      * 根据班级ID获取班级科目对应关系List
-     * @param classId 班级ID
+     * @param map
      * @return 班级科目对应关系List
      */
-    List<ClassSubject> getClassSubjectListByClassId(Integer classId);
+    List<ClassSubject> getListByMap(Map<String, Object> map) throws SQLException;
 
     /**
      * 根据主键ID删除班级科目对应关系
-     * @param classId
+     * @param id 主键
      * @return
      */
-    Integer deleteByClassSubjectId(Integer classId);
+    Integer deleteById(Integer id) throws SQLException;
+
+    /**
+     * 获取课程知识点对应关系数量
+     * @param map
+     * @return
+     */
+    int getCountByMap(Map<String, Object> map) throws SQLException;
 }

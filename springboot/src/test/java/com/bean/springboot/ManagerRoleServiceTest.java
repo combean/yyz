@@ -9,7 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -24,7 +26,7 @@ public class ManagerRoleServiceTest {
     private ManagerRoleService managerRoleService;
 
     @Test
-    public void insertManagerRoleList() throws Exception {
+    public void insertList() throws Exception {
         List<ManagerRole> list = new ArrayList<>();
         ManagerRole managerRole = new ManagerRole();
         managerRole.setManagerId(1);
@@ -46,15 +48,15 @@ public class ManagerRoleServiceTest {
         managerRole3.setRoleId(3);
         list.add(managerRole3);
 
-        managerRoleService.insertManagerRoleList(list);
+        managerRoleService.insertList(list);
     }
 
     @Test
-    public void insertManager() throws Exception {
+    public void insert() throws Exception {
         ManagerRole managerRole = new ManagerRole();
         managerRole.setManagerId(2);
         managerRole.setRoleId(2);
-        managerRoleService.insertManagerRole(managerRole);
+        managerRoleService.insert(managerRole);
     }
 
     @Test
@@ -63,22 +65,26 @@ public class ManagerRoleServiceTest {
     }
 
     @Test
-    public void getManagerRoleListByInfo() throws Exception {
-        ManagerRole managerRole = new ManagerRole();
-        managerRole.setManagerId(2);
-        List<ManagerRole> list=managerRoleService.getManagerRoleListByInfo(managerRole);
+    public void getListByMap() throws Exception {
+//        ManagerRole managerRole = new ManagerRole();
+//        managerRole.setManagerId(2);
+        Map<String, Object> map = new HashMap<>();
+        map.put("managerId",2);
+        List<ManagerRole> list=managerRoleService.getListByMap(map);
     }
 
     @Test
     public void deleteByManagerRoleId() throws Exception {
-        Integer i = managerRoleService.deleteByManagerRoleId(5);
+        Integer i = managerRoleService.deleteById(5);
     }
 
     @Test
-    public void getCountByInfo() throws Exception{
-        ManagerRole managerRole = new ManagerRole();
-        managerRole.setManagerId(2);
-        Integer i = managerRoleService.getCountByInfo(managerRole);
+    public void getCountByMap() throws Exception{
+//        ManagerRole managerRole = new ManagerRole();
+//        managerRole.setManagerId(2);
+        Map<String, Object> map = new HashMap<>();
+        map.put("managerId",2);
+        Integer i = managerRoleService.getCountByMap(map);
     }
 
 }

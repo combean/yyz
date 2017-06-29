@@ -26,7 +26,7 @@ public class MenuServiceTest {
     private MenuService menuService;
 
     @Test
-    public void insertMenu() throws Exception {
+    public void insert() throws Exception {
         Menu menu = new Menu();
         menu.setMenuName("顶级菜单");
         menu.setMenuLevel(0);
@@ -34,7 +34,7 @@ public class MenuServiceTest {
         menu.setAddid(1);
         menu.setAddname("zhaoyan");
         menu.setAddtime(new Date());
-        menuService.insertMenu(menu);
+        menuService.insert(menu);
 
         Menu menu1 = new Menu();
         menu1.setMenuName("二级菜单");
@@ -44,7 +44,7 @@ public class MenuServiceTest {
         menu1.setAddid(1);
         menu1.setAddname("zhaoyan");
         menu1.setAddtime(new Date());
-        menuService.insertMenu(menu1);
+        menuService.insert(menu1);
 
         Menu menu2 = new Menu();
         menu2.setMenuName("二级菜单1");
@@ -54,11 +54,11 @@ public class MenuServiceTest {
         menu2.setAddid(1);
         menu2.setAddname("zhaoyan");
         menu2.setAddtime(new Date());
-        menuService.insertMenu(menu2);
+        menuService.insert(menu2);
     }
 
     @Test
-    public void updateMenu() throws Exception {
+    public void update() throws Exception {
         Menu menu = new Menu();
         menu.setMenuName("顶级菜单修改");
         menu.setMenuId(1);
@@ -66,28 +66,28 @@ public class MenuServiceTest {
         menu.setEditid(1);
         menu.setEditname("zhaoyan");
         menu.setEdittime(new Date());
-        menuService.updateMenu(menu);
+        menuService.update(menu);
     }
 
     @Test
-    public void getMenuByInfo() throws Exception {
-        Map<String,String> map = new HashMap<>();
+    public void getByMap() throws Exception {
+        Map<String,Object> map = new HashMap<>();
         map.put("menuName","顶级菜单修改");
-        Menu u=menuService.getMenuByInfo(map);
+        Menu u=menuService.getByMap(map);
         System.out.println(u);
     }
 
     @Test
-    public void getMenuListByInfo() throws Exception {
-        Map<String,String> map = new HashMap<>();
-        List<Menu> m = menuService.getMenuListByInfo(map);
+    public void getListByMap() throws Exception {
+        Map<String,Object> map = new HashMap<>();
+        List<Menu> m = menuService.getListByMap(map);
         System.out.print(m);
     }
 
     @Test
-    public void getMenuCountByInfo() throws Exception {
-        Map<String,String> map = new HashMap<>();
-        Integer i = menuService.getMenuCountByInfo(map);
+    public void getCountByMap() throws Exception {
+        Map<String,Object> map = new HashMap<>();
+        Integer i = menuService.getCountByMap(map);
     }
 
 }

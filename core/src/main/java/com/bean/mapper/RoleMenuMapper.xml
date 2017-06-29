@@ -42,7 +42,7 @@
     delete from exm_role_menu
     where role_id = #{roleId,jdbcType=INTEGER}
   </delete>
-  <select id="getRoleMenuListByInfo" parameterType="com.bean.model.RoleMenu" resultMap="BaseResultMap">
+  <select id="getListByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
     SELECT
     rm.role_menu_id, rm.role_id, rm.menu_id, r.role_name, r.role_key, m.menu_name, m.menu_key, m.menu_url
     FROM
@@ -51,11 +51,11 @@
     INNER JOIN exm_menu AS m ON rm.menu_id=m.menu_id
     <include refid="where" />
   </select>
-  <delete id="deleteByRoleMenuId" parameterType="java.lang.Integer">
+  <delete id="deleteById" parameterType="java.lang.Integer">
     delete from exm_role_menu
     where role_menu_id = #{roleMenuId,jdbcType=INTEGER}
   </delete>
-  <select id="getCountByInfo" parameterType="com.bean.model.ManagerRole" resultType="int">
+  <select id="getCountByMap" parameterType="java.util.Map" resultType="int">
     SELECT COUNT(*)
     FROM exm_role_menu AS rm
     <include refid="where" />

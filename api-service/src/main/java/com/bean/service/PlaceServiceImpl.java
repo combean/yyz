@@ -5,6 +5,8 @@ import com.bean.model.Place;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utils.MyLogger;
+
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -19,27 +21,32 @@ public class PlaceServiceImpl implements PlaceService {
 
 
     @Override
-    public int insertPlace(Place place) {
+    public int insert(Place place) throws SQLException {
         return placeMapper.insert(place);
     }
 
     @Override
-    public Integer updatePlace(Place place) {
+    public Integer update(Place place) throws SQLException {
         return placeMapper.update(place);
     }
 
     @Override
-    public Place getPlaceByInfo(Map<String, String> map) {
-        return placeMapper.getPlaceByInfo(map);
+    public Place getByMap(Map<String, Object> map) throws SQLException {
+        return placeMapper.getByMap(map);
     }
 
     @Override
-    public List<Place> getPlaceListByInfo(Map<String, String> map) {
-        return placeMapper.getPlaceListByInfo(map);
+    public List<Place> getListByMap(Map<String, Object> map) throws SQLException {
+        return placeMapper.getListByMap(map);
     }
 
     @Override
-    public Integer getPlaceCountByInfo(Map<String, String> map) {
-        return placeMapper.getPlaceCountByInfo(map);
+    public Integer getCountByMap(Map<String, Object> map) throws SQLException {
+        return placeMapper.getCountByMap(map);
+    }
+
+    @Override
+    public Place getById(Integer id) throws SQLException {
+        return placeMapper.getById(id);
     }
 }

@@ -21,7 +21,7 @@
       </if>
     </where>
   </sql>
-  <insert id="insert" parameterType="java.util.List">
+  <insert id="insertList" parameterType="java.util.List">
     insert into exm_class_subject (class_id, subject_id
     )
     values
@@ -29,11 +29,17 @@
       (#{item.classId,jdbcType=INTEGER}, #{item.subjectId,jdbcType=INTEGER})
     </foreach>
   </insert>
+  <insert id="insert" parameterType="com.bean.model.ClassSubject">
+    insert into exm_class_subject (class_id, subject_id
+    )
+    values
+      (#{classId,jdbcType=INTEGER}, #{subjectId,jdbcType=INTEGER})
+  </insert>
   <delete id="deleteByClassId" parameterType="java.lang.Integer">
     delete from exm_class_subject
     where class_id = #{classId,jdbcType=INTEGER}
   </delete>
-  <select id="getClassSubjectListByClassId" parameterType="com.bean.model.ClassSubject" resultMap="BaseResultMap">
+  <select id="getListByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
     SELECT cs.class_subject_id,cs.class_id,cs.subject_id,c.class_name,s.subject_name
      FROM
      exm_class_subject  AS cs
@@ -41,10 +47,15 @@
      INNER JOIN exm_subject AS s ON cs.subject_id=s.subject_id
     <include refid="where" />
   </select>
-  <delete id="deleteByClassSubjectId" parameterType="java.lang.Integer">
+  <delete id="deleteById" parameterType="java.lang.Integer">
     delete from exm_class_subject
     where class_subject_id = #{classSubjectId,jdbcType=INTEGER}
   </delete>
+  <select id="getCountByMap" parameterType="java.util.Map" resultType="int">
+    SELECT COUNT(*)
+    FROM exm_class_subject AS cs
+    <include refid="where" />
+  </select>
 
   <sql id="Example_Where_Clause">
     <where>

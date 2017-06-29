@@ -3,6 +3,7 @@ package com.bean.service;
 
 import com.bean.model.Subject;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -14,7 +15,7 @@ public interface SubjectService {
      *
      * 插入数据主键 Subject.getSubjectId();
      */
-    int insertSubject(Subject subject);
+    int insert(Subject subject) throws SQLException;
 
     /**
      * 编辑/删除科目
@@ -23,26 +24,34 @@ public interface SubjectService {
      *
      * 删除时 setDel(0)
      */
-    Integer updateSubject(Subject subject);
+    Integer update(Subject subject) throws SQLException;
 
     /**
      * 根据传入的map信息获取科目对象
      * @param map key 为 Subject 属性
      * @return 科目对象
      */
-    Subject getSubjectByInfo(Map<String, String> map);
+    Subject getByMap(Map<String, Object> map) throws SQLException;
 
     /**
      * 根据传入的map信息获取科目List
      * @param map key 为 Subject 属性
      * @return List<Subject>
      */
-    List<Subject> getSubjectListByInfo(Map<String, String> map);
+    List<Subject> getListByMap(Map<String, Object> map) throws SQLException;
 
     /**
      * 根据条件获取科目数量
      * @param map key 为 Subject 属性
      * @return 科目数量
      */
-    Integer getSubjectCountByInfo(Map<String, String> map);
+    Integer getCountByMap(Map<String, Object> map) throws SQLException;
+
+    /**
+     * 根据主键ID 获取科目对象
+     * @param id 主键ID
+     * @return
+     * @throws SQLException
+     */
+    Subject getById(int id) throws SQLException;
 }

@@ -20,49 +20,67 @@ public class SubjectApplicationTests {
 	private SubjectService subjectService;
 
 	@Test
-	public void insertSubject() throws  Exception{
+	public void insert() throws  Exception{
 		Subject subject=new Subject();
-		subject.setSubjectName("测试班级3");
-		subject.setParentId(1);
-		subject.setMemo("测试班级3备注");
+		subject.setSubjectName("测试班级");
+		subject.setMemo("测试班级备注");
 
-		subjectService.insertSubject(subject);
+		subjectService.insert(subject);
+
+		Subject subject1=new Subject();
+		subject1.setSubjectName("测试班级1");
+		subject1.setMemo("测试班级备注1");
+		subject1.setParentId(0);
+
+		subjectService.insert(subject1);
+
+		Subject subject2=new Subject();
+		subject2.setSubjectName("测试子班级");
+		subject2.setMemo("测试子班级备注1");
+		subject2.setParentId(1);
+
+		subjectService.insert(subject2);
 	}
 
 	@Test
-	public void updateSubject() throws Exception{
+	public void update() throws Exception{
 		Subject subject=new Subject();
-		subject.setSubjectName("测试班级修改修改");
+		subject.setSubjectName("测试班级修");
 		subject.setSubjectId(1);
 		subject.setMemo("测试班级备注修改修改");
 		subject.setEditid(2);
 		subject.setEditname("duhongda");
 		subject.setEdittime(new Date());
 
-		subjectService.updateSubject(subject);
+		subjectService.update(subject);
 	}
 
 	@Test
-	public void getSubjectByInfo() throws Exception{
-		Map<String,String> map = new HashMap<>();
+	public void getByMap() throws Exception{
+		Map<String,Object> map = new HashMap<>();
 		map.put("subjectId","1");
-		Subject subject=subjectService.getSubjectByInfo(map);
+		Subject subject=subjectService.getByMap(map);
 		System.out.println(subject);
 	}
 
 	@Test
-	public void getSubjectListByInfo() throws Exception{
-		Map<String,String> map = new HashMap<>();
-		map.put("subjectName","测子");
-		List<Subject> subject=subjectService.getSubjectListByInfo(map);
+	public void getListByMap() throws Exception{
+		Map<String,Object> map = new HashMap<>();
+		map.put("subjectName","测试");
+		List<Subject> subject=subjectService.getListByMap(map);
 		System.out.println(subject);
 	}
 
 	@Test
-	public void getSubjectCountByInfo() throws Exception{
-		Map<String,String> map = new HashMap<>();
-		map.put("subjectName","测子");
-		Integer subject=subjectService.getSubjectCountByInfo(map);
+	public void getCountByMap() throws Exception{
+		Map<String,Object> map = new HashMap<>();
+		map.put("subjectName","测试");
+		Integer subject=subjectService.getCountByMap(map);
 		System.out.println(subject);
+	}
+
+	@Test
+	public void getById() throws Exception{
+		Subject subject = subjectService.getById(1);
 	}
 }

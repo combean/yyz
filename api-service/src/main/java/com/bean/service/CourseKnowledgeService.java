@@ -2,7 +2,9 @@ package com.bean.service;
 
 import com.bean.model.CourseKnowledge;
 
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 public interface CourseKnowledgeService {
 
@@ -11,40 +13,40 @@ public interface CourseKnowledgeService {
      * @param courseKnowledge 添加课程知识点关系对象
      * @return 添加条数
      */
-    int insertCourseKnowledge(CourseKnowledge courseKnowledge);
+    int insert(CourseKnowledge courseKnowledge) throws SQLException;
 
     /**
      * 添加课程知识点关系
      * @param courseKnowledge 添加课程知识点关系List
      * @return 添加条数
      */
-    int insertCourseKnowledgeList(List<CourseKnowledge> courseKnowledge);
+    int insertList(List<CourseKnowledge> courseKnowledge) throws SQLException;
 
     /**
      * 删除课程知识点关系
      * @param courseId 课程ID
      * @return
      */
-    Integer deleteByCourseId(Integer courseId);
+    int deleteByCourseId(Integer courseId);
 
     /**
      * 根据课程ID获取课程知识点对应关系List
-     * @param courseKnowledge 课程ID
+     * @param map
      * @return 课程知识点对应关系List
      */
-    List<CourseKnowledge> getCourseKnowledgeListByInfo(CourseKnowledge courseKnowledge);
+    List<CourseKnowledge> getListByMap(Map<String, Object> map) throws SQLException;
 
     /**
      * 根据主键ID删除课程知识点对应关系
-     * @param courseKnowledgeId
+     * @param id 主键
      * @return
      */
-    Integer deleteByCourseKnowledgeId(Integer courseKnowledgeId);
+    int deleteById(Integer id) throws SQLException;
 
     /**
      * 获取课程知识点对应关系数量
-     * @param courseKnowledge 课程知识点对应关系对象
+     * @param map
      * @return
      */
-    Integer getCountByInfo(CourseKnowledge courseKnowledge);
+    int getCountByMap(Map<String, Object> map) throws SQLException;
 }

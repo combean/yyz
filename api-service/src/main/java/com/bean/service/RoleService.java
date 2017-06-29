@@ -2,6 +2,7 @@ package com.bean.service;
 
 import com.bean.model.Role;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +14,7 @@ public interface RoleService {
      *
      * 插入数据的主键 Role.getRoleId();
      */
-    int insertRole(Role role);
+    int insert(Role role) throws SQLException;
 
     /**
      * 编辑/删除角色
@@ -22,26 +23,28 @@ public interface RoleService {
      *
      * 删除时 setDel(0)
      */
-    Integer updateRole(Role role);
+    int update(Role role) throws SQLException;
 
     /**
      * 根据传入的map信息获取角色对象
      * @param map key 为Role属性
      * @return 角色对象
      */
-    Role getRoleByInfo(Map<String, String> map);
+    Role getByMap(Map<String, Object> map) throws SQLException;
 
     /**
      * 根据传入的map信息获取角色List
      * @param map key 为Role属性
      * @return List<Role>
      */
-    List<Role> getRoleListByInfo(Map<String, String> map);
+    List<Role> getListByMap(Map<String, Object> map) throws SQLException;
 
     /**
      * 根据条件获取角色数量
      * @param map key 为Role属性
      * @return
      */
-    Integer getRoleCountByInfo(Map<String, String> map);
+    int getCountByMap(Map<String, Object> map) throws SQLException;
+
+    Role getById(Integer id) throws SQLException;
 }

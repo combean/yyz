@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utils.MyLogger;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -18,27 +19,32 @@ public class RoleServiceImpl implements RoleService {
     private MyLogger LOGGER = new MyLogger(RoleServiceImpl.class);
 
     @Override
-    public int insertRole(Role role) {
+    public int insert(Role role) throws SQLException {
         return roleMapper.insert(role);
     }
 
     @Override
-    public Integer updateRole(Role role) {
+    public int update(Role role) throws SQLException {
         return roleMapper.update(role);
     }
 
     @Override
-    public Role getRoleByInfo(Map<String,String> map) {
-        return roleMapper.getRoleByInfo(map);
+    public Role getByMap(Map<String,Object> map) throws SQLException {
+        return roleMapper.getByMap(map);
     }
 
     @Override
-    public List<Role> getRoleListByInfo(Map<String, String> map) {
-        return roleMapper.getRoleListByInfo(map);
+    public List<Role> getListByMap(Map<String, Object> map) throws SQLException {
+        return roleMapper.getListByMap(map);
     }
 
     @Override
-    public Integer getRoleCountByInfo(Map<String, String> map) {
-        return roleMapper.getRoleCountByInfo(map);
+    public int getCountByMap(Map<String, Object> map) throws SQLException {
+        return roleMapper.getCountByMap(map);
+    }
+
+    @Override
+    public Role getById(Integer id) throws SQLException {
+        return roleMapper.getById(id);
     }
 }

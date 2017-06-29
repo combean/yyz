@@ -9,7 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @RunWith(SpringRunner.class)
@@ -19,7 +21,7 @@ public class ClassSubjectApplicationTests {
 	private ClassSubjectService classSubjectService;
 
 	@Test
-	public void insertClassSubject() throws  Exception{
+	public void insertList() throws  Exception{
 		List<ClassSubject> list = new ArrayList<ClassSubject>();
 		ClassSubject classSubject = new ClassSubject();
 		classSubject.setClassId(1);
@@ -41,7 +43,16 @@ public class ClassSubjectApplicationTests {
 		classSubject3.setSubjectId(3);
 		list.add(classSubject3);
 
-		classSubjectService.insertClassSubject(list);
+		classSubjectService.insertList(list);
+	}
+
+	@Test
+	public void insert() throws Exception{
+		ClassSubject classSubject = new ClassSubject();
+		classSubject.setClassId(1);
+		classSubject.setSubjectId(4);
+
+		classSubjectService.insert(classSubject);
 	}
 
 	@Test
@@ -50,12 +61,21 @@ public class ClassSubjectApplicationTests {
 	}
 
 	@Test
-	public void getClassSubjectListByClassId() throws Exception{
-		List<ClassSubject> list=classSubjectService.getClassSubjectListByClassId(1);
+	public void getListByMap() throws Exception{
+		Map<String, Object> map = new HashMap<>();
+		map.put("classId",1);
+		List<ClassSubject> list=classSubjectService.getListByMap(map);
 	}
 
 	@Test
 	public void deleteByClassSubjectId() throws Exception{
-		Integer i = classSubjectService.deleteByClassSubjectId(2);
+		Integer i = classSubjectService.deleteById(2);
+	}
+
+	@Test
+	public void getCountByMap() throws Exception{
+		Map<String, Object> map = new HashMap<>();
+		map.put("classId",1);
+		int i = classSubjectService.getCountByMap(map);
 	}
 }

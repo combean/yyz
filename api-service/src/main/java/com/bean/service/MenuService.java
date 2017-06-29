@@ -2,6 +2,7 @@ package com.bean.service;
 
 import com.bean.model.Menu;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +14,7 @@ public interface MenuService {
      *
      * 插入数据主键 Menu.getMenuId();
      */
-    abstract int insertMenu(Menu menu);
+    int insert(Menu menu) throws SQLException;
 
     /**
      * 编辑/删除菜单
@@ -22,26 +23,28 @@ public interface MenuService {
      *
      * 删除时 setDel(0)
      */
-    abstract Integer updateMenu(Menu menu);
+    Integer update(Menu menu) throws SQLException;
 
     /**
      * 根据传入的map信息获取菜单对象
      * @param map key 为 Menu 属性
      * @return 菜单对象
      */
-    abstract Menu getMenuByInfo(Map<String, String> map);
+    Menu getByMap(Map<String, Object> map) throws SQLException;
 
     /**
      * 根据传入的map信息获取菜单List
      * @param map key 为 Menu 属性
      * @return List<Menu>
      */
-    abstract List<Menu> getMenuListByInfo(Map<String, String> map);
+    List<Menu> getListByMap(Map<String, Object> map) throws SQLException;
 
     /**
      * 根据条件获取菜单数量
      * @param map key 为 Menu 属性
      * @return 菜单数量
      */
-    abstract Integer getMenuCountByInfo(Map<String, String> map);
+    Integer getCountByMap(Map<String, Object> map) throws SQLException;
+
+    Menu getById(Integer id) throws SQLException;
 }

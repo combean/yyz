@@ -9,7 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by PVer on 2017/6/27.
@@ -22,7 +24,7 @@ public class CourseKnowledgeServiceTest {
     private CourseKnowledgeService courseKnowledgeService;
 
     @Test
-    public void insertCourseKnowledge() throws Exception {
+    public void insert() throws Exception {
         List<CourseKnowledge> list = new ArrayList<>();
         CourseKnowledge courseKnowledge = new CourseKnowledge();
         courseKnowledge.setCourseId(1);
@@ -44,15 +46,15 @@ public class CourseKnowledgeServiceTest {
         courseKnowledge3.setKnowledgeId(3);
         list.add(courseKnowledge3);
 
-        courseKnowledgeService.insertCourseKnowledgeList(list);
+        courseKnowledgeService.insertList(list);
     }
 
     @Test
-    public void insertCourseKnowledgeList() throws Exception {
+    public void insertList() throws Exception {
         CourseKnowledge courseKnowledge = new CourseKnowledge();
         courseKnowledge.setCourseId(2);
         courseKnowledge.setKnowledgeId(2);
-        courseKnowledgeService.insertCourseKnowledge(courseKnowledge);
+        courseKnowledgeService.insert(courseKnowledge);
     }
 
     @Test
@@ -61,22 +63,26 @@ public class CourseKnowledgeServiceTest {
     }
 
     @Test
-    public void getCourseKnowledgeListByInfo() throws Exception {
-        CourseKnowledge courseKnowledge = new CourseKnowledge();
-        courseKnowledge.setCourseId(2);
-        List<CourseKnowledge> list=courseKnowledgeService.getCourseKnowledgeListByInfo(courseKnowledge);
+    public void getListByMap() throws Exception {
+//        CourseKnowledge courseKnowledge = new CourseKnowledge();
+//        courseKnowledge.setCourseId(2);
+        Map<String, Object> map = new HashMap<>();
+        map.put("courseId",2);
+        List<CourseKnowledge> list=courseKnowledgeService.getListByMap(map);
     }
 
     @Test
     public void deleteByCourseKnowledgeId() throws Exception {
-        Integer i = courseKnowledgeService.deleteByCourseKnowledgeId(3);
+        Integer i = courseKnowledgeService.deleteById(3);
     }
 
     @Test
-    public void getCountByInfo() throws Exception {
-        CourseKnowledge courseKnowledge = new CourseKnowledge();
-        courseKnowledge.setCourseId(2);
-        Integer i = courseKnowledgeService.getCountByInfo(courseKnowledge);
+    public void getCountByMap() throws Exception {
+//        CourseKnowledge courseKnowledge = new CourseKnowledge();
+//        courseKnowledge.setCourseId(2);
+        Map<String, Object> map = new HashMap<>();
+        map.put("courseId",2);
+        Integer i = courseKnowledgeService.getCountByMap(map);
     }
 
 }

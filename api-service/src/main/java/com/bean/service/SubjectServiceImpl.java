@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utils.MyLogger;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -20,27 +21,32 @@ public class SubjectServiceImpl implements SubjectService {
 
 
     @Override
-    public int insertSubject(Subject subject) {
+    public int insert(Subject subject) throws SQLException {
         return subjectMapper.insert(subject);
     }
 
     @Override
-    public Integer updateSubject(Subject subject) {
+    public Integer update(Subject subject) throws SQLException {
         return subjectMapper.update(subject);
     }
 
     @Override
-    public Subject getSubjectByInfo(Map<String, String> map) {
-        return subjectMapper.getSubjectByInfo(map);
+    public Subject getByMap(Map<String, Object> map) throws SQLException {
+        return subjectMapper.getByMap(map);
     }
 
     @Override
-    public List<Subject> getSubjectListByInfo(Map<String, String> map) {
-        return subjectMapper.getSubjectListByInfo(map);
+    public List<Subject> getListByMap(Map<String, Object> map) throws SQLException {
+        return subjectMapper.getListByMap(map);
     }
 
     @Override
-    public Integer getSubjectCountByInfo(Map<String, String> map) {
-        return subjectMapper.getSubjectCountByInfo(map);
+    public Integer getCountByMap(Map<String, Object> map) throws SQLException {
+        return subjectMapper.getCountByMap(map);
+    }
+
+    @Override
+    public Subject getById(int id) throws SQLException {
+        return subjectMapper.getById(id);
     }
 }

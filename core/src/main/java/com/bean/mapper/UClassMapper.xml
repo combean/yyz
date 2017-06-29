@@ -89,24 +89,33 @@
       class_id = #{classId,jdbcType=INTEGER}
     </where>
   </update>
-  <select id="getUClassByInfo" parameterType="java.util.Map" resultMap="BaseResultMap">
+  <select id="getByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List" />
     FROM exm_class
     <include refid="where" />
   </select>
-  <select id="getUClassListByInfo" parameterType="java.util.Map" resultMap="BaseResultMap">
+  <select id="getById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM exm_class
+    <where>
+      class_id = #{classId,jdbcType=INTEGER}
+    </where>
+  </select>
+  <select id="getListByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List" />
     FROM exm_class
     <include refid="where" />
   </select>
-  <select id="getUClassCountByInfo" parameterType="java.util.Map" resultType="int">
+  <select id="getCountByMap" parameterType="java.util.Map" resultType="int">
     SELECT
     COUNT(*)
     FROM exm_class
     <include refid="where" />
   </select>
+
 
   <sql id="Example_Where_Clause">
     <where>
@@ -196,7 +205,6 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-
   <insert id="insertSelective" parameterType="com.bean.model.UClass">
     insert into exm_class
     <trim prefix="(" suffix=")" suffixOverrides=",">

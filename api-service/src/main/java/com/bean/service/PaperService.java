@@ -2,6 +2,7 @@ package com.bean.service;
 
 import com.bean.model.Paper;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +14,7 @@ public interface PaperService {
      *
      * 插入数据主键 Paper.getClassId();
      */
-    int insertPaper(Paper paper);
+    int insert(Paper paper) throws SQLException;
 
     /**
      * 编辑/删除考卷
@@ -22,26 +23,28 @@ public interface PaperService {
      *
      * 删除时 setDel(0)
      */
-    Integer updatePaper(Paper paper);
+    int update(Paper paper) throws SQLException;
 
     /**
      * 根据传入的map信息获取考卷对象
      * @param map key 为 Paper 属性
      * @return 考卷对象
      */
-    Paper getPaperByInfo(Map<String, String> map);
+    Paper getByMap(Map<String, Object> map) throws SQLException;
 
     /**
      * 根据传入的map信息获取考卷List
      * @param map key 为 Paper 属性
      * @return List<Paper>
      */
-    List<Paper> getPaperListByInfo(Map<String, String> map);
+    List<Paper> getListByMap(Map<String, Object> map) throws SQLException;
 
     /**
      * 根据条件获取考卷数量
      * @param map key 为 Paper 属性
      * @return 考卷数量
      */
-    Integer getPaperCountByInfo(Map<String, String> map);
+    int getCountByMap(Map<String, Object> map) throws SQLException;
+
+    Paper getById(Integer id) throws SQLException;
 }

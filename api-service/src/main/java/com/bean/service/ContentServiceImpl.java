@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utils.MyLogger;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -20,27 +21,32 @@ public class ContentServiceImpl implements ContentService {
 
 
     @Override
-    public int insertContent(Content content) {
+    public int insert(Content content) throws SQLException {
         return contentMapper.insert(content);
     }
 
     @Override
-    public Integer updateContent(Content content) {
+    public Integer update(Content content) throws SQLException {
         return contentMapper.update(content);
     }
 
     @Override
-    public Content getContentByInfo(Map<String, String> map) {
-        return contentMapper.getContentByInfo(map);
+    public Content getByMap(Map<String, Object> map) throws SQLException {
+        return contentMapper.getByMap(map);
     }
 
     @Override
-    public List<Content> getContentListByInfo(Map<String, String> map) {
-        return contentMapper.getContentListByInfo(map);
+    public List<Content> getListByMap(Map<String, Object> map) throws SQLException {
+        return contentMapper.getListByMap(map);
     }
 
     @Override
-    public Integer getContentCountByInfo(Map<String, String> map) {
-        return contentMapper.getContentCountByInfo(map);
+    public Integer getCountByMap(Map<String, Object> map) throws SQLException {
+        return contentMapper.getCountByMap(map);
+    }
+
+    @Override
+    public Content getById(Integer id) throws SQLException{
+        return contentMapper.getById(id);
     }
 }

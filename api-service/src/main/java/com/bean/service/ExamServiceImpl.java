@@ -5,6 +5,8 @@ import com.bean.model.Exam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utils.MyLogger;
+
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -19,27 +21,32 @@ public class ExamServiceImpl implements ExamService {
 
 
     @Override
-    public int insertExam(Exam exam) {
+    public int insert(Exam exam) throws SQLException {
         return examMapper.insert(exam);
     }
 
     @Override
-    public Integer updateExam(Exam exam) {
+    public Integer update(Exam exam) throws SQLException {
         return examMapper.update(exam);
     }
 
     @Override
-    public Exam getExamByInfo(Map<String, String> map) {
-        return examMapper.getExamByInfo(map);
+    public Exam getByMap(Map<String, Object> map) throws SQLException {
+        return examMapper.getByMap(map);
     }
 
     @Override
-    public List<Exam> getExamListByInfo(Map<String, String> map) {
-        return examMapper.getExamListByInfo(map);
+    public List<Exam> getListByMap(Map<String, Object> map) throws SQLException {
+        return examMapper.getListByMap(map);
     }
 
     @Override
-    public Integer getExamCountByInfo(Map<String, String> map) {
-        return examMapper.getExamCountByInfo(map);
+    public Integer getCountByMap(Map<String, Object> map) throws SQLException {
+        return examMapper.getCountByMap(map);
+    }
+
+    @Override
+    public Exam getById(Integer id) throws SQLException {
+        return examMapper.getById(id);
     }
 }

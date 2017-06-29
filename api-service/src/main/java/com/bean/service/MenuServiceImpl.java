@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utils.MyLogger;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -20,27 +21,32 @@ public class MenuServiceImpl implements MenuService {
 
 
     @Override
-    public int insertMenu(Menu menu) {
+    public int insert(Menu menu) throws SQLException {
         return menuMapper.insert(menu);
     }
 
     @Override
-    public Integer updateMenu(Menu menu) {
+    public Integer update(Menu menu) throws SQLException {
         return menuMapper.update(menu);
     }
 
     @Override
-    public Menu getMenuByInfo(Map<String, String> map) {
-        return menuMapper.getMenuByInfo(map);
+    public Menu getByMap(Map<String, Object> map) throws SQLException {
+        return menuMapper.getByMap(map);
     }
 
     @Override
-    public List<Menu> getMenuListByInfo(Map<String, String> map) {
-        return menuMapper.getMenuListByInfo(map);
+    public List<Menu> getListByMap(Map<String, Object> map) throws SQLException {
+        return menuMapper.getListByMap(map);
     }
 
     @Override
-    public Integer getMenuCountByInfo(Map<String, String> map) {
-        return menuMapper.getMenuCountByInfo(map);
+    public Integer getCountByMap(Map<String, Object> map) throws SQLException {
+        return menuMapper.getCountByMap(map);
+    }
+
+    @Override
+    public Menu getById(Integer id) throws SQLException {
+        return menuMapper.getById(id);
     }
 }

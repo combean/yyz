@@ -26,7 +26,7 @@ public class PaperServiceTest {
     private PaperService paperService;
 
     @Test
-    public void insertPaper() throws Exception {
+    public void insert() throws Exception {
         Paper paper = new Paper();
         paper.setPaperName("测试考卷名称");
         paper.setSubjectId(1);
@@ -37,7 +37,7 @@ public class PaperServiceTest {
         paper.setAddname("zhaoyan");
         paper.setAddtime(new Date());
         paper.setAddid(1);
-        Integer i = paperService.insertPaper(paper);
+        Integer i = paperService.insert(paper);
 
         Paper paper1 = new Paper();
         paper1.setPaperName("测试考卷名称");
@@ -49,11 +49,11 @@ public class PaperServiceTest {
         paper1.setAddname("zhaoyan");
         paper1.setAddtime(new Date());
         paper1.setAddid(1);
-        Integer i1 = paperService.insertPaper(paper1);
+        Integer i1 = paperService.insert(paper1);
     }
 
     @Test
-    public void updatePaper() throws Exception {
+    public void update() throws Exception {
         Paper paper = new Paper();
         paper.setPaperName("测试考卷名称修改");
         paper.setSubjectId(1);
@@ -63,30 +63,30 @@ public class PaperServiceTest {
         paper.setEditname("zhaoyan");
         paper.setEdittime(new Date());
         paper.setEditid(1);
-        paperService.updatePaper(paper);
+        paperService.update(paper);
     }
 
     @Test
-    public void getPaperByInfo() throws Exception {
-        Map<String,String> map = new HashMap<>();
+    public void getByMap() throws Exception {
+        Map<String,Object> map = new HashMap<>();
         map.put("paperId","1");
-        Paper m = paperService.getPaperByInfo(map);
+        Paper m = paperService.getByMap(map);
         System.out.print(m);
     }
 
     @Test
-    public void getPaperListByInfo() throws Exception {
-        Map<String,String> map = new HashMap<>();
+    public void getListByMap() throws Exception {
+        Map<String,Object> map = new HashMap<>();
         map.put("paperName","测试");
-        List<Paper> m = paperService.getPaperListByInfo(map);
+        List<Paper> m = paperService.getListByMap(map);
         System.out.print(m);
     }
 
     @Test
-    public void getPaperCountByInfo() throws Exception {
-        Map<String,String> map = new HashMap<>();
+    public void getCountbyMap() throws Exception {
+        Map<String,Object> map = new HashMap<>();
         map.put("paperName","测试");
-        int count = paperService.getPaperCountByInfo(map);
+        int count = paperService.getCountByMap(map);
     }
 
 }

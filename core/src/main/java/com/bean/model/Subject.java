@@ -93,11 +93,11 @@ public class Subject implements Serializable {
         this.memo = memo;
     }
 
-    public int getDel() {
+    public Integer getDel() {
         return del;
     }
 
-    public void setDel(int del) {
+    public void setDel(Integer del) {
         this.del = del;
     }
 

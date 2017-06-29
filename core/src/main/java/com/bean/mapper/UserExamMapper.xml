@@ -53,7 +53,7 @@
     delete from exm_user_exam
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
-  <select id="getUserExamListByInfo" parameterType="com.bean.model.UserExam" resultMap="BaseResultMap">
+  <select id="getListByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
     SELECT
     ue.user_exam_id, ue.user_id, ue.exam_id,
     u.user_username, u.user_password, u.user_class_id, u.user_mobile, u.user_email, u.user_name, u.user_sex, c.class_name,
@@ -67,11 +67,11 @@
     INNER JOIN exm_place AS p ON e.place_id=p.place_id
     <include refid="where" />
   </select>
-  <delete id="deleteByUserExamId" parameterType="java.lang.Integer">
+  <delete id="deleteById" parameterType="java.lang.Integer">
     delete from exm_user_exam
     where user_exam_id = #{userExamId,jdbcType=INTEGER}
   </delete>
-  <select id="getCountByInfo" parameterType="com.bean.model.ManagerRole" resultType="int">
+  <select id="getCountByMap" parameterType="java.util.Map" resultType="int">
     SELECT COUNT(*)
     FROM exm_user_exam AS ue
     <include refid="where" />
