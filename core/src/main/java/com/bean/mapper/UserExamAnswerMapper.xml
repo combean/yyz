@@ -1,17 +1,135 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bean.dao.UserExamAnswerMapper">
-  <resultMap id="BaseResultMap" type="com.bean.model.UserExamAnswer">
+    <resultMap id="BaseResultMap" type="com.bean.model.UserExamAnswer">
     <id column="user_exam_answer_id" jdbcType="INTEGER" property="userExamAnswerId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="paper_id" jdbcType="INTEGER" property="paperId" />
-    <result column="pqt_question_id" jdbcType="INTEGER" property="pqtQuestionId" />
+    <result column="question_id" jdbcType="INTEGER" property="questionId" />
     <result column="blank_no" jdbcType="INTEGER" property="blankNo" />
     <result column="answer_info" jdbcType="VARCHAR" property="answerInfo" />
     <result column="if_right" jdbcType="BIT" property="ifRight" />
     <result column="answer_time" jdbcType="TIMESTAMP" property="answerTime" />
     <result column="answer_edit_time" jdbcType="TIMESTAMP" property="answerEditTime" />
-  </resultMap>
+    <result column="raw_score" jdbcType="FLOAT" property="rawScore" />
+    </resultMap>
+    <sql id="where">
+    <where>
+    <if test="userExamAnswerId != null">
+    AND user_exam_answer_id = #{userExamAnswerId,jdbcType=INTEGER}
+    </if>
+    <if test="userId != null">
+    AND user_id = #{userId,jdbcType=INTEGER}
+    </if>
+    <if test="questionId != null">
+    AND question_id = #{questionId,jdbcType=INTEGER}
+    </if>
+    <if test="blankNo != null">
+    AND ue.blank_no = #{blankNo,jdbcType=INTEGER}
+    </if>
+    <if test="ifRight != null">
+    AND if_right = #{ifRight,jdbcType=INTEGER}
+    </if>
+    </where>
+    </sql>
+    <insert id="insertList" parameterType="java.util.List">
+    insert into exm_user_exam_answer
+    (
+    user_id,
+    paper_id,
+    question_id,
+    blank_no,
+    answer_info,
+    if_right,
+    answer_time,
+    answer_edit_time,
+    raw_score
+    )
+    VALUES
+    <foreach collection="list" item="item" index="index" separator=",">
+    (
+    #{item.userId,jdbcType=INTEGER},
+    #{item.paperId,jdbcType=INTEGER},
+    #{item.questionId,jdbcType=INTEGER},
+    #{item.blankNo,jdbcType=INTEGER},
+    #{item.answerInfo,jdbcType=VARCHAR},
+    #{item.ifRight,jdbcType=BIT},
+    #{item.answerTime,jdbcType=TIMESTAMP},
+    #{item.answerEditTime,jdbcType=TIMESTAMP},
+    #{item.rawScore,jdbcType=FLOAT}
+    )
+    </foreach>
+    </insert>
+    <insert id="insert" parameterType="com.bean.model.UserExam">
+    insert into exm_user_exam_answer (
+    user_id,
+    paper_id,
+    question_id,
+    <if test="blankNo != null">
+      blank_no,
+    </if>answer_info,
+    if_right,
+    answer_time,
+    answer_edit_time,
+    raw_score
+    )
+    values
+    (
+    #{userId,jdbcType=INTEGER},
+    #{paperId,jdbcType=INTEGER},
+    #{questionId,jdbcType=INTEGER},
+    <if test="blankNo!=null">#{blankNo,jdbcType=INTEGER},</if>
+    #{answerInfo,jdbcType=VARCHAR},
+    #{ifRight,jdbcType=BIT},
+    #{answerTime,jdbcType=TIMESTAMP},
+    #{answerEditTime,jdbcType=TIMESTAMP},
+    #{rawScore,jdbcType=FLOAT}
+    )
+    </insert>
+    <delete id="deleteByUserId" parameterType="java.lang.Integer">
+    delete from exm_user_exam_answer
+    where user_id = #{userId,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByPaperId" parameterType="java.lang.Integer">
+    delete from exm_user_exam_answer
+    where paper_id = #{paperId,jdbcType=INTEGER}
+    </delete>
+    <select id="getListByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT
+    user_id,
+    paper_id,
+    question_id,
+    blank_no,
+    answer_info,
+    if_right,
+    answer_time,
+    answer_edit_time,
+    raw_score
+    FROM
+    exm_user_exam_answer
+
+    <include refid="where" />
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Integer">
+    delete from exm_user_exam_answer
+    where user_exam_answer_id = #{userExamAnswerId,jdbcType=INTEGER}
+    </delete>
+    <update id="updateAnswerById" parameterType="com.bean.model.UserExam">
+    UPDATE exm_user_exam_answer
+      SET
+        answer_info = #{answerInfo,jdbcType=VARCHAR},
+        if_right = #{ifRight,jdbcType=BIT},
+        answer_edit_time = #{answerEditTime,jdbcType=TIMESTAMP}
+      WHERE
+        user_exam_answer_id =#{userExamAnswerId,jdbcType=INTEGER}
+    </update>
+    <select id="getCountByMap" parameterType="java.util.Map" resultType="int">
+    SELECT COUNT(*)
+    FROM exm_user_exam_answer
+    <include refid="where" />
+    </select>
+
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -104,16 +222,6 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.bean.model.UserExamAnswer">
-    insert into exm_user_exam_answer (user_exam_answer_id, user_id, paper_id, 
-      pqt_question_id, blank_no, answer_info, 
-      if_right, answer_time, answer_edit_time
-      )
-    values (#{userExamAnswerId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{paperId,jdbcType=INTEGER}, 
-      #{pqtQuestionId,jdbcType=INTEGER}, #{blankNo,jdbcType=INTEGER}, #{answerInfo,jdbcType=VARCHAR}, 
-      #{ifRight,jdbcType=BIT}, #{answerTime,jdbcType=TIMESTAMP}, #{answerEditTime,jdbcType=TIMESTAMP}
-      )
-  </insert>
   <insert id="insertSelective" parameterType="com.bean.model.UserExamAnswer">
     insert into exm_user_exam_answer
     <trim prefix="(" suffix=")" suffixOverrides=",">

@@ -19,7 +19,10 @@ public class UserExamAnswer implements Serializable {
      */
     private Integer paperId;
 
-    private Integer pqtQuestionId;
+    /**
+     * 考题ID
+     */
+    private Integer questionId;
 
     /**
      * 填空题中空的序号
@@ -34,7 +37,7 @@ public class UserExamAnswer implements Serializable {
     /**
      * 是否正确 0:错误 1:正确
      */
-    private Boolean ifRight;
+    private Integer ifRight;
 
     /**
      * 回答时间
@@ -45,6 +48,11 @@ public class UserExamAnswer implements Serializable {
      * 修改答案时间
      */
     private Date answerEditTime;
+
+    /**
+     * 分值
+     */
+    private float rawScore;
 
     private static final long serialVersionUID = 1L;
 
@@ -72,12 +80,12 @@ public class UserExamAnswer implements Serializable {
         this.paperId = paperId;
     }
 
-    public Integer getPqtQuestionId() {
-        return pqtQuestionId;
+    public Integer getQuestionId() {
+        return questionId;
     }
 
-    public void setPqtQuestionId(Integer pqtQuestionId) {
-        this.pqtQuestionId = pqtQuestionId;
+    public void setQuestionId(Integer questionId) {
+        this.questionId = questionId;
     }
 
     public Integer getBlankNo() {
@@ -96,11 +104,11 @@ public class UserExamAnswer implements Serializable {
         this.answerInfo = answerInfo;
     }
 
-    public Boolean getIfRight() {
+    public Integer getIfRight() {
         return ifRight;
     }
 
-    public void setIfRight(Boolean ifRight) {
+    public void setIfRight(Integer ifRight) {
         this.ifRight = ifRight;
     }
 
@@ -118,5 +126,13 @@ public class UserExamAnswer implements Serializable {
 
     public void setAnswerEditTime(Date answerEditTime) {
         this.answerEditTime = answerEditTime;
+    }
+
+    public float getRawScore() {
+        return rawScore;
+    }
+
+    public void setRawScore(float rawScore) {
+        this.rawScore = rawScore;
     }
 }
