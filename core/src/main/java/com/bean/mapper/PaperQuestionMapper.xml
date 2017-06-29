@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bean.dao.PaperQuestionMapper">
+    <resultMap id="BaseResultMap" type="com.bean.model.PaperQuestion">
+        <id column="paper_question_id" jdbcType="INTEGER" property="paperQuestionId" />
+        <result column="paper_id" jdbcType="INTEGER" property="paperId" />
+        <result column="question_id" jdbcType="INTEGER" property="questionId" />
+        <result column="question_title" jdbcType="VARCHAR" property="questionTitle" />
+        <result column="question_type" jdbcType="VARCHAR" property="questionType" />
+        <result column="question_level" jdbcType="VARCHAR" property="questionLevel" />
+        <result column="memo" jdbcType="VARCHAR" property="memo" />
+    </resultMap>
+    <sql id="where">
+        <where>
+            <if test="roleMenuId != null">
+                AND pq.paper_question_id = #{paperQuestionId,jdbcType=INTEGER}
+            </if>
+            <if test="paperId != null">
+                AND pq.paper_id = #{paperId,jdbcType=INTEGER}
+            </if>
+            <if test="questionId != null">
+                AND pq.question_id = #{questionId,jdbcType=INTEGER}
+            </if>
+        </where>
+    </sql>
+    <insert id="insertList" parameterType="java.util.List">
+        insert into exm_paper_question (paper_id, question_id
+        )
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.paperId,jdbcType=INTEGER}, #{item.questionId,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+    <insert id="insert" parameterType="com.bean.model.PaperQuestion">
+        insert into exm_paper_question (paper_id, question_id
+        )
+        values
+        (#{paperId,jdbcType=INTEGER}, #{questionId,jdbcType=INTEGER})
+    </insert>
+    <delete id="deleteByPaperId" parameterType="java.lang.Integer">
+        delete from exm_paper_question
+        where paper_id = #{paperId,jdbcType=INTEGER}
+    </delete>
+    <select id="getListByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT
+        pq.paper_question_id, pq.paper_id, pq.question_id, q.question_title, q.question_type, q.question_level, q.memo
+        FROM
+        exm_paper_question AS pq
+        INNER JOIN exm_question AS q ON pq.question_id=q.question_id
+        <include refid="where" />
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from exm_paper_question
+        where paper_question_id = #{paperQuestionId,jdbcType=INTEGER}
+    </delete>
+    <select id="getCountByMap" parameterType="java.util.Map" resultType="int">
+        SELECT COUNT(*)
+        FROM exm_paper_question AS pq
+        <include refid="where" />
+    </select>
+</mapper>
