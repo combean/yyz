@@ -11,52 +11,52 @@ import java.util.List;
 import java.util.Map;
 
 
-@Service("choiceQuestionAnswertService")
+@Service("choiceQuestionAnswerService")
 public class ChoiceQuestionAnswerServiceImpl implements ChoiceQuestionAnswerService {
 
     @Autowired
-    private ChoiceQuestionAnswerMapper choiceQuestionAnswertMapper;
+    private ChoiceQuestionAnswerMapper choiceQuestionAnswerMapper;
 
     private MyLogger LOGGER = new MyLogger(ChoiceQuestionAnswerServiceImpl.class);
 
 
     @Override
-    public int insertList(List<ChoiceQuestionAnswer> choiceQuestionAnswert) throws SQLException {
-        return choiceQuestionAnswertMapper.insertList(choiceQuestionAnswert);
+    public int insertList(List<ChoiceQuestionAnswer> choiceQuestionAnswer) throws SQLException {
+        return choiceQuestionAnswerMapper.insertList(choiceQuestionAnswer);
     }
 
     @Override
-    public int insert(ChoiceQuestionAnswer choiceQuestionAnswert) throws SQLException {
-        return choiceQuestionAnswertMapper.insert(choiceQuestionAnswert);
+    public int insert(ChoiceQuestionAnswer choiceQuestionAnswer) throws SQLException {
+        return choiceQuestionAnswerMapper.insert(choiceQuestionAnswer);
     }
 
     @Override
     public Integer deleteByQuestionId(Integer questionId) throws SQLException {
-        return choiceQuestionAnswertMapper.deleteByQuestionId(questionId);
+        return choiceQuestionAnswerMapper.deleteByQuestionId(questionId);
     }
 
     @Override
     public List<ChoiceQuestionAnswer> getListByMap(Map<String, Object> map) throws SQLException {
-        return choiceQuestionAnswertMapper.getListByMap(map);
+        return choiceQuestionAnswerMapper.getListByMap(map);
     }
 
     @Override
     public Integer deleteById(Integer id) throws SQLException {
-        return choiceQuestionAnswertMapper.deleteById(id);
+        return choiceQuestionAnswerMapper.deleteById(id);
     }
 
     @Override
     public int getCountByMap(Map<String, Object> map) throws SQLException {
-        return choiceQuestionAnswertMapper.getCountByMap(map);
+        return choiceQuestionAnswerMapper.getCountByMap(map);
     }
 
     @Override
     public String getRightAnswerByQuestionId(Integer questionId) throws SQLException {
-        return choiceQuestionAnswertMapper.getRightAnswerByQuestionId(questionId);
+        return choiceQuestionAnswerMapper.getRightAnswerByQuestionId(questionId);
     }
 
     @Override
     public ChoiceQuestionAnswer getRightAnswerObjByQuestionId(Integer questionId) throws SQLException {
-        return choiceQuestionAnswertMapper.getRightAnswerObjByQuestionId(questionId);
+        return choiceQuestionAnswerMapper.getRightAnswerObjByQuestionId(questionId);
     }
 }
