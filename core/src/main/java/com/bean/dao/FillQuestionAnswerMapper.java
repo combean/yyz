@@ -2,29 +2,17 @@ package com.bean.dao;
 
 import com.bean.model.FillQuestionAnswer;
 import com.bean.model.FillQuestionAnswerExample;
+
+import java.sql.SQLException;
 import java.util.List;
+
+import mybatis.basemapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
-public interface FillQuestionAnswerMapper {
-    long countByExample(FillQuestionAnswerExample example);
+public interface FillQuestionAnswerMapper extends BaseMapper<FillQuestionAnswer> {
 
-    int deleteByExample(FillQuestionAnswerExample example);
+    int deleteByQuestionId(Integer id) throws SQLException;
 
-    int deleteByPrimaryKey(Integer fillAnswerId);
+    List<FillQuestionAnswer> getAnswerByQuestionId(Integer questionId) throws SQLException;
 
-    int insert(FillQuestionAnswer record);
-
-    int insertSelective(FillQuestionAnswer record);
-
-    List<FillQuestionAnswer> selectByExample(FillQuestionAnswerExample example);
-
-    FillQuestionAnswer selectByPrimaryKey(Integer fillAnswerId);
-
-    int updateByExampleSelective(@Param("record") FillQuestionAnswer record, @Param("example") FillQuestionAnswerExample example);
-
-    int updateByExample(@Param("record") FillQuestionAnswer record, @Param("example") FillQuestionAnswerExample example);
-
-    int updateByPrimaryKeySelective(FillQuestionAnswer record);
-
-    int updateByPrimaryKey(FillQuestionAnswer record);
 }

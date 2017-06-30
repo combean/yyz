@@ -16,7 +16,7 @@ public class FillQuestionAnswer implements Serializable {
     /**
      * 空序号
      */
-    private String blankNo;
+    private Integer blankNo;
 
     /**
      * 答案内容
@@ -41,11 +41,11 @@ public class FillQuestionAnswer implements Serializable {
         this.questionId = questionId;
     }
 
-    public String getBlankNo() {
+    public Integer getBlankNo() {
         return blankNo;
     }
 
-    public void setBlankNo(String blankNo) {
+    public void setBlankNo(Integer blankNo) {
         this.blankNo = blankNo;
     }
 
