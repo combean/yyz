@@ -64,4 +64,12 @@ public interface ChoiceQuestionAnswerService {
      * @throws SQLException
      */
     ChoiceQuestionAnswer getRightAnswerObjByQuestionId(Integer questionId) throws SQLException;
+
+    /**
+     * 获取多选题选择题正确答案List
+     * @param questionId 问题ID
+     * @return 获取选择题正确答案List
+     * @throws SQLException
+     */
+    List<ChoiceQuestionAnswer> getRightAnswerListByQuestionId(Integer questionId) throws SQLException;
 }

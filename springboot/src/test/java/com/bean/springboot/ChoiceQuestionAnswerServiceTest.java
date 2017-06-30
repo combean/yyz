@@ -65,7 +65,7 @@ public class ChoiceQuestionAnswerServiceTest {
         choiceQuestionAnswer.setQuestionId(1);
         choiceQuestionAnswer.setAnswerTitle("F");
         choiceQuestionAnswer.setAnswerInfo("备选项5");
-        choiceQuestionAnswer.setAnswerType(0);
+        choiceQuestionAnswer.setAnswerType(1);
         choiceQuestionAnswerService.insert(choiceQuestionAnswer);
     }
 
@@ -101,5 +101,10 @@ public class ChoiceQuestionAnswerServiceTest {
     @Test
     public void getRightAnswerObj() throws Exception{
         ChoiceQuestionAnswer rightObj = choiceQuestionAnswerService.getRightAnswerObjByQuestionId(1);
+    }
+
+    @Test
+    public void getRightAnswerList() throws Exception{
+        List<ChoiceQuestionAnswer> rightObj = choiceQuestionAnswerService.getRightAnswerListByQuestionId(1);
     }
 }

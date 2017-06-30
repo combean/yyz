@@ -63,6 +63,12 @@
     exm_choice_question_answer
     WHERE question_id = #{questionId,jdbcType=INTEGER} AND answer_type=1
   </select>
+  <select id="getRightAnswerListByQuestionId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT choice_answer_id, question_id, answer_title, answer_info, answer_type
+    FROM
+    exm_choice_question_answer
+    WHERE question_id = #{questionId,jdbcType=INTEGER} AND answer_type=1
+  </select>
   <delete id="deleteById" parameterType="java.lang.Integer">
     delete from exm_choice_question_answer
     where choice_answer_id = #{choiceAnswerId,jdbcType=INTEGER}

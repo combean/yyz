@@ -16,4 +16,6 @@ public interface ChoiceQuestionAnswerMapper extends BaseMapper<ChoiceQuestionAns
     String getRightAnswerByQuestionId(Integer questionId) throws SQLException;
 
     ChoiceQuestionAnswer getRightAnswerObjByQuestionId(Integer questionId) throws SQLException;
+
+    List<ChoiceQuestionAnswer> getRightAnswerListByQuestionId(Integer questionId) throws SQLException;
 }

@@ -59,4 +59,9 @@ public class ChoiceQuestionAnswerServiceImpl implements ChoiceQuestionAnswerServ
     public ChoiceQuestionAnswer getRightAnswerObjByQuestionId(Integer questionId) throws SQLException {
         return choiceQuestionAnswerMapper.getRightAnswerObjByQuestionId(questionId);
     }
+
+    @Override
+    public List<ChoiceQuestionAnswer> getRightAnswerListByQuestionId(Integer questionId) throws SQLException {
+        return choiceQuestionAnswerMapper.getRightAnswerListByQuestionId(questionId);
+    }
 }
