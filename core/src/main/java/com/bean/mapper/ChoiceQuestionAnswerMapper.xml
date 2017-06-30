@@ -35,7 +35,7 @@
       (#{item.questionId,jdbcType=INTEGER}, #{item.answerTitle,jdbcType=VARCHAR}, #{item.answerInfo,jdbcType=VARCHAR}, #{item.answerType,jdbcType=BIT})
     </foreach>
   </insert>
-  <insert id="insert" parameterType="com.bean.model.ClassSubject">
+  <insert id="insert" parameterType="com.bean.model.ChoiceQuestionAnswerMapper">
     insert into exm_choice_question_answer (question_id, answer_title, answer_info, answer_type
     )
     values
