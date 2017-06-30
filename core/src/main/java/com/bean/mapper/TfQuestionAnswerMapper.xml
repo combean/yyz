@@ -7,6 +7,68 @@
     <result column="answer_title" jdbcType="VARCHAR" property="answerTitle" />
     <result column="answer_type" jdbcType="BIT" property="answerType" />
   </resultMap>
+  <sql id="where">
+    <where>
+      <if test="choiceAnswerId != null">
+        AND choice_answer_id = #{choiceAnswerId,jdbcType=INTEGER}
+      </if>
+      <if test="questionId != null">
+        AND question_id = #{questionId,jdbcType=INTEGER}
+      </if>
+      <if test="answerTitle != null">
+        AND answer_title = #{answerTitle,jdbcType=VARCHAR}
+      </if>
+      <if test="answerType != null">
+        AND answer_type = #{answerType,jdbcType=BIT}
+      </if>
+    </where>
+  </sql>
+  <insert id="insertList" parameterType="java.util.List">
+    insert into exm_tf_question_answer (question_id, answer_title, answer_type
+    )
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.questionId,jdbcType=INTEGER}, #{item.answerTitle,jdbcType=VARCHAR}, #{item.answerType,jdbcType=BIT})
+    </foreach>
+  </insert>
+  <insert id="insert" parameterType="com.bean.model.TfQuestionAnswer">
+    insert into exm_tf_question_answer (question_id, answer_title, answer_type
+    )
+    values
+    (#{questionId,jdbcType=INTEGER}, #{answerTitle,jdbcType=VARCHAR}, #{answerType,jdbcType=BIT})
+  </insert>
+  <delete id="deleteByQuestionId" parameterType="java.lang.Integer">
+    delete from exm_tf_question_answer
+    where question_id = #{questionId,jdbcType=INTEGER}
+  </delete>
+  <select id="getListByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT tf_answer_id, question_id, answer_title, answer_type
+    FROM
+    exm_tf_question_answer
+    <include refid="where" />
+  </select>
+  <select id="getRightAnswerByQuestionId" parameterType="java.lang.Integer" resultType="java.lang.String">
+    SELECT answer_title
+    FROM
+    exm_tf_question_answer
+    WHERE question_id = #{questionId,jdbcType=INTEGER} AND answer_type=1
+  </select>
+  <select id="getRightAnswerObjByQuestionId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT tf_answer_id, question_id, answer_title, answer_type
+    FROM
+    exm_tf_question_answer
+    WHERE question_id = #{questionId,jdbcType=INTEGER} AND answer_type=1
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Integer">
+    delete from exm_tf_question_answer
+    where tf_answer_id = #{tfAnswerId,jdbcType=INTEGER}
+  </delete>
+  <select id="getCountByMap" parameterType="java.util.Map" resultType="int">
+    SELECT COUNT(*)
+    FROM exm_tf_question_answer
+    <include refid="where" />
+  </select>
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -98,12 +160,6 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.bean.model.TfQuestionAnswer">
-    insert into exm_tf_question_answer (tf_answer_id, question_id, answer_title, 
-      answer_type)
-    values (#{tfAnswerId,jdbcType=INTEGER}, #{questionId,jdbcType=INTEGER}, #{answerTitle,jdbcType=VARCHAR}, 
-      #{answerType,jdbcType=BIT})
-  </insert>
   <insert id="insertSelective" parameterType="com.bean.model.TfQuestionAnswer">
     insert into exm_tf_question_answer
     <trim prefix="(" suffix=")" suffixOverrides=",">

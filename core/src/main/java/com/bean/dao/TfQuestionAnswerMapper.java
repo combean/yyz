@@ -2,29 +2,18 @@ package com.bean.dao;
 
 import com.bean.model.TfQuestionAnswer;
 import com.bean.model.TfQuestionAnswerExample;
+
+import java.sql.SQLException;
 import java.util.List;
+
+import mybatis.basemapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
-public interface TfQuestionAnswerMapper {
-    long countByExample(TfQuestionAnswerExample example);
+public interface TfQuestionAnswerMapper extends BaseMapper<TfQuestionAnswer> {
 
-    int deleteByExample(TfQuestionAnswerExample example);
+    int deleteByQuestionId(Integer id) throws SQLException;
 
-    int deleteByPrimaryKey(Integer tfAnswerId);
+    String getRightAnswerByQuestionId(Integer questionId) throws SQLException;
 
-    int insert(TfQuestionAnswer record);
-
-    int insertSelective(TfQuestionAnswer record);
-
-    List<TfQuestionAnswer> selectByExample(TfQuestionAnswerExample example);
-
-    TfQuestionAnswer selectByPrimaryKey(Integer tfAnswerId);
-
-    int updateByExampleSelective(@Param("record") TfQuestionAnswer record, @Param("example") TfQuestionAnswerExample example);
-
-    int updateByExample(@Param("record") TfQuestionAnswer record, @Param("example") TfQuestionAnswerExample example);
-
-    int updateByPrimaryKeySelective(TfQuestionAnswer record);
-
-    int updateByPrimaryKey(TfQuestionAnswer record);
+    TfQuestionAnswer getRightAnswerObjByQuestionId(Integer questionId) throws SQLException;
 }

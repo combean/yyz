@@ -21,7 +21,7 @@ public class TfQuestionAnswer implements Serializable {
     /**
      * 答案是否正确 0:错误 1:正确
      */
-    private Boolean answerType;
+    private Integer answerType;
 
     private static final long serialVersionUID = 1L;
 
@@ -49,11 +49,11 @@ public class TfQuestionAnswer implements Serializable {
         this.answerTitle = answerTitle;
     }
 
-    public Boolean getAnswerType() {
+    public Integer getAnswerType() {
         return answerType;
     }
 
-    public void setAnswerType(Boolean answerType) {
+    public void setAnswerType(Integer answerType) {
         this.answerType = answerType;
     }
 }
