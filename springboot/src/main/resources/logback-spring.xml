@@ -49,8 +49,8 @@
     <!-- show parameters for hibernate sql 专为 Hibernate 定制 -->
     <!--<logger name="org.hibernate.engine.query.HQLQueryPlan" level="TRACE" />-->
     <!--<logger name="org.hibernate.engine.QueryParameters" level="TRACE" />-->
-    <logger name="org.hibernate.SQL" level="TRACE" />
-    <logger name="com.bean.dao" level="DEBUG" />
+    <!--<logger name="org.hibernate.SQL" level="TRACE" />-->
+    <logger name="com.bean.dao" level="TRACE" />
     <!--<logger name="org.hibernate.type" level="TRACE" />-->
 
     <root level="INFO">
