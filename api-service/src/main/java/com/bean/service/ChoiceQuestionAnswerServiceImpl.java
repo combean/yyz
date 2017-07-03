@@ -41,7 +41,7 @@ public class ChoiceQuestionAnswerServiceImpl implements ChoiceQuestionAnswerServ
     }
 
     @Override
-    public Integer deleteById(Integer id) throws SQLException {
+    public int deleteById(Integer id) throws SQLException {
         return choiceQuestionAnswerMapper.deleteById(id);
     }
 

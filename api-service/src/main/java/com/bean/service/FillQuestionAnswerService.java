@@ -26,7 +26,7 @@ public interface FillQuestionAnswerService {
      * @param questionId 试题ID
      * @return
      */
-    Integer deleteByQuestionId(Integer questionId) throws SQLException;
+    int deleteByQuestionId(Integer questionId) throws SQLException;
 
     /**
      * 根据班级ID获取填空题备选答案List

@@ -40,7 +40,7 @@ public interface ChoiceQuestionAnswerService {
      * @param id 主键
      * @return
      */
-    Integer deleteById(Integer id) throws SQLException;
+    int deleteById(Integer id) throws SQLException;
 
     /**
      * 获取选择题备选答案数量

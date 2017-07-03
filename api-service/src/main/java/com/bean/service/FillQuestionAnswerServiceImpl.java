@@ -31,7 +31,7 @@ public class FillQuestionAnswerServiceImpl implements FillQuestionAnswerService 
     }
 
     @Override
-    public Integer deleteByQuestionId(Integer questionId) throws SQLException {
+    public int deleteByQuestionId(Integer questionId) throws SQLException {
         return fillQuestionAnswerMapper.deleteByQuestionId(questionId);
     }
 
