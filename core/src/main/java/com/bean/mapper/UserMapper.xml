@@ -24,14 +24,13 @@
     <result column="deletename" jdbcType="VARCHAR" property="deletename" />
     <result column="deletetime" jdbcType="TIMESTAMP" property="deletetime" />
   </resultMap>
-
   <sql id="where">
     <where>
       <if test="userId !=null">
         AND user_id = #{userId,jdbcType=INTEGER}
       </if>
       <if test="userUsername != null">
-        AND user_username = #{userUsername,jdbcType=VARCHAR}  OR user_username LIKE CONCAT('%',#{userUsername,jdbcType=VARCHAR},'%' )
+        AND user_username = #{userUsername,jdbcType=VARCHAR}
       </if>
       <if test="userClassId != null">
         AND user_class_id = #{userClassId,jdbcType=INTEGER}
@@ -221,6 +220,18 @@
     FROM exm_user
     <include refid="where" />
   </select>
+  <select id="getByParameter" parameterType="string" resultMap="BaseResultMap">
+    select *
+    form exm_user
+    <include refid="where" />
+  </select>
+  <select id="getByObj" parameterType="com.bean.model.User" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Column_List_With_Class" />
+    FROM exm_user AS u
+    INNER JOIN exm_class AS c ON u.user_class_id = c.class_id
+    <include refid="where" />
+  </select>
 
 
   <sql id="Example_Where_Clause">
@@ -311,7 +322,6 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-
   <select id="countByExample" parameterType="com.bean.model.UserExample" resultType="java.lang.Long">
     select count(*) from exm_user
     <if test="_parameter != null">

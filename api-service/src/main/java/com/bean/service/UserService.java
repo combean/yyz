@@ -46,5 +46,15 @@ public interface UserService {
      */
     int getCountByMap(Map<String,Object> map) throws SQLException;
 
+    /**
+     * 根据主键ID获取用户对象
+     * @param id 主键ID
+     * @return
+     * @throws SQLException
+     */
     User getById(int id) throws SQLException;
+
+    User getByParameter(String str) throws SQLException;
+
+    User getByObj(User user) throws SQLException;
 }

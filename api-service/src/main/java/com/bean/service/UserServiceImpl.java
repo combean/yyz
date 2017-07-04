@@ -47,4 +47,14 @@ public class UserServiceImpl implements UserService {
     public User getById(int id) throws SQLException{
         return userMapper.getById(id);
     }
+
+    @Override
+    public User getByParameter(String str) throws SQLException {
+        return userMapper.getByParameter(str);
+    }
+
+    @Override
+    public User getByObj(User user) throws SQLException {
+        return userMapper.getByObj(user);
+    }
 }

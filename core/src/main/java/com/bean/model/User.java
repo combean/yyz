@@ -52,7 +52,7 @@ public class User implements Serializable {
     /**
      * 用户/学员性别 1:男 0:女
      */
-    private int userSex;
+    private Integer userSex;
 
     /**
      * 用户班级名称
@@ -165,7 +165,7 @@ public class User implements Serializable {
         this.userProfileImg = userProfileImg;
     }
 
-    public int getUserSex() {
+    public Integer getUserSex() {
         return userSex;
     }
 
@@ -177,7 +177,7 @@ public class User implements Serializable {
         this.userEmail = userEmail;
     }
 
-    public void setUserSex(int userSex) {
+    public void setUserSex(Integer userSex) {
         this.userSex = userSex;
     }
 
