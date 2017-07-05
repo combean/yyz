@@ -1,17 +1,17 @@
 package com.bean.springboot.controller;
 
+import com.bean.model.Exam;
 import com.bean.model.ResultJson;
 import com.bean.model.User;
+import com.bean.service.ExamService;
 import com.bean.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 import java.util.*;
+import static utils.Utils.MD5;
 
 /**
  * Created by PVer on 2017/7/3.
@@ -23,13 +23,15 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ExamService examService;
+
+    //添加用户
     @RequestMapping("/add")
     public ResultJson add(User user) throws SQLException {
         ResultJson resultJson = new ResultJson();
         Map<String, Object> errorMap = new HashMap<>();
-
         User userCheck = new User();
-
         //用户名为空验证
         if(user.getUserUsername()==null || user.getUserUsername()==""){
             resultJson.setState(0);
@@ -86,7 +88,7 @@ public class UserController {
             user.setAddname("zhaoyan");
             user.setAddid(1);
             user.setAddtime(new Date());
-//            user.setUserPassword(MD5());
+            user.setUserPassword(MD5(user.getUserPassword()));
             userService.insert(user);
             resultJson.setState(1);
         }
@@ -94,6 +96,7 @@ public class UserController {
         return resultJson;
     }
 
+    //编辑用户
     @RequestMapping("/edit")
     public ResultJson edit(User user) throws SQLException {
         ResultJson resultJson = new ResultJson();
@@ -136,6 +139,8 @@ public class UserController {
             if(!user.getUserPassword().equals(user.getUserPassword1())){
                 resultJson.setState(0);
                 errorMap.put("wrong_password","两次密码不一致");
+            }else{
+                user.setUserPassword(MD5(user.getUserPassword()));
             }
         }
         if(errorMap.size()>0) resultJson.setErrorMap(errorMap);
@@ -150,6 +155,7 @@ public class UserController {
         return resultJson;
     }
 
+    //删除用户
     @RequestMapping("/del")
     public ResultJson delete(User user) throws SQLException {
         ResultJson resultJson = new ResultJson();
@@ -164,6 +170,7 @@ public class UserController {
         return resultJson;
     }
 
+    //获取用户列表
     @RequestMapping("/getAllUser")
     public List<User> getAllUser(User user) throws SQLException {
         //搜索条件
@@ -178,5 +185,14 @@ public class UserController {
         List<User> users = userService.getListByMap(map);
 
         return users;
+    }
+
+    //获取用户考试列表
+    @RequestMapping("/getExamByUser")
+    public List<Exam> getExamByUser(int userId) throws SQLException {
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId",userId);
+        List<Exam> exams = examService.getListByMap(map);
+        return exams;
     }
 }
