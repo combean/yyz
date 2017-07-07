@@ -1,18 +1,12 @@
 package com.bean.dao;
 
 import com.bean.model.QuestionKnowledge;
+import mybatis.basemapper.BaseMapper;
+
 import java.util.List;
 
-public interface QuestionKnowledgeMapper {
-    int insert(QuestionKnowledge questionKnowledge);
+public interface QuestionKnowledgeMapper extends BaseMapper<QuestionKnowledge> {
 
-    int insertList(List<QuestionKnowledge> questionKnowledge);
+    int deleteByQuestionId(Integer questionId);
 
-    Integer deleteByQuestionId(Integer questionId);
-
-    List<QuestionKnowledge> getQuestionKnowledgeListByInfo(QuestionKnowledge questionKnowledge);
-
-    Integer deleteByQuestionKnowledgeId(Integer questionKnowledgeId);
-
-    int getCountByInfo (QuestionKnowledge questionKnowledge);
 }

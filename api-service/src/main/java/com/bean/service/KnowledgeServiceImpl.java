@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utils.MyLogger;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -20,27 +21,32 @@ public class KnowledgeServiceImpl implements KnowledgeService {
 
 
     @Override
-    public int insertKnowledge(Knowledge kowledge) {
+    public int insert(Knowledge kowledge) throws SQLException {
         return knowledgeMapper.insert(kowledge);
     }
 
     @Override
-    public Integer updateKnowledge(Knowledge kowledge) {
+    public Integer update(Knowledge kowledge) throws SQLException {
         return knowledgeMapper.update(kowledge);
     }
 
     @Override
-    public Knowledge getKnowledgeByInfo(Map<String, String> map) {
-        return knowledgeMapper.getKnowledgeByInfo(map);
+    public Knowledge getByMap(Map<String, Object> map) throws SQLException {
+        return knowledgeMapper.getByMap(map);
     }
 
     @Override
-    public List<Knowledge> getKnowledgeListByInfo(Map<String, String> map) {
-        return knowledgeMapper.getKnowledgeListByInfo(map);
+    public List<Knowledge> getListByMap(Map<String, Object> map) throws SQLException {
+        return knowledgeMapper.getListByMap(map);
     }
 
     @Override
-    public Integer getKnowledgeCountByInfo(Map<String, String> map) {
-        return knowledgeMapper.getKnowledgeCountByInfo(map);
+    public Integer getCountByMap(Map<String, Object> map) throws SQLException {
+        return knowledgeMapper.getCountByMap(map);
+    }
+
+    @Override
+    public Knowledge getById(Integer id) throws SQLException {
+        return knowledgeMapper.getById(id);
     }
 }

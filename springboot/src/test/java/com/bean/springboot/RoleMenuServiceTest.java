@@ -9,7 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -24,7 +26,7 @@ public class RoleMenuServiceTest {
     private RoleMenuService roleMenuService;
 
     @Test
-    public void insertRoleMenu() throws Exception {
+    public void insertenu() throws Exception {
         List<RoleMenu> list = new ArrayList<>();
         RoleMenu roleMenu = new RoleMenu();
         roleMenu.setRoleId(1);
@@ -46,15 +48,15 @@ public class RoleMenuServiceTest {
         roleMenu3.setMenuId(3);
         list.add(roleMenu3);
 
-        roleMenuService.insertRoleMenuList(list);
+        roleMenuService.insertList(list);
     }
 
     @Test
-    public void insertRoleMenuList() throws Exception {
+    public void insertList() throws Exception {
         RoleMenu roleMenu = new RoleMenu();
         roleMenu.setRoleId(2);
         roleMenu.setMenuId(2);
-        roleMenuService.insertRoleMenu(roleMenu);
+        roleMenuService.insert(roleMenu);
     }
 
     @Test
@@ -63,22 +65,26 @@ public class RoleMenuServiceTest {
     }
 
     @Test
-    public void getRoleMenuListByInfo() throws Exception {
-        RoleMenu roleMenu = new RoleMenu();
-        roleMenu.setRoleId(2);
-        List<RoleMenu> list=roleMenuService.getRoleMenuListByInfo(roleMenu);
+    public void getListByMap() throws Exception {
+//        RoleMenu roleMenu = new RoleMenu();
+//        roleMenu.setRoleId(2);
+        Map<String,Object> map = new HashMap<>();
+        map.put("roleId",2);
+        List<RoleMenu> list=roleMenuService.getListByMap(map);
     }
 
     @Test
     public void deleteByRoleMenuId() throws Exception {
-        Integer i = roleMenuService.deleteByRoleMenuId(3);
+        Integer i = roleMenuService.deleteById(5);
     }
 
     @Test
-    public void getCountByInfo() throws Exception {
-        RoleMenu roleMenu = new RoleMenu();
-        roleMenu.setRoleId(2);
-        Integer i = roleMenuService.getCountByInfo(roleMenu);
+    public void getCountByMap() throws Exception {
+//        RoleMenu roleMenu = new RoleMenu();
+//        roleMenu.setRoleId(2);
+        Map<String,Object> map = new HashMap<>();
+        map.put("roleId",2);
+        Integer i = roleMenuService.getCountByMap(map);
     }
 
 }

@@ -1,17 +1,11 @@
 package com.bean.dao;
 
 import com.bean.model.Subject;
+import mybatis.basemapper.BaseMapper;
+
 import java.util.List;
 import java.util.Map;
 
-public interface SubjectMapper {
-    int insert(Subject subject);
+public interface SubjectMapper extends BaseMapper<Subject> {
 
-    Integer update(Subject subject);
-
-    Subject getSubjectByInfo(Map<String,String> map);
-
-    List<Subject> getSubjectListByInfo(Map<String,String> map);
-
-    Integer getSubjectCountByInfo(Map<String,String> map);
 }

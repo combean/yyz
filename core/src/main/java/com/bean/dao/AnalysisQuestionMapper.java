@@ -2,29 +2,15 @@ package com.bean.dao;
 
 import com.bean.model.AnalysisQuestion;
 import com.bean.model.AnalysisQuestionExample;
+
+import java.sql.SQLException;
 import java.util.List;
+
+import mybatis.basemapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
-public interface AnalysisQuestionMapper {
-    long countByExample(AnalysisQuestionExample example);
+public interface AnalysisQuestionMapper extends BaseMapper<AnalysisQuestion> {
 
-    int deleteByExample(AnalysisQuestionExample example);
+    int deleteByFQuestionId(Integer id) throws SQLException;
 
-    int deleteByPrimaryKey(Integer analysisQuestionId);
-
-    int insert(AnalysisQuestion record);
-
-    int insertSelective(AnalysisQuestion record);
-
-    List<AnalysisQuestion> selectByExample(AnalysisQuestionExample example);
-
-    AnalysisQuestion selectByPrimaryKey(Integer analysisQuestionId);
-
-    int updateByExampleSelective(@Param("record") AnalysisQuestion record, @Param("example") AnalysisQuestionExample example);
-
-    int updateByExample(@Param("record") AnalysisQuestion record, @Param("example") AnalysisQuestionExample example);
-
-    int updateByPrimaryKeySelective(AnalysisQuestion record);
-
-    int updateByPrimaryKey(AnalysisQuestion record);
 }

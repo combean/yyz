@@ -5,7 +5,63 @@
     <id column="analysis_question_id" jdbcType="INTEGER" property="analysisQuestionId" />
     <result column="f_question_id" jdbcType="INTEGER" property="fQuestionId" />
     <result column="s_question_id" jdbcType="INTEGER" property="sQuestionId" />
+    <result column="f_question_title" jdbcType="INTEGER" property="fquestionTitle" />
+    <result column="f_question_type" jdbcType="INTEGER" property="fquestionType" />
+    <result column="s_question_title" jdbcType="INTEGER" property="squestionTitle" />
+    <result column="s_question_type" jdbcType="INTEGER" property="squestionType" />
   </resultMap>
+  <sql id="where">
+    <where>
+      <if test="analysisQuestionId != null">
+        AND analysis_question_id = #{analysisQuestionId,jdbcType=INTEGER}
+      </if>
+      <if test="fQuestionId != null">
+        AND f_question_id = #{fQuestionId,jdbcType=INTEGER}
+      </if>
+      <if test="sQuestionId != null">
+        AND s_question_id = #{sQuestionId,jdbcType=INTEGER}
+      </if>
+    </where>
+  </sql>
+  <insert id="insertList" parameterType="java.util.List">
+    insert into exm_analysis_question (f_question_id, s_question_id)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.fQuestionId,jdbcType=INTEGER}, #{item.sQuestionId,jdbcType=VARCHAR})
+    </foreach>
+  </insert>
+  <insert id="insert" parameterType="com.bean.model.AnalysisQuestion">
+    insert into exm_analysis_question (f_question_id, s_question_id
+    )
+    values
+    (#{fQuestionId,jdbcType=INTEGER}, #{sQuestionId,jdbcType=VARCHAR})
+  </insert>
+  <delete id="deleteByFQuestionId" parameterType="java.lang.Integer">
+    delete from exm_analysis_question
+    where f_question_id = #{fquestionId,jdbcType=INTEGER}
+  </delete>
+  <select id="getListByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT
+    analysis_question_id, f_question_id, s_question_id,
+    fq.question_title AS f_question_title, fq.question_type AS f_question_type,
+    sq.question_title AS s_question_title, sq.question_type AS s_question_type
+    FROM
+    exm_analysis_question AS aq
+    INNER JOIN exm_question AS fq ON aq.f_question_id = fq.question_id
+    INNER JOIN exm_question AS sq ON aq.s_question_id = sq.question_id
+    <include refid="where" />
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Integer">
+    delete from exm_analysis_question
+    where analysis_question_id = #{analysisQuestionId,jdbcType=INTEGER}
+  </delete>
+  <select id="getCountByMap" parameterType="java.util.Map" resultType="int">
+    SELECT COUNT(*)
+    FROM exm_analysis_question AS aq
+    <include refid="where" />
+  </select>
+
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -97,12 +153,6 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.bean.model.AnalysisQuestion">
-    insert into exm_analysis_question (analysis_question_id, f_question_id, 
-      s_question_id)
-    values (#{analysisQuestionId,jdbcType=INTEGER}, #{fQuestionId,jdbcType=INTEGER}, 
-      #{sQuestionId,jdbcType=INTEGER})
-  </insert>
   <insert id="insertSelective" parameterType="com.bean.model.AnalysisQuestion">
     insert into exm_analysis_question
     <trim prefix="(" suffix=")" suffixOverrides=",">

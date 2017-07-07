@@ -1,6 +1,8 @@
 package com.bean.service;
 
 import com.bean.model.Place;
+
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +14,7 @@ public interface PlaceService {
      *
      * 插入数据主键 Place.getPlaceId();
      */
-    int insertPlace(Place place);
+    int insert(Place place) throws SQLException;
 
     /**
      * 编辑/删除考试地点
@@ -21,26 +23,28 @@ public interface PlaceService {
      *
      * 删除时 setDel(0)
      */
-    Integer updatePlace(Place place);
+    Integer update(Place place) throws SQLException;
 
     /**
      * 根据传入的map信息获取考试地点对象
      * @param map key 为 Place 属性
      * @return 考试地点对象
      */
-    Place getPlaceByInfo(Map<String, String> map);
+    Place getByMap(Map<String, Object> map) throws SQLException;
 
     /**
      * 根据传入的map信息获取考试地点List
      * @param map key 为 Place 属性
      * @return List<Place>
      */
-    List<Place> getPlaceListByInfo(Map<String, String> map);
+    List<Place> getListByMap(Map<String, Object> map) throws SQLException;
 
     /**
      * 根据条件获取考试地点数量
      * @param map key 为 Place 属性
      * @return 考试地点数量
      */
-    Integer getPlaceCountByInfo(Map<String, String> map);
+    Integer getCountByMap(Map<String, Object> map) throws SQLException;
+
+    Place getById(Integer id) throws SQLException;
 }

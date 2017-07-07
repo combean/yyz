@@ -5,16 +5,9 @@ import com.bean.model.CourseExample;
 import java.util.List;
 import java.util.Map;
 
+import mybatis.basemapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
-public interface CourseMapper {
-    int insert(Course course);
+public interface CourseMapper extends BaseMapper<Course> {
 
-    Integer update(Course course);
-
-    Course getCourseByInfo(Map<String, String> map);
-
-    List<Course> getCourseListByInfo(Map<String, String> map);
-
-    Integer getCourseCountByInfo(Map<String, String> map);
 }

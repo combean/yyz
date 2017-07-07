@@ -26,7 +26,7 @@ public class KnowledgeServiceTest {
     private KnowledgeService knowledgeService;
 
     @Test
-    public void insertKnowledge() throws Exception {
+    public void insert() throws Exception {
         Knowledge knowledge = new Knowledge();
         knowledge.setKnowledgeName("测试知识点");
         knowledge.setMemo("测试知识点备注内容");
@@ -34,7 +34,7 @@ public class KnowledgeServiceTest {
         knowledge.setAddid(1);
         knowledge.setAddtime(new Date());
 
-        knowledgeService.insertKnowledge(knowledge);
+        knowledgeService.insert(knowledge);
 
         Knowledge knowledge1 = new Knowledge();
         knowledge1.setKnowledgeName("测试知识点1");
@@ -43,11 +43,11 @@ public class KnowledgeServiceTest {
         knowledge1.setAddid(1);
         knowledge1.setAddtime(new Date());
 
-        knowledgeService.insertKnowledge(knowledge1);
+        knowledgeService.insert(knowledge1);
     }
 
     @Test
-    public void updateKnowledge() throws Exception {
+    public void update() throws Exception {
         Knowledge knowledge = new Knowledge();
         knowledge.setKnowledgeName("测试知识点修改修改");
         knowledge.setKnowledgeId(1);
@@ -56,33 +56,38 @@ public class KnowledgeServiceTest {
         knowledge.setEditname("zhaoyan");
         knowledge.setEdittime(new Date());
 
-        knowledgeService.updateKnowledge(knowledge);
+        knowledgeService.update(knowledge);
     }
 
     @Test
-    public void getKnowledgeByInfo() throws Exception {
-        Map<String,String> map = new HashMap<>();
+    public void getByMap() throws Exception {
+        Map<String,Object> map = new HashMap<>();
         map.put("knowledgeName","测试知识点修改");
 
-        Knowledge u=knowledgeService.getKnowledgeByInfo(map);
+        Knowledge u=knowledgeService.getByMap(map);
         System.out.println(u);
     }
 
     @Test
-    public void getKnowledgeListByInfo() throws Exception {
-        Map<String,String> map = new HashMap<>();
+    public void getListByMap() throws Exception {
+        Map<String,Object> map = new HashMap<>();
         map.put("knowledgeName","测试");
 
-        List<Knowledge> u = knowledgeService.getKnowledgeListByInfo(map);
+        List<Knowledge> u = knowledgeService.getListByMap(map);
         System.out.println(u);
     }
 
     @Test
-    public void getKnowledgeCountByInfo() throws Exception {
-        Map<String,String> map = new HashMap<>();
+    public void getCountByMap() throws Exception {
+        Map<String,Object> map = new HashMap<>();
         map.put("knowledgeName","测试");
-        Integer count = knowledgeService.getKnowledgeCountByInfo(map);
+        Integer count = knowledgeService.getCountByMap(map);
         System.out.print(count);
+    }
+
+    @Test
+    public void getById() throws Exception{
+        Knowledge knowledge = knowledgeService.getById(2);
     }
 
 }

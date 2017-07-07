@@ -41,7 +41,7 @@
     delete from exm_manager_role
     where manager_id = #{managerId,jdbcType=INTEGER}
   </delete>
-  <select id="getManagerRoleListByInfo" parameterType="com.bean.model.ManagerRole" resultMap="BaseResultMap">
+  <select id="getListByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
     SELECT
       mr.manager_role_id, mr.manager_id, mr.role_id, m.manager_username, m.manager_name, r.role_name, r.role_key
     FROM
@@ -50,11 +50,11 @@
     INNER JOIN exm_role AS r ON mr.role_id=r.role_id
     <include refid="where" />
   </select>
-  <delete id="deleteByManagerRoleId" parameterType="java.lang.Integer">
+  <delete id="deleteById" parameterType="java.lang.Integer">
     delete from exm_manager_role
     where manager_role_id = #{managerRoleId,jdbcType=INTEGER}
   </delete>
-  <select id="getCountByInfo" parameterType="com.bean.model.ManagerRole" resultType="int">
+  <select id="getCountByMap" parameterType="java.util.Map" resultType="int">
     SELECT COUNT(*)
       FROM exm_manager_role AS mr
     <include refid="where" />

@@ -26,7 +26,7 @@ public class ContentServiceTest {
     private ContentService contentService;
 
     @Test
-    public void insertContent() throws Exception {
+    public void insert() throws Exception {
         Content content = new Content();
         content.setContentName("测试课程内容/课件名称");
         content.setContentInfo("测试课程详细信息");
@@ -35,7 +35,7 @@ public class ContentServiceTest {
         content.setAddname("zhaoyan");
         content.setAddtime(new Date());
         content.setAddid(1);
-        Integer i = contentService.insertContent(content);
+        Integer i = contentService.insert(content);
 
         Content content1 = new Content();
         content1.setContentName("测试课程内容/课件名称1");
@@ -45,11 +45,11 @@ public class ContentServiceTest {
         content1.setAddname("zhaoyan");
         content1.setAddtime(new Date());
         content1.setAddid(1);
-        Integer i1 = contentService.insertContent(content1);
+        Integer i1 = contentService.insert(content1);
     }
 
     @Test
-    public void updateContent() throws Exception {
+    public void update() throws Exception {
         Content content = new Content();
         content.setContentName("测试课程内容/课件名称修改");
         content.setContentInfo("测试课程详细信息修改");
@@ -59,30 +59,35 @@ public class ContentServiceTest {
         content.setEditname("zhaoyan");
         content.setEdittime(new Date());
         content.setEditid(1);
-        contentService.updateContent(content);
+        contentService.update(content);
     }
 
     @Test
-    public void getContentByInfo() throws Exception {
-        Map<String,String> map = new HashMap<>();
+    public void getByMap() throws Exception {
+        Map<String,Object> map = new HashMap<>();
         map.put("contentId","1");
-        Content m = contentService.getContentByInfo(map);
+        Content m = contentService.getByMap(map);
         System.out.print(m);
     }
 
     @Test
-    public void getContentListByInfo() throws Exception {
-        Map<String,String> map = new HashMap<>();
+    public void getListByMap() throws Exception {
+        Map<String,Object> map = new HashMap<>();
         map.put("contentName","测试");
-        List<Content> m = contentService.getContentListByInfo(map);
+        List<Content> m = contentService.getListByMap(map);
         System.out.print(m);
     }
 
     @Test
-    public void getContentCountByInfo() throws Exception {
-        Map<String,String> map = new HashMap<>();
+    public void getCountByMap() throws Exception {
+        Map<String,Object> map = new HashMap<>();
         map.put("contentName","测试课程");
-        int count = contentService.getContentCountByInfo(map);
+        int count = contentService.getCountByMap(map);
+    }
+
+    @Test
+    public void getById() throws Exception{
+        Content content = contentService.getById(1);
     }
 
 }

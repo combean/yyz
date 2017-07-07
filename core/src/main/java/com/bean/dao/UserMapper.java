@@ -4,18 +4,9 @@ import com.bean.model.User;
 import java.util.List;
 import java.util.Map;
 
+import mybatis.basemapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
-public interface UserMapper {
-
-    int insert(User user);
-
-    Integer update(User user);
-
-    User getUserByInfo(Map<String,String> map);
-
-    List<User> getUserList(Map<String,String> map);
-
-    Integer getUserCount(Map<String,String> map);
+public interface UserMapper extends BaseMapper<User> {
 
 }

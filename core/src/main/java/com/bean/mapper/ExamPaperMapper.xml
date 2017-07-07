@@ -5,7 +5,61 @@
     <id column="exam_paper_id" jdbcType="INTEGER" property="examPaperId" />
     <result column="exam_id" jdbcType="INTEGER" property="examId" />
     <result column="paper_id" jdbcType="INTEGER" property="paperId" />
+    <result column="paper_name" jdbcType="VARCHAR" property="paperName" />
+    <result column="paper_type" jdbcType="INTEGER" property="paperType" />
+    <result column="exam_minutes" jdbcType="INTEGER" property="examMinutes" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
   </resultMap>
+  <sql id="where">
+    <where>
+      <if test="examPaperId != null">
+        AND ep.exam_paper_id = #{examPaperId,jdbcType=INTEGER}
+      </if>
+      <if test="examId != null">
+        AND ep.exam_id = #{examId,jdbcType=INTEGER}
+      </if>
+      <if test="paperId != null">
+        AND ep.paper_id = #{paperId,jdbcType=INTEGER}
+      </if>
+    </where>
+  </sql>
+  <insert id="insertList" parameterType="java.util.List">
+    insert into exm_exam_paper (exam_id, paper_id
+    )
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.examId,jdbcType=INTEGER}, #{item.paperId,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+  <insert id="insert" parameterType="com.bean.model.ExamPaper">
+    insert into exm_exam_paper (exam_id, paper_id
+    )
+    values
+    (#{examId,jdbcType=INTEGER}, #{paperId,jdbcType=INTEGER})
+  </insert>
+  <delete id="deleteByPaperId" parameterType="java.lang.Integer">
+    delete from exm_exam_paper
+    where paper_id = #{paperId,jdbcType=INTEGER}
+  </delete>
+  <select id="getListByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT
+    ep.exam_paper_id, ep.exam_id, ep.paper_id, p.paper_name, p.paper_type, p.exam_minutes, p.start_time, p.end_time
+    FROM
+    exm_exam_paper  AS ep
+    INNER JOIN exm_paper AS p ON ep.paper_id=p.paper_id
+    <include refid="where" />
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Integer">
+    delete from exm_exam_paper
+    where exam_paper_id = #{examPaperId,jdbcType=INTEGER}
+  </delete>
+  <select id="getCountByMap" parameterType="java.util.Map" resultType="int">
+    SELECT COUNT(*)
+    FROM exm_exam_paper AS ep
+    <include refid="where" />
+  </select>
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -97,12 +151,6 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.bean.model.ExamPaper">
-    insert into exm_exam_paper (exam_paper_id, exam_id, paper_id
-      )
-    values (#{examPaperId,jdbcType=INTEGER}, #{examId,jdbcType=INTEGER}, #{paperId,jdbcType=INTEGER}
-      )
-  </insert>
   <insert id="insertSelective" parameterType="com.bean.model.ExamPaper">
     insert into exm_exam_paper
     <trim prefix="(" suffix=")" suffixOverrides=",">

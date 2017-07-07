@@ -28,7 +28,7 @@ public class ClassApplicationTests {
 		uClass.setAddid(1);
 		uClass.setAddtime(new Date());
 
-		uClassService.insertUClass(uClass);
+		uClassService.insert(uClass);
 	}
 
 	@Test
@@ -42,32 +42,31 @@ public class ClassApplicationTests {
 		uClass.setEditname("zhaoyan");
 		uClass.setEdittime(new Date());
 
-		uClassService.updateUClass(uClass);
+		uClassService.update(uClass);
 	}
 
 	@Test
 	public void getUClassByInfo() throws Exception{
-		Map<String,String> map = new HashMap<>();
-		map.put("className","测试班级");
+		Map<String,Object> map = new HashMap<>();
+		map.put("classId",1);
 
-		UClass u=uClassService.getUClassByInfo(map);
+		UClass u=uClassService.getByMap(map);
 		System.out.println(u);
 	}
 
 	@Test
 	public void getUClassListByInfo() throws Exception{
-		Map<String,String> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>();
 		map.put("className","测试班级");
-
-		List<UClass> u = uClassService.getUClassListByInfo(map);
+		List<UClass> u = uClassService.getListByMap(map);
 		System.out.println(u);
 	}
 
 	@Test
 	public void getUClassCountByInfo() throws Exception{
-		Map<String,String> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>();
 		map.put("className","测试班级");
-		Integer count = uClassService.getUClassCountByInfo(map);
+		Integer count = uClassService.getCountByMap(map);
 		System.out.print(count);
 	}
 }

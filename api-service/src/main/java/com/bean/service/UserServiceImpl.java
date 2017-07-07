@@ -5,6 +5,8 @@ import com.bean.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utils.MyLogger;
+
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -17,27 +19,42 @@ public class UserServiceImpl implements UserService {
     private MyLogger LOGGER = new MyLogger(UserServiceImpl.class);
 
     @Override
-    public int insertUser(User user) {
+    public int insert(User user) throws SQLException {
         return userMapper.insert(user);
     }
 
     @Override
-    public Integer updateUser(User user) {
+    public int update(User user) throws SQLException {
         return userMapper.update(user);
     }
 
     @Override
-    public User getUserByInfo(Map<String,String> map) {
-        return userMapper.getUserByInfo(map);
+    public User getByMap(Map<String,Object> map) throws SQLException {
+        return userMapper.getByMap(map);
     }
 
     @Override
-    public List<User> getUserListByInfo(Map<String, String> map) {
-        return userMapper.getUserList(map);
+    public List<User> getListByMap(Map<String, Object> map) throws SQLException {
+        return userMapper.getListByMap(map);
     }
 
     @Override
-    public Integer getUserCountByInfo(Map<String, String> map) {
-        return userMapper.getUserCount(map);
+    public int getCountByMap(Map<String, Object> map) throws SQLException {
+        return userMapper.getCountByMap(map);
+    }
+
+    @Override
+    public User getById(int id) throws SQLException{
+        return userMapper.getById(id);
+    }
+
+    @Override
+    public User getByParameter(String str) throws SQLException {
+        return userMapper.getByParameter(str);
+    }
+
+    @Override
+    public User getByObj(User user) throws SQLException {
+        return userMapper.getByObj(user);
     }
 }

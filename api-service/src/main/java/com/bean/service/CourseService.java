@@ -2,6 +2,7 @@ package com.bean.service;
 
 import com.bean.model.Course;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +14,7 @@ public interface CourseService {
      *
      * 插入数据主键 Course.getClassId();
      */
-    int insertCourse(Course course);
+    int insert(Course course) throws SQLException;
 
     /**
      * 编辑/删除课程
@@ -22,26 +23,28 @@ public interface CourseService {
      *
      * 删除时 setDel(0)
      */
-    Integer updateCourse(Course course);
+    Integer update(Course course) throws SQLException;
 
     /**
      * 根据传入的map信息获取课程对象
      * @param map key 为 Course 属性
      * @return 课程对象
      */
-    Course getCourseByInfo(Map<String, String> map);
+    Course getByMap(Map<String, Object> map) throws SQLException;
 
     /**
      * 根据传入的map信息获取课程List
      * @param map key 为 Course 属性
      * @return List<Course>
      */
-    List<Course> getCourseListByInfo(Map<String, String> map);
+    List<Course> getListByMap(Map<String, Object> map) throws SQLException;
 
     /**
      * 根据条件获取课程数量
      * @param map key 为 Course 属性
      * @return 课程数量
      */
-    Integer getCourseCountByInfo(Map<String, String> map);
+    Integer getCountByMap(Map<String, Object> map) throws SQLException;
+
+    Course getById(Integer id) throws SQLException;
 }

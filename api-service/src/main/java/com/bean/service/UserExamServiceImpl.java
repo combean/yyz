@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utils.MyLogger;
 
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 
 @Service("userExamService")
@@ -18,32 +20,32 @@ public class UserExamServiceImpl implements UserExamService {
     private MyLogger LOGGER = new MyLogger(UserExamServiceImpl.class);
 
     @Override
-    public int insertUserExamList(List<UserExam> userExam){
+    public int insertList(List<UserExam> userExam) throws SQLException {
         return userExamMapper.insertList(userExam);
     }
 
     @Override
-    public int insertUserExam(UserExam userExam) {
+    public int insert(UserExam userExam) throws SQLException {
         return userExamMapper.insert(userExam);
     }
 
     @Override
-    public Integer deleteByUserId(Integer managerId) {
-        return userExamMapper.deleteByUserId(managerId);
+    public int deleteByUserId(Integer userId) {
+        return userExamMapper.deleteByUserId(userId);
     }
 
     @Override
-    public List<UserExam> getUserExamListByInfo(UserExam userExam) {
-        return userExamMapper.getUserExamListByInfo(userExam);
+    public List<UserExam> getListByMap(Map<String,Object> map) throws SQLException {
+        return userExamMapper.getListByMap(map);
     }
 
     @Override
-    public Integer deleteByUserExamId(Integer userExamId) {
-        return userExamMapper.deleteByUserExamId(userExamId);
+    public int deleteById(Integer id) throws SQLException {
+        return userExamMapper.deleteById(id);
     }
 
     @Override
-    public Integer getCountByInfo(UserExam userExam) {
-        return userExamMapper.getCountByInfo(userExam);
+    public int getCountByMap(Map<String,Object> map) throws SQLException {
+        return userExamMapper.getCountByMap(map);
     }
 }

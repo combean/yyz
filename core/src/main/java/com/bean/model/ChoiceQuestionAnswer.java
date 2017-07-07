@@ -26,7 +26,7 @@ public class ChoiceQuestionAnswer implements Serializable {
     /**
      * 答案是否正确 0:错误 1:正确
      */
-    private Boolean answerType;
+    private Integer answerType;
 
     private static final long serialVersionUID = 1L;
 
@@ -62,11 +62,11 @@ public class ChoiceQuestionAnswer implements Serializable {
         this.answerInfo = answerInfo;
     }
 
-    public Boolean getAnswerType() {
+    public Integer getAnswerType() {
         return answerType;
     }
 
-    public void setAnswerType(Boolean answerType) {
+    public void setAnswerType(Integer answerType) {
         this.answerType = answerType;
     }
 }

@@ -1,18 +1,12 @@
 package com.bean.dao;
 
 import com.bean.model.ManagerRole;
+import mybatis.basemapper.BaseMapper;
+
 import java.util.List;
 
-public interface ManagerRoleMapper {
-    int insert(ManagerRole managerRole);
+public interface ManagerRoleMapper extends BaseMapper<ManagerRole>{
 
-    int insertList(List<ManagerRole> managerRole);
+    int deleteByManagerId(Integer managerId);
 
-    Integer deleteByManagerId(Integer managerId);
-
-    List<ManagerRole> getManagerRoleListByInfo(ManagerRole managerRole);
-
-    Integer deleteByManagerRoleId(Integer managerRoleId);
-
-    int getCountByInfo (ManagerRole managerRole);
 }

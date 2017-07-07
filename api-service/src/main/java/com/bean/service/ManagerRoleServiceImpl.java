@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utils.MyLogger;
 
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 
 @Service("managerRoleService")
@@ -18,32 +20,32 @@ public class ManagerRoleServiceImpl implements ManagerRoleService {
     private MyLogger LOGGER = new MyLogger(ManagerRoleServiceImpl.class);
 
     @Override
-    public int insertManagerRoleList(List<ManagerRole> managerRole){
+    public int insertList(List<ManagerRole> managerRole) throws SQLException {
         return managerRoleMapper.insertList(managerRole);
     }
 
     @Override
-    public int insertManagerRole(ManagerRole managerRole) {
+    public int insert(ManagerRole managerRole) throws SQLException {
         return managerRoleMapper.insert(managerRole);
     }
 
     @Override
-    public Integer deleteByManagerId(Integer managerId) {
+    public int deleteByManagerId(Integer managerId) {
         return managerRoleMapper.deleteByManagerId(managerId);
     }
 
     @Override
-    public List<ManagerRole> getManagerRoleListByInfo(ManagerRole managerRole) {
-        return managerRoleMapper.getManagerRoleListByInfo(managerRole);
+    public List<ManagerRole> getListByMap(Map<String, Object> map) throws SQLException {
+        return managerRoleMapper.getListByMap(map);
     }
 
     @Override
-    public Integer deleteByManagerRoleId(Integer managerRoleId) {
-        return managerRoleMapper.deleteByManagerRoleId(managerRoleId);
+    public int deleteById(Integer id) throws SQLException {
+        return managerRoleMapper.deleteById(id);
     }
 
     @Override
-    public Integer getCountByInfo(ManagerRole managerRole) {
-        return managerRoleMapper.getCountByInfo(managerRole);
+    public int getCountByMap(Map<String, Object> map) throws SQLException {
+        return managerRoleMapper.getCountByMap(map);
     }
 }

@@ -1,18 +1,11 @@
 package com.bean.dao;
 
 import com.bean.model.UClass;
+import mybatis.basemapper.BaseMapper;
+
 import java.util.List;
 import java.util.Map;
 
-public interface UClassMapper {
+public interface UClassMapper extends BaseMapper<UClass> {
 
-    int insert(UClass uClass);
-
-    Integer update(UClass uClass);
-
-    UClass getUClassByInfo(Map<String,String> map);
-
-    List<UClass> getUClassListByInfo(Map<String,String> map);
-
-    Integer getUClassCountByInfo(Map<String,String> map);
 }

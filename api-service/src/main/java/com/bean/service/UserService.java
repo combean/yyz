@@ -1,6 +1,8 @@
 package com.bean.service;
 
 import com.bean.model.User;
+
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +14,7 @@ public interface UserService {
      *
      * 插入数据的主键 User.getUserId();
      */
-    int insertUser(User user);
+    int insert(User user) throws SQLException;
 
     /**
      * 编辑/删除用户
@@ -21,26 +23,38 @@ public interface UserService {
      *
      * 删除时 setDel(0)
      */
-    Integer updateUser(User user);
+    int update(User user) throws SQLException;
 
     /**
      * 根据传入的map信息获取用户对象
      * @param map key 为User属性
      * @return 用户对象
      */
-    User getUserByInfo(Map<String,String> map);
+    User getByMap(Map<String,Object> map) throws SQLException;
 
     /**
      * 根据传入的map信息获取用户List
      * @param map key 为User属性
      * @return List<User>
      */
-    List<User> getUserListByInfo(Map<String,String> map);
+    List<User> getListByMap(Map<String,Object> map) throws SQLException;
 
     /**
      * 根据条件获取用户数量
      * @param map key 为User属性
      * @return
      */
-    Integer getUserCountByInfo(Map<String,String> map);
+    int getCountByMap(Map<String,Object> map) throws SQLException;
+
+    /**
+     * 根据主键ID获取用户对象
+     * @param id 主键ID
+     * @return
+     * @throws SQLException
+     */
+    User getById(int id) throws SQLException;
+
+    User getByParameter(String str) throws SQLException;
+
+    User getByObj(User user) throws SQLException;
 }

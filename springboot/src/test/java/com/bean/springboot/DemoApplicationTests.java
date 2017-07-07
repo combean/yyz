@@ -22,58 +22,72 @@ public class DemoApplicationTests {
 
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private UClassService uClassService;
 
 	@Test
 	public void insertUser() throws  Exception{
 		User user = new User();
 		user.setUserUsername("zhaoyan");
 		user.setUserPassword("1234567");
-		user.setUserName("赵岩111");
+		user.setUserName("赵岩");
 		user.setUserMobile("15021464551");
 		user.setUserClassId(1);
 		user.setAddname("zhaoyan");
 		user.setAddtime(new Date());
 		user.setAddid(1);
-		Integer i = userService.insertUser(user);
+		Integer i = userService.insert(user);
+
+		User user1 = new User();
+		user1.setUserUsername("duxiaoda");
+		user1.setUserPassword("6666666");
+		user1.setUserName("杜晓达");
+		user1.setUserMobile("15021464111");
+		user1.setUserClassId(1);
+		user1.setAddname("zhaoyan");
+		user1.setAddtime(new Date());
+		user1.setAddid(1);
+		Integer ii = userService.insert(user1);
 	}
 
 	@Test
 	public void updateUser() throws Exception{
 		User user = new User();
 		user.setUserPassword("7777777");
-		user.setUserId(1);
+		user.setUserId(2);
 		user.setUserName("杜小贱");
 		user.setUserClassId(1);
 		user.setDel(0);
 		user.setEditname("zhaoyan");
 		user.setEdittime(new Date());
 		user.setEditid(1);
-		userService.updateUser(user);
+		userService.update(user);
 	}
 
 	@Test
 	public void getUserObj() throws Exception{
-		Map<String,String> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>();
 		map.put("userUsername","zhaoyan");
-		map.put("userMobile","15021464551");
-		User userSelect = userService.getUserByInfo(map);
+//		map.put("userMobile","15021464551");
+		User userSelect = userService.getByMap(map);
 		System.out.println(userSelect);
 	}
 
 	@Test
 	public void getUserList() throws Exception{
-		Map<String,String> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>();
 		map.put("userClassId","1");
-		List<User> userSelect = userService.getUserListByInfo(map);
+		List<User> userSelect = userService.getListByMap(map);
 		System.out.println(userSelect);
 	}
 
 	@Test
 	public void getUserCountByInfo() throws Exception{
-		Map<String,String> map = new HashMap<>();
+		Map<String,Object> map = new HashMap<>();
 		map.put("userClassId","1");
-		int count = userService.getUserCountByInfo(map);
+		int count = userService.getCountByMap(map);
+	}
+
+	@Test
+	public void getById() throws Exception{
+		User user = userService.getById(1);
 	}
 }

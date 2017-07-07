@@ -26,7 +26,7 @@ public class CourseServiceTest {
     private CourseService courseService;
 
     @Test
-    public void insertCourse() throws Exception {
+    public void insert() throws Exception {
         Course course = new Course();
         course.setCourseName("课程名称测试");
         course.setCourseType(1);
@@ -34,7 +34,7 @@ public class CourseServiceTest {
         course.setAddname("zhaoyan");
         course.setAddtime(new Date());
         course.setAddid(1);
-        Integer i = courseService.insertCourse(course);
+        Integer i = courseService.insert(course);
 
         Course course1 = new Course();
         course1.setCourseName("课程名称测试1");
@@ -43,11 +43,11 @@ public class CourseServiceTest {
         course1.setAddname("zhaoyan");
         course1.setAddtime(new Date());
         course1.setAddid(1);
-        Integer i1 = courseService.insertCourse(course1);
+        Integer i1 = courseService.insert(course1);
     }
 
     @Test
-    public void updateCourse() throws Exception {
+    public void update() throws Exception {
         Course course = new Course();
         course.setCourseName("课程名称测试修改");
         course.setCourseType(1);
@@ -57,30 +57,35 @@ public class CourseServiceTest {
         course.setEditname("zhaoyan");
         course.setEdittime(new Date());
         course.setEditid(1);
-        courseService.updateCourse(course);
+        courseService.update(course);
     }
 
     @Test
-    public void getCourseByInfo() throws Exception {
-        Map<String,String> map = new HashMap<>();
+    public void getByMap() throws Exception {
+        Map<String,Object> map = new HashMap<>();
         map.put("courseId","1");
-        Course m = courseService.getCourseByInfo(map);
+        Course m = courseService.getByMap(map);
         System.out.print(m);
     }
 
     @Test
-    public void getCourseListByInfo() throws Exception {
-        Map<String,String> map = new HashMap<>();
+    public void getListByMap() throws Exception {
+        Map<String,Object> map = new HashMap<>();
         map.put("courseName","课程");
-        List<Course> m = courseService.getCourseListByInfo(map);
+        List<Course> m = courseService.getListByMap(map);
         System.out.print(m);
     }
 
     @Test
-    public void getCourseCountByInfo() throws Exception {
-        Map<String,String> map = new HashMap<>();
+    public void getCountByMap() throws Exception {
+        Map<String,Object> map = new HashMap<>();
         map.put("courseName","课程");
-        int count = courseService.getCourseCountByInfo(map);
+        int count = courseService.getCountByMap(map);
+    }
+
+    @Test
+    public void getById() throws Exception{
+        Course course=courseService.getById(1);
     }
 
 }

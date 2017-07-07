@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utils.MyLogger;
 
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 
 @Service("courseKnowledgeService")
@@ -18,32 +20,32 @@ public class CourseKnowledgeServiceImpl implements CourseKnowledgeService {
     private MyLogger LOGGER = new MyLogger(CourseKnowledgeServiceImpl.class);
 
     @Override
-    public int insertCourseKnowledgeList(List<CourseKnowledge> courseKnowledge){
+    public int insertList(List<CourseKnowledge> courseKnowledge) throws SQLException {
         return courseKnowledgeMapper.insertList(courseKnowledge);
     }
 
     @Override
-    public int insertCourseKnowledge(CourseKnowledge courseKnowledge) {
+    public int insert(CourseKnowledge courseKnowledge) throws SQLException {
         return courseKnowledgeMapper.insert(courseKnowledge);
     }
 
     @Override
-    public Integer deleteByCourseId(Integer courseId) {
+    public int deleteByCourseId(Integer courseId) {
         return courseKnowledgeMapper.deleteByCourseId(courseId);
     }
 
     @Override
-    public List<CourseKnowledge> getCourseKnowledgeListByInfo(CourseKnowledge courseKnowledge) {
-        return courseKnowledgeMapper.getCourseKnowledgeListByInfo(courseKnowledge);
+    public List<CourseKnowledge> getListByMap(Map<String, Object> map) throws SQLException {
+        return courseKnowledgeMapper.getListByMap(map);
     }
 
     @Override
-    public Integer deleteByCourseKnowledgeId(Integer courseKnowledgeId) {
-        return courseKnowledgeMapper.deleteByCourseKnowledgeId(courseKnowledgeId);
+    public int deleteById(Integer id) throws SQLException {
+        return courseKnowledgeMapper.deleteById(id);
     }
 
     @Override
-    public Integer getCountByInfo(CourseKnowledge courseKnowledge) {
-        return courseKnowledgeMapper.getCountByInfo(courseKnowledge);
+    public int getCountByMap(Map<String, Object> map) throws SQLException {
+        return courseKnowledgeMapper.getCountByMap(map);
     }
 }

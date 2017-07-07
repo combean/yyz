@@ -26,7 +26,7 @@ public class ManagerServiceTest {
     private ManagerService managerService;
 
     @Test
-    public void insertManager() throws Exception {
+    public void insert() throws Exception {
         Manager manager = new Manager();
         manager.setManagerUsername("zhaoyan");
         manager.setManagerPassword("1234567");
@@ -35,7 +35,7 @@ public class ManagerServiceTest {
         manager.setAddname("zhaoyan");
         manager.setAddtime(new Date());
         manager.setAddid(1);
-        Integer i = managerService.insertManager(manager);
+        Integer i = managerService.insert(manager);
 
         Manager manager1 = new Manager();
         manager1.setManagerUsername("duhongda");
@@ -45,11 +45,11 @@ public class ManagerServiceTest {
         manager1.setAddname("zhaoyan");
         manager1.setAddtime(new Date());
         manager1.setAddid(1);
-        Integer i1 = managerService.insertManager(manager1);
+        Integer i1 = managerService.insert(manager1);
     }
 
     @Test
-    public void updateManager() throws Exception {
+    public void update() throws Exception {
         Manager manager = new Manager();
         manager.setManagerPassword("7777777");
         manager.setManagerId(1);
@@ -58,30 +58,30 @@ public class ManagerServiceTest {
         manager.setEditname("zhaoyan");
         manager.setEdittime(new Date());
         manager.setEditid(1);
-        managerService.updateManager(manager);
+        managerService.update(manager);
     }
 
     @Test
-    public void getManagerByInfo() throws Exception {
-        Map<String,String> map = new HashMap<>();
+    public void getByMap() throws Exception {
+        Map<String,Object> map = new HashMap<>();
         map.put("managerId","1");
-        Manager m = managerService.getManagerByInfo(map);
+        Manager m = managerService.getByMap(map);
         System.out.print(m);
     }
 
     @Test
-    public void getManagerListByInfo() throws Exception {
-        Map<String,String> map = new HashMap<>();
+    public void getListByMap() throws Exception {
+        Map<String,Object> map = new HashMap<>();
         map.put("managerName","杜宏");
-        List<Manager> m = managerService.getManagerListByInfo(map);
+        List<Manager> m = managerService.getListByMap(map);
         System.out.print(m);
     }
 
     @Test
-    public void getManagerCountByInfo() throws Exception {
-        Map<String,String> map = new HashMap<>();
+    public void getCountByMap() throws Exception {
+        Map<String,Object> map = new HashMap<>();
         map.put("managerName","杜宏");
-        int count = managerService.getManagerCountByInfo(map);
+        int count = managerService.getCountByMap(map);
     }
 
 }
