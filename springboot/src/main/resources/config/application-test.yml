@@ -55,5 +55,10 @@ db:
       initialSize: 2
       validationQuery: SELECT 1
 server:
-    port: 8082
+    port: 8081
     address: localhost
+    undertow:
+          io-threads: 4
+          worker-threads: 32
+    session:
+      timeout: 1800
