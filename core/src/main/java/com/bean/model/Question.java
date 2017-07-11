@@ -2,6 +2,7 @@ package com.bean.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author 
@@ -22,6 +23,9 @@ public class Question implements Serializable {
      */
     private Integer questionType;
 
+    private String questionTypeTitle;
+
+    private List<QuestionAnswer> questionAnswers;
     /**
      * 备注
      */
@@ -36,6 +40,11 @@ public class Question implements Serializable {
      * 题目难易等级 0:易 1:中 2:难
       */
     private Integer questionLevel;
+
+    /**
+     * 试题解析
+     */
+    private String questionAnalytical;
 
     /**
      * 添加人
@@ -99,6 +108,22 @@ public class Question implements Serializable {
 
     public void setQuestionLevel(Integer questionLevel) {
         this.questionLevel = questionLevel;
+    }
+
+    public String getQuestionAnalytical() {
+        return questionAnalytical;
+    }
+
+    public void setQuestionAnalytical(String questionAnalytical) {
+        this.questionAnalytical = questionAnalytical;
+    }
+
+    public String getQuestionTypeTitle() {
+        return questionTypeTitle;
+    }
+
+    public void setQuestionTypeTitle(String questionTypeTitle) {
+        this.questionTypeTitle = questionTypeTitle;
     }
 
     public String getMemo() {

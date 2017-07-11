@@ -1,7 +1,11 @@
 package com.bean.service;
 
+import com.bean.dao.QuestionAnswerMapper;
+import com.bean.dao.QuestionKnowledgeMapper;
 import com.bean.dao.QuestionMapper;
+import com.bean.model.QuestionAnswer;
 import com.bean.model.Question;
+import com.bean.model.QuestionKnowledge;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utils.MyLogger;
@@ -15,6 +19,12 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Autowired
     private QuestionMapper questionMapper;
+
+    @Autowired
+    private QuestionAnswerMapper questionAnswerMapper;
+
+    @Autowired
+    private QuestionKnowledgeMapper questionKnowledgeMapper;
 
     private MyLogger LOGGER = new MyLogger(QuestionServiceImpl.class);
 
@@ -47,5 +57,38 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public Question getById(Integer id) throws SQLException {
         return questionMapper.getById(id);
+    }
+
+    @Override
+    public Question getByObj(Question question) throws SQLException {
+        return questionMapper.getByObj(question);
+    }
+
+    @Override
+    public int insertQuestionAnswer(Question question, List<QuestionAnswer> questionAnswers, List<QuestionKnowledge> questionKnowledges) throws SQLException {
+                questionMapper.insert(question);
+                for (QuestionAnswer questionAnswer: questionAnswers) {
+                    questionAnswer.setQuestionId(question.getQuestionId());
+                }
+                for (QuestionKnowledge questionKnowledge: questionKnowledges){
+                    questionKnowledge.setQuestionId(question.getQuestionId());
+                }
+                questionKnowledgeMapper.insertList(questionKnowledges);
+         return questionAnswerMapper.insertList(questionAnswers);
+    }
+
+    @Override
+    public int updateQuestionAnswer(Question question, List<QuestionAnswer> questionAnswers, List<QuestionKnowledge> questionKnowledges) throws SQLException {
+        questionMapper.update(question);
+        for (QuestionAnswer questionAnswer: questionAnswers) {
+            questionAnswer.setQuestionId(question.getQuestionId());
+        }
+        for (QuestionKnowledge questionKnowledge: questionKnowledges){
+            questionKnowledge.setQuestionId(question.getQuestionId());
+        }
+        questionKnowledgeMapper.deleteByQuestionId(question.getQuestionId());
+        questionAnswerMapper.deleteByQuestionId(question.getQuestionId());
+        questionKnowledgeMapper.insertList(questionKnowledges);
+        return questionAnswerMapper.insertList(questionAnswers);
     }
 }

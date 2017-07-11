@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.bean.dao.ChoiceQuestionAnswerMapper">
-  <resultMap id="BaseResultMap" type="com.bean.model.ChoiceQuestionAnswer">
+<mapper namespace="com.bean.dao.QuestionAnswerMapper">
+  <resultMap id="BaseResultMap" type="com.bean.model.QuestionAnswer">
     <id column="choice_answer_id" jdbcType="INTEGER" property="choiceAnswerId" />
     <result column="question_id" jdbcType="INTEGER" property="questionId" />
     <result column="answer_title" jdbcType="VARCHAR" property="answerTitle" />
     <result column="answer_info" jdbcType="VARCHAR" property="answerInfo" />
     <result column="answer_type" jdbcType="BIT" property="answerType" />
+    <result column="blank_no" jdbcType="BIT" property="blankNo" />
   </resultMap>
   <sql id="where">
     <where>
@@ -28,54 +29,54 @@
     </where>
   </sql>
   <insert id="insertList" parameterType="java.util.List">
-    insert into exm_choice_question_answer (question_id, answer_title, answer_info, answer_type
+    insert into exm_question_answer (question_id, answer_title, answer_info, answer_type,blank_no
     )
     values
     <foreach collection="list" item="item" index="index" separator=",">
-      (#{item.questionId,jdbcType=INTEGER}, #{item.answerTitle,jdbcType=VARCHAR}, #{item.answerInfo,jdbcType=VARCHAR}, #{item.answerType,jdbcType=BIT})
+      (#{item.questionId,jdbcType=INTEGER}, #{item.answerTitle,jdbcType=VARCHAR}, #{item.answerInfo,jdbcType=VARCHAR}, #{item.answerType,jdbcType=BIT},#{item.blankNo,jdbcType=BIT})
     </foreach>
   </insert>
-  <insert id="insert" parameterType="com.bean.model.ChoiceQuestionAnswer">
-    insert into exm_choice_question_answer (question_id, answer_title, answer_info, answer_type
+  <insert id="insert" parameterType="com.bean.model.QuestionAnswer">
+    insert into exm_question_answer (question_id, answer_title, answer_info, answer_type,blank_no
     )
     values
-    (#{questionId,jdbcType=INTEGER}, #{answerTitle,jdbcType=VARCHAR}, #{answerInfo,jdbcType=VARCHAR}, #{answerType,jdbcType=BIT})
+    (#{questionId,jdbcType=INTEGER}, #{answerTitle,jdbcType=VARCHAR}, #{answerInfo,jdbcType=VARCHAR}, #{answerType,jdbcType=BIT},#{blankNo,jdbcType=BIT})
   </insert>
   <delete id="deleteByQuestionId" parameterType="java.lang.Integer">
-    delete from exm_choice_question_answer
+    delete from exm_question_answer
     where question_id = #{questionId,jdbcType=INTEGER}
   </delete>
   <select id="getListByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
-    SELECT choice_answer_id, question_id, answer_title, answer_info, answer_type
+    SELECT choice_answer_id, question_id, answer_title, answer_info, answer_type,blank_no
     FROM
-    exm_choice_question_answer
+    exm_question_answer
     <include refid="where" />
   </select>
   <select id="getRightAnswerByQuestionId" parameterType="java.lang.Integer" resultType="java.lang.String">
     SELECT answer_title
     FROM
-    exm_choice_question_answer
+    exm_question_answer
     WHERE question_id = #{questionId,jdbcType=INTEGER} AND answer_type=1
   </select>
   <select id="getRightAnswerObjByQuestionId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    SELECT choice_answer_id, question_id, answer_title, answer_info, answer_type
+    SELECT choice_answer_id, question_id, answer_title, answer_info, answer_type,,blank_no
     FROM
-    exm_choice_question_answer
+    exm_question_answer
     WHERE question_id = #{questionId,jdbcType=INTEGER} AND answer_type=1
   </select>
   <select id="getRightAnswerListByQuestionId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    SELECT choice_answer_id, question_id, answer_title, answer_info, answer_type
+    SELECT choice_answer_id, question_id, answer_title, answer_info, answer_type,blank_no
     FROM
-    exm_choice_question_answer
+    exm_question_answer
     WHERE question_id = #{questionId,jdbcType=INTEGER} AND answer_type=1
   </select>
   <delete id="deleteById" parameterType="java.lang.Integer">
-    delete from exm_choice_question_answer
+    delete from exm_question_answer
     where choice_answer_id = #{choiceAnswerId,jdbcType=INTEGER}
   </delete>
   <select id="getCountByMap" parameterType="java.util.Map" resultType="int">
     SELECT COUNT(*)
-    FROM exm_choice_question_answer
+    FROM exm_question_answer
     <include refid="where" />
   </select>
 
@@ -146,7 +147,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from exm_choice_question_answer
+    from exm_question_answer
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -157,21 +158,21 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from exm_choice_question_answer
+    from exm_question_answer
     where choice_answer_id = #{choiceAnswerId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from exm_choice_question_answer
+    delete from exm_question_answer
     where choice_answer_id = #{choiceAnswerId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.bean.model.ChoiceQuestionAnswerExample">
-    delete from exm_choice_question_answer
+    delete from exm_question_answer
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insertSelective" parameterType="com.bean.model.ChoiceQuestionAnswer">
-    insert into exm_choice_question_answer
+  <insert id="insertSelective" parameterType="com.bean.model.QuestionAnswer">
+    insert into exm_question_answer
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="choiceAnswerId != null">
         choice_answer_id,
@@ -208,13 +209,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.bean.model.ChoiceQuestionAnswerExample" resultType="java.lang.Long">
-    select count(*) from exm_choice_question_answer
+    select count(*) from exm_question_answer
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update exm_choice_question_answer
+    update exm_question_answer
     <set>
       <if test="record.choiceAnswerId != null">
         choice_answer_id = #{record.choiceAnswerId,jdbcType=INTEGER},
@@ -237,7 +238,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update exm_choice_question_answer
+    update exm_question_answer
     set choice_answer_id = #{record.choiceAnswerId,jdbcType=INTEGER},
       question_id = #{record.questionId,jdbcType=INTEGER},
       answer_title = #{record.answerTitle,jdbcType=VARCHAR},
@@ -247,8 +248,8 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.bean.model.ChoiceQuestionAnswer">
-    update exm_choice_question_answer
+  <update id="updateByPrimaryKeySelective" parameterType="com.bean.model.QuestionAnswer">
+    update exm_question_answer
     <set>
       <if test="questionId != null">
         question_id = #{questionId,jdbcType=INTEGER},
@@ -265,8 +266,8 @@
     </set>
     where choice_answer_id = #{choiceAnswerId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.bean.model.ChoiceQuestionAnswer">
-    update exm_choice_question_answer
+  <update id="updateByPrimaryKey" parameterType="com.bean.model.QuestionAnswer">
+    update exm_question_answer
     set question_id = #{questionId,jdbcType=INTEGER},
       answer_title = #{answerTitle,jdbcType=VARCHAR},
       answer_info = #{answerInfo,jdbcType=VARCHAR},

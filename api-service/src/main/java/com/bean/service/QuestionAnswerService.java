@@ -1,25 +1,25 @@
 package com.bean.service;
 
-import com.bean.model.ChoiceQuestionAnswer;
+import com.bean.model.QuestionAnswer;
 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-public interface ChoiceQuestionAnswerService {
+public interface QuestionAnswerService {
     /**
      * 添加选择题备选答案
-     * @param choiceQuestionAnswer 添加选择题备选答案List
+     * @param questionAnswers 添加选择题备选答案List
      * @return 添加条数
      */
-    int insertList(List<ChoiceQuestionAnswer> choiceQuestionAnswer) throws SQLException;
+    int insertList(List<QuestionAnswer> questionAnswers) throws SQLException;
 
     /**
      * 添加选择题备选答案
-     * @param choiceQuestionAnswer 添加选择题备选答案对象
+     * @param questionAnswer 添加选择题备选答案对象
      * @return 添加条数
      */
-    int insert(ChoiceQuestionAnswer choiceQuestionAnswer) throws SQLException;
+    int insert(QuestionAnswer questionAnswer) throws SQLException;
 
     /**
      * 编辑选择题备选答案
@@ -33,7 +33,7 @@ public interface ChoiceQuestionAnswerService {
      * @param map
      * @return 选择题备选答案List
      */
-    List<ChoiceQuestionAnswer> getListByMap(Map<String, Object> map) throws SQLException;
+    List<QuestionAnswer> getListByMap(Map<String, Object> map) throws SQLException;
 
     /**
      * 根据主键ID删除选择题备选答案
@@ -63,7 +63,7 @@ public interface ChoiceQuestionAnswerService {
      * @return 获取选择题正确答案对象
      * @throws SQLException
      */
-    ChoiceQuestionAnswer getRightAnswerObjByQuestionId(Integer questionId) throws SQLException;
+    QuestionAnswer getRightAnswerObjByQuestionId(Integer questionId) throws SQLException;
 
     /**
      * 获取多选题选择题正确答案List
@@ -71,5 +71,5 @@ public interface ChoiceQuestionAnswerService {
      * @return 获取选择题正确答案List
      * @throws SQLException
      */
-    List<ChoiceQuestionAnswer> getRightAnswerListByQuestionId(Integer questionId) throws SQLException;
+    List<QuestionAnswer> getRightAnswerListByQuestionId(Integer questionId) throws SQLException;
 }

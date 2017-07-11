@@ -6,6 +6,8 @@
     <result column="question_title" jdbcType="VARCHAR" property="questionTitle" />
     <result column="question_type" jdbcType="BIT" property="questionType" />
     <result column="question_level" jdbcType="BIT" property="questionLevel" />
+    <result column="question_analytical" jdbcType="VARCHAR" property="questionAnalytical" />
+    <result column="question_type_title" jdbcType="VARCHAR" property="questionTypeTitle" />
     <result column="memo" jdbcType="VARCHAR" property="memo" />
     <result column="del" jdbcType="BIT" property="del" />
     <result column="addname" jdbcType="VARCHAR" property="addname" />
@@ -32,8 +34,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    question_id, question_title, question_type, question_level, memo, del,
-    addname, addid, addtime, editname, editid, edittime
+    question_id, question_title, question_type, question_level, question_analytical, memo, del,
+    addname, addid, addtime, editname, editid, edittime, question_type_title
   </sql>
   <insert id="insert" parameterType="com.bean.model.Question" useGeneratedKeys="true" keyProperty="questionId">
     insert into exm_question
@@ -46,6 +48,9 @@
       </if>
       <if test="questionLevel != null">
         question_level,
+      </if>
+      <if test="questionAnalytical != null">
+        question_analytical,
       </if>
       <if test="memo != null">
         memo,
@@ -76,6 +81,9 @@
       <if test="questionLevel != null">
         #{questionLevel,jdbcType=VARCHAR},
       </if>
+      <if test="questionAnalytical != null">
+        #{questionAnalytical,jdbcType=VARCHAR},
+      </if>
       <if test="memo != null">
         #{memo,jdbcType=VARCHAR},
       </if>
@@ -105,6 +113,9 @@
       <if test="questionLevel != null">
         question_level = #{questionLevel,jdbcType=VARCHAR},
       </if>
+      <if test="questionAnalytical != null">
+        question_analytical = #{questionAnalytical,jdbcType=VARCHAR},
+      </if>
       <if test="memo != null">
         memo = #{memo,jdbcType=INTEGER},
       </if>
@@ -128,25 +139,36 @@
   <select id="getByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List" />
-    FROM exm_question
+    FROM exm_question AS q
+    INNER JOIN exm_question_type AS qt ON q.question_type=qt.question_type_id
+    <include refid="where" />
+  </select>
+  <select id="getByObj" parameterType="com.bean.model.Question" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM exm_question AS q
+    INNER JOIN exm_question_type AS qt ON q.question_type=qt.question_type_id
     <include refid="where" />
   </select>
   <select id="getById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List" />
-    FROM exm_question
+    FROM exm_question AS q
+    INNER JOIN exm_question_type AS qt ON q.question_type=qt.question_type_id
     WHERE question_id = #{questionId,jdbcType=INTEGER}
   </select>
   <select id="getListByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List" />
-    FROM exm_question
+    FROM exm_question AS q
+    INNER JOIN exm_question_type AS qt ON q.question_type=qt.question_type_id
     <include refid="where" />
   </select>
   <select id="getCountByMap" parameterType="java.util.Map" resultType="int">
     SELECT
     COUNT(*)
-    FROM exm_question
+    FROM exm_question AS q
+    INNER JOIN exm_question_type AS qt ON q.question_type=qt.question_type_id
     <include refid="where" />
   </select>
 
