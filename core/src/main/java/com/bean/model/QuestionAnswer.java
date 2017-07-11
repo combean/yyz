@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * @author 
  */
-public class ChoiceQuestionAnswer implements Serializable {
+public class QuestionAnswer implements Serializable {
     /**
      * 选择题答案ID
      */
@@ -22,6 +22,11 @@ public class ChoiceQuestionAnswer implements Serializable {
      * 答案内容
      */
     private String answerInfo;
+
+    /**
+     * 填空题 空序号
+     */
+    private Integer blankNo;
 
     /**
      * 答案是否正确 0:错误 1:正确
@@ -68,5 +73,13 @@ public class ChoiceQuestionAnswer implements Serializable {
 
     public void setAnswerType(Integer answerType) {
         this.answerType = answerType;
+    }
+
+    public Integer getBlankNo() {
+        return blankNo;
+    }
+
+    public void setBlankNo(Integer blankNo) {
+        this.blankNo = blankNo;
     }
 }
