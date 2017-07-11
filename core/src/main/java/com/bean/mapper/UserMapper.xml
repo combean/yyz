@@ -26,25 +26,25 @@
   </resultMap>
   <sql id="where">
     <where>
-      <if test="userId !=null">
+      <if test="userId!=null and userId != ''">
         AND user_id = #{userId,jdbcType=INTEGER}
       </if>
-      <if test="userUsername != null">
+      <if test="userUsername != null and userUsername != ''">
         AND user_username = #{userUsername,jdbcType=VARCHAR}
       </if>
-      <if test="userClassId != null">
+      <if test="userClassId != null and userClassId != ''">
         AND user_class_id = #{userClassId,jdbcType=INTEGER}
       </if>
-      <if test="userMobile != null">
+      <if test="userMobile != null and userMobile != ''">
         AND user_mobile = #{userMobile,jdbcType=VARCHAR}
       </if>
-      <if test="userEmail != null">
+      <if test="userEmail != null and userEmail != ''">
         AND user_email = #{userEmail,jdbcType=VARCHAR}
       </if>
-      <if test="userName != null">
+      <if test="userName != null and userName !=''">
         AND user_name = #{userName,jdbcType=VARCHAR}  OR user_name LIKE CONCAT('%',#{userName,jdbcType=VARCHAR},'%' )
       </if>
-      <if test="userSex != null">
+      <if test="userSex != null and userSex !=null">
         AND user_sex = #{userSex,jdbcType=BIT}
       </if>
     </where>
@@ -147,34 +147,31 @@
   <update id="update" parameterType="com.bean.model.User">
     UPDATE exm_user
     <set>
-      <if test="userUsername != null">
-        user_username = #{userUsername,jdbcType=VARCHAR},
-      </if>
-      <if test="userPassword != null">
+      <if test="userPassword != null and userPassword != ''">
         user_password = #{userPassword,jdbcType=VARCHAR},
       </if>
-      <if test="userClassId != null">
+      <if test="userClassId != null and userClassId != ''">
         user_class_id = #{userClassId,jdbcType=INTEGER},
       </if>
-      <if test="userMobile != null">
+      <if test="userMobile != null and userMobile != ''">
         user_mobile = #{userMobile,jdbcType=VARCHAR},
       </if>
-      <if test="userEmail != null">
+      <if test="userEmail != null and userEmail != ''">
         user_email = #{userEmail,jdbcType=VARCHAR},
       </if>
-      <if test="userProfileImg != null">
+      <if test="userProfileImg != null and userProfileImg != ''">
         user_profile_img = #{userProfileImg,jdbcType=VARCHAR},
       </if>
-      <if test="userName != null">
+      <if test="userName != null and userName != ''">
         user_name = #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="userSex != null">
+      <if test="userSex != null and userSex != ''">
         user_sex = #{userSex,jdbcType=BIT},
       </if>
-      <if test="memo != null">
+      <if test="memo != null and memo != ''">
         memo = #{memo,jdbcType=INTEGER},
       </if>
-      <if test="del != null">
+      <if test="del != null and del != ''">
         del = #{del,jdbcType=BIT},
       </if>
       <if test="editname != null">
