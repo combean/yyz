@@ -49,4 +49,9 @@ public class ExamServiceImpl implements ExamService {
     public Exam getById(Integer id) throws SQLException {
         return examMapper.getById(id);
     }
+
+    @Override
+    public Exam getByObj(Exam exam) throws SQLException {
+        return examMapper.getByObj(exam);
+    }
 }

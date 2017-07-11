@@ -46,5 +46,19 @@ public interface ExamService {
      */
     Integer getCountByMap(Map<String, Object> map) throws SQLException;
 
+    /**
+     * 根据主键ID获取考试对象
+     * @param id 主键ID
+     * @return
+     * @throws SQLException
+     */
     Exam getById(Integer id) throws SQLException;
+
+    /**
+     * 根据对象属性获取考试对象
+     * @param exam 考试对象
+     * @return 考试对象
+     * @throws SQLException
+     */
+    Exam getByObj(Exam exam) throws SQLException;
 }
