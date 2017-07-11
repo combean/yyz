@@ -1,7 +1,5 @@
 package mybatis.basemapper;
 
-import org.springframework.test.context.jdbc.Sql;
-
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
