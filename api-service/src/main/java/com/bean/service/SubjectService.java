@@ -2,6 +2,8 @@ package com.bean.service;
 
 
 import com.bean.model.Subject;
+import com.bean.model.SubjectKnowledge;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -54,4 +56,24 @@ public interface SubjectService {
      * @throws SQLException
      */
     Subject getById(int id) throws SQLException;
+
+    /**
+     * 插入科目和科目与知识点对应关系
+     * @param subject 科目对象
+     * @param subjectKnowledges 科目和知识点关系对象
+     * @return
+     * @throws SQLException
+     */
+    @Transactional
+    int insertSubjectKnowledge(Subject subject, List<SubjectKnowledge> subjectKnowledges) throws SQLException;
+
+    /**
+     * 更新科目和科目与知识点对应关系
+     * @param subject 科目对象
+     * @param subjectKnowledges 科目和知识点关系对象
+     * @return
+     * @throws SQLException
+     */
+    @Transactional
+    int updateSubjectKnowledge(Subject subject, List<SubjectKnowledge> subjectKnowledges) throws SQLException;
 }

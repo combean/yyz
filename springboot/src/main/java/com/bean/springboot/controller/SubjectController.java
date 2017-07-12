@@ -2,6 +2,7 @@ package com.bean.springboot.controller;
 
 import com.bean.RSTFul.RSTFulBody;
 import com.bean.model.Subject;
+import com.bean.model.SubjectKnowledge;
 import com.bean.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,10 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by PVer on 2017/7/12.
@@ -30,7 +28,18 @@ public class SubjectController {
         subject.setAddname(request.getSession().getAttribute("userName")+"");
         subject.setAddid(Integer.parseInt(request.getSession().getAttribute("userId")+""));
         subject.setAddtime(new Date());
-        int i = subjectService.insert(subject);
+
+        //知识点
+        String knowledgeIdStr = request.getParameter("knowledgeIds");
+        String[] knowledgeIds = knowledgeIdStr.split(",");
+        List<SubjectKnowledge> sujectKnowledges = new ArrayList<>();
+        for (String knowledgeId : knowledgeIds){
+            SubjectKnowledge subjectKnowledge = new SubjectKnowledge();
+            subjectKnowledge.setKnowledgeId(Integer.parseInt(knowledgeId));
+            sujectKnowledges.add(subjectKnowledge);
+        }
+        
+        int i = subjectService.insertSubjectKnowledge(subject,sujectKnowledges);
         if(i>0) resObject.setCode(1);
         else resObject.setCode(0);
         return resObject;
@@ -42,7 +51,18 @@ public class SubjectController {
         subject.setEditname(request.getSession().getAttribute("userName")+"");
         subject.setEditid(Integer.parseInt(request.getSession().getAttribute("userId")+""));
         subject.setEdittime(new Date());
-        int i=subjectService.update(subject);
+
+        //知识点
+        String knowledgeIdStr = request.getParameter("knowledgeIds");
+        String[] knowledgeIds = knowledgeIdStr.split(",");
+        List<SubjectKnowledge> sujectKnowledges = new ArrayList<>();
+        for (String knowledgeId : knowledgeIds){
+            SubjectKnowledge subjectKnowledge = new SubjectKnowledge();
+            subjectKnowledge.setKnowledgeId(Integer.parseInt(knowledgeId));
+            sujectKnowledges.add(subjectKnowledge);
+        }
+
+        int i=subjectService.updateSubjectKnowledge(subject,sujectKnowledges);
         if(i>0) resObject.setCode(1);
         else resObject.setCode(0);
         return resObject;
