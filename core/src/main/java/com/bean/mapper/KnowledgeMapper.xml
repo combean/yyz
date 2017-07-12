@@ -107,6 +107,12 @@
     FROM exm_knowledge
     <include refid="where" />
   </select>
+  <select id="getListByObj" parameterType="com.bean.model.Knowledge" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM exm_knowledge
+    <include refid="where" />
+  </select>
   <select id="getCountByMap" parameterType="java.util.Map" resultType="int">
     SELECT
     COUNT(*)

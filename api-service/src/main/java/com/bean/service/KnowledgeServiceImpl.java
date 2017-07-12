@@ -49,4 +49,9 @@ public class KnowledgeServiceImpl implements KnowledgeService {
     public Knowledge getById(Integer id) throws SQLException {
         return knowledgeMapper.getById(id);
     }
+
+    @Override
+    public List<Knowledge> getListByObj(Knowledge knowledge) throws SQLException {
+        return knowledgeMapper.getListByObj(knowledge);
+    }
 }

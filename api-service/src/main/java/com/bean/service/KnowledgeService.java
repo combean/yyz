@@ -47,4 +47,6 @@ public interface KnowledgeService {
     Integer getCountByMap(Map<String, Object> map) throws SQLException;
 
     Knowledge getById(Integer id) throws SQLException;
+
+    List<Knowledge> getListByObj(Knowledge knowledge) throws SQLException;
 }

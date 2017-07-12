@@ -26,4 +26,6 @@ public interface BaseMapper<T> {
     T getByObj(T t) throws SQLException;
 
     List<T> getListByMap(Map<String, Object> map) throws SQLException;
+
+    List<T> getListByObj(T t) throws SQLException;
 }
