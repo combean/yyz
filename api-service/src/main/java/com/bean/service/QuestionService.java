@@ -66,7 +66,7 @@ public interface QuestionService {
     Question getByObj(Question question) throws SQLException;
 
     /**
-     * 插入题目和参考答案
+     * 插入题目和参考答案知识点
      * @param question 题目对象
      * @param questionAnswers 答案对象
      * @param questionKnowledges 题目知识点对象
@@ -77,7 +77,7 @@ public interface QuestionService {
     int insertQuestionAnswer(Question question, List<QuestionAnswer> questionAnswers, List<QuestionKnowledge> questionKnowledges) throws SQLException;
 
     /**
-     * 更新题目和参考答案
+     * 更新题目和参考答案知识点
      * @param question 题目对象
      * @param questionAnswers 答案对象
      * @param questionKnowledges 题目知识点对象
