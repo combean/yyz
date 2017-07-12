@@ -22,6 +22,11 @@ public class Subject implements Serializable {
      */
     private Integer parentId;
 
+    /**
+     * 0:顶级科目 1:章 2:节
+     */
+    private Integer subjectType;
+
     private String memo;
 
     /**
@@ -83,6 +88,14 @@ public class Subject implements Serializable {
 
     public void setParentId(Integer parentId) {
         this.parentId = parentId;
+    }
+
+    public Integer getSubjectType() {
+        return subjectType;
+    }
+
+    public void setSubjectType(Integer subjectType) {
+        this.subjectType = subjectType;
     }
 
     public String getMemo() {
