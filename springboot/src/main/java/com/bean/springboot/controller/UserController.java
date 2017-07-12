@@ -93,10 +93,10 @@ public class UserController {
         //搜索条件
         Map<String, Object> map = new HashMap<>();
         map.put("del",1);
-        if(user.getUserUsername()!=null || user.getUserUsername()!="") map.put("userUsername",user.getUserUsername());
-        if(user.getUserName()!=null || user.getUserName()!="") map.put("userName",user.getUserName());
-        if(user.getUserMobile()!=null || user.getUserMobile()!="") map.put("userMobile",user.getUserMobile());
-        if(user.getUserEmail()!=null || user.getUserEmail()!="") map.put("userEmail",user.getUserEmail());
+        if(user.getUserUsername()!=null && user.getUserUsername()!="") map.put("userUsername",user.getUserUsername());
+        if(user.getUserName()!=null && user.getUserName()!="") map.put("userName",user.getUserName());
+        if(user.getUserMobile()!=null && user.getUserMobile()!="") map.put("userMobile",user.getUserMobile());
+        if(user.getUserEmail()!=null && user.getUserEmail()!="") map.put("userEmail",user.getUserEmail());
         if(user.getUserClassId()!=null) map.put("userClassId",user.getUserClassId());
 
         List<User> users = userService.getListByMap(map);
