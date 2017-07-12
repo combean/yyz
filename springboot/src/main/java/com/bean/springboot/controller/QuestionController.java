@@ -53,14 +53,7 @@ public class QuestionController {
         int n = 0;
         List<QuestionAnswer> questionAnswers = getQuestionAnswer(question,request);
         if(question.getQuestionType()==3){
-            //将题干所有字符转换为半角
-            String questionTitle=Utils.ToDBC(question.getQuestionTitle());
-            //正则匹配()中的内容
-            Pattern pattern = Pattern.compile("(?<=\\()[^\\)]+");
-            Matcher matcher = pattern.matcher(questionTitle);
-            //将题干()中内容替换为空
-            String result = matcher.replaceAll("");
-            question.setQuestionTitle(result);
+            question.setQuestionTitle(getFillQuestionTitle(question.getQuestionTitle()));
         }
         //写入数据库
         n = questionService.insertQuestionAnswer(question,questionAnswers,questionKnowledges);
@@ -92,14 +85,8 @@ public class QuestionController {
         int n = 0;
         List<QuestionAnswer> questionAnswers = getQuestionAnswer(question,request);
         if(question.getQuestionType()==3){
-            //将题干所有字符转换为半角
-            String questionTitle=Utils.ToDBC(question.getQuestionTitle());
-            //正则匹配()中的内容
-            Pattern pattern = Pattern.compile("(?<=\\()[^\\)]+");
-            Matcher matcher = pattern.matcher(questionTitle);
-            //将题干()中内容替换为空
-            String result = matcher.replaceAll("");
-            question.setQuestionTitle(result);
+
+            question.setQuestionTitle(getFillQuestionTitle(question.getQuestionTitle()));
         }
 
         //更新数据
@@ -112,6 +99,7 @@ public class QuestionController {
         return resObject;
     }
 
+    //获取答案List
     private List<QuestionAnswer> getQuestionAnswer(Question question,HttpServletRequest request){
         List<QuestionAnswer> questionAnswers = new ArrayList<>();
         //题目为选择题或多选题
@@ -177,5 +165,17 @@ public class QuestionController {
             }
         }
         return questionAnswers;
+    }
+
+    //替换填空题()中内容
+    private String getFillQuestionTitle(String questionTitle){
+        //将题干所有字符转换为半角
+        String tempStr=Utils.ToDBC(questionTitle);
+        //正则匹配()中的内容
+        Pattern pattern = Pattern.compile("(?<=\\()[^\\)]+");
+        Matcher matcher = pattern.matcher(tempStr);
+        //将题干()中内容替换为空
+        String resTitle = matcher.replaceAll("");
+        return resTitle;
     }
 }
