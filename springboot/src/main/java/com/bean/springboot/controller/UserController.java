@@ -98,6 +98,7 @@ public class UserController {
         if(user.getUserMobile()!=null && user.getUserMobile()!="") map.put("userMobile",user.getUserMobile());
         if(user.getUserEmail()!=null && user.getUserEmail()!="") map.put("userEmail",user.getUserEmail());
         if(user.getUserClassId()!=null) map.put("userClassId",user.getUserClassId());
+        if(user.getUserId() != null) map.put("userId",user.getUserId());
 
         List<User> users = userService.getListByMap(map);
 
