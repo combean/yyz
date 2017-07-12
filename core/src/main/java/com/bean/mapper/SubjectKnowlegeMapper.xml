@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bean.dao.SubjectKnowledgeMapper">
+  <resultMap id="BaseResultMap" type="com.bean.model.SubjectKnowledge">
+    <id column="subject_knowledge_id" jdbcType="INTEGER" property="subjectKnowledgeId" />
+    <result column="subject_id" jdbcType="INTEGER" property="subjectId" />
+    <result column="knowledge_id" jdbcType="INTEGER" property="knowledgeId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    subject_knowledge_id, subject_id, knowledge_id
+  </sql>
+  <sql id="where">
+    <where>
+      <if test="subjectKnowledgeId != null">
+        AND sk.subject_knowledge_id = #{subjectKnowledgeId,jdbcType=INTEGER}
+      </if>
+      <if test="subjectId != null">
+        AND sk.subject_id = #{subjectId,jdbcType=INTEGER}
+      </if>
+      <if test="knowledgeId != null">
+        AND sk.knowledge_id = #{knowledgeId,jdbcType=INTEGER}
+      </if>
+    </where>
+  </sql>
+  <insert id="insertList" parameterType="java.util.List">
+    insert into exm_subject_knowledge (subject_id, knowledge_id
+    )
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.subjectId,jdbcType=INTEGER}, #{item.knowledgeId,jdbcType=INTEGER})
+    </foreach>
+  </insert>
+  <insert id="insert" parameterType="com.bean.model.SubjectKnowledge">
+    insert into exm_subject_knowledge (subject_id, knowledge_id
+    )
+    values
+    (#{subjectId,jdbcType=INTEGER}, #{knowledgeId,jdbcType=INTEGER})
+  </insert>
+  <delete id="deleteBySubjectId" parameterType="java.lang.Integer">
+    delete from exm_subject_knowledge
+    where subject_id = #{subjectId,jdbcType=INTEGER}
+  </delete>
+  <select id="getListByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT
+    sk.subject_knowledge_id, sk.subject_id, sk.knowledge_id, s.subject_name, k.knowledge_name
+    FROM
+    exm_subject_knowledge  AS sk
+    INNER JOIN exm_subject AS s ON sk.subject_id=s.subject_id
+    INNER JOIN exm_knowledge AS k ON sk.knowledge_id=k.knowledge_id
+    <include refid="where" />
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Integer">
+    delete from exm_subject_knowledge
+    where subject_knowledge_id = #{SubjectKnowledgeId,jdbcType=INTEGER}
+  </delete>
+  <select id="getCountByMap" parameterType="java.util.Map" resultType="int">
+    SELECT COUNT(*)
+    FROM exm_subject_knowledge AS sk
+    <include refid="where" />
+  </select>
+</mapper>
