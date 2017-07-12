@@ -14,4 +14,6 @@ public interface QuestionAnswerMapper extends BaseMapper<QuestionAnswer> {
     QuestionAnswer getRightAnswerObjByQuestionId(Integer questionId) throws SQLException;
 
     List<QuestionAnswer> getRightAnswerListByQuestionId(Integer questionId) throws SQLException;
+
+    List<QuestionAnswer> getAnswerListByQuestionId(Integer questionId) throws SQLException;
 }

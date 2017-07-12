@@ -23,8 +23,14 @@ public class Question implements Serializable {
      */
     private Integer questionType;
 
+    /**
+     * 题目题干
+     */
     private String questionTypeTitle;
 
+    /**
+     * 被选项/参考答案
+     */
     private List<QuestionAnswer> questionAnswers;
     /**
      * 备注
@@ -188,5 +194,13 @@ public class Question implements Serializable {
 
     public void setEdittime(Date edittime) {
         this.edittime = edittime;
+    }
+
+    public List<QuestionAnswer> getQuestionAnswers() {
+        return questionAnswers;
+    }
+
+    public void setQuestionAnswers(List<QuestionAnswer> questionAnswers) {
+        this.questionAnswers = questionAnswers;
     }
 }

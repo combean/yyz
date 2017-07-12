@@ -1,8 +1,6 @@
 package com.bean.service;
 
 import com.bean.dao.QuestionAnswerMapper;
-import com.bean.dao.QuestionAnswerMapper;
-import com.bean.model.QuestionAnswer;
 import com.bean.model.QuestionAnswer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,5 +63,10 @@ public class QuestionAnswerServiceImpl implements QuestionAnswerService {
     @Override
     public List<QuestionAnswer> getRightAnswerListByQuestionId(Integer questionId) throws SQLException {
         return questionAnswerMapper.getRightAnswerListByQuestionId(questionId);
+    }
+
+    @Override
+    public List<QuestionAnswer> getAnswerListByQuestionId(Integer questionId) throws SQLException {
+        return questionAnswerMapper.getAnswerListByQuestionId(questionId);
     }
 }

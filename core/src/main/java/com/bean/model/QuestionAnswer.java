@@ -9,7 +9,7 @@ public class QuestionAnswer implements Serializable {
     /**
      * 选择题答案ID
      */
-    private Integer choiceAnswerId;
+    private Integer answerId;
 
     private Integer questionId;
 
@@ -35,12 +35,12 @@ public class QuestionAnswer implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Integer getChoiceAnswerId() {
-        return choiceAnswerId;
+    public Integer getAnswerId() {
+        return answerId;
     }
 
-    public void setChoiceAnswerId(Integer choiceAnswerId) {
-        this.choiceAnswerId = choiceAnswerId;
+    public void setAnswerId(Integer answerId) {
+        this.answerId = answerId;
     }
 
     public Integer getQuestionId() {

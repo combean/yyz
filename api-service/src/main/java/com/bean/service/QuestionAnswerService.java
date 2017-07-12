@@ -72,4 +72,12 @@ public interface QuestionAnswerService {
      * @throws SQLException
      */
     List<QuestionAnswer> getRightAnswerListByQuestionId(Integer questionId) throws SQLException;
+
+    /**
+     * 根据题目ID获取题目答案List
+     * @param questionId 题目ID
+     * @return 答案List
+     * @throws SQLException
+     */
+    List<QuestionAnswer> getAnswerListByQuestionId(Integer questionId) throws SQLException;
 }

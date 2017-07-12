@@ -12,11 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import utils.Utils;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.Array;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -99,7 +96,30 @@ public class QuestionController {
         return resObject;
     }
 
-    //获取答案List
+    @RequestMapping("/getAllQuestion")
+    public List<Question> getAllQuestion(Question question,Integer answerType) throws SQLException {
+        Map<String, Object> map = new HashMap<>();
+        map.put("del",1);
+
+        if(question.getQuestionTitle() != null && question.getQuestionTitle() != "") map.put("questionTitle",question.getQuestionTitle());
+        if(question.getQuestionType() != null) map.put("questionType",question.getQuestionType());
+        if(question.getQuestionLevel() != null) map.put("questionLevel",question.getQuestionLevel());
+        if(question.getQuestionId() != null) map.put("questionId",question.getQuestionId());
+        List<Question> questions = questionService.getListByMap(map);
+        List<QuestionAnswer> questionAnswers =null;
+        for (Question q: questions) {
+            if(answerType==1){
+                questionAnswers = questionAnswerService.getRightAnswerListByQuestionId(q.getQuestionId());
+            }else{
+                questionAnswers = questionAnswerService.getAnswerListByQuestionId(q.getQuestionId());
+            }
+
+            q.setQuestionAnswers(questionAnswers);
+        }
+        return questions;
+    }
+
+    //组合答案List
     private List<QuestionAnswer> getQuestionAnswer(Question question,HttpServletRequest request){
         List<QuestionAnswer> questionAnswers = new ArrayList<>();
         //题目为选择题或多选题
