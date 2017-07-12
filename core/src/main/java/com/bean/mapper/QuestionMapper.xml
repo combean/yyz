@@ -164,6 +164,16 @@
     INNER JOIN exm_question_type AS qt ON q.question_type=qt.question_type_id
     <include refid="where" />
   </select>
+  <select id="getQuestionListByIds" parameterType="java.util.List" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM exm_question AS q
+    INNER JOIN exm_question_type AS qt ON q.question_type=qt.question_type_id
+    WHERE question_id IN
+    <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+      #{item.questionId}
+    </foreach>
+  </select>
   <select id="getCountByMap" parameterType="java.util.Map" resultType="int">
     SELECT
     COUNT(*)

@@ -19,6 +19,9 @@
       <if test="knowledgeId != null">
         AND qk.knowledge_id = #{knowledgeId,jdbcType=INTEGER}
       </if>
+      <if test="knowledgeName != null">
+        AND k.knowledge_name = #{knowledgeName,jdbcType=INTEGER}
+      </if>
     </where>
   </sql>
   <insert id="insertList" parameterType="java.util.List">
@@ -40,6 +43,15 @@
     where question_id = #{questionId,jdbcType=INTEGER}
   </delete>
   <select id="getListByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT
+    qk.question_knowledge_id, qk.question_id, qk.knowledge_id, q.question_title, k.knowledge_name
+    FROM
+    exm_question_knowledge AS qk
+    INNER JOIN exm_question AS q ON qk.question_id=q.question_id
+    INNER JOIN exm_knowledge AS k ON qk.knowledge_id=k.knowledge_id
+    <include refid="where" />
+  </select>
+  <select id="getListByObj" parameterType="com.bean.model.QuestionKnowledge" resultMap="BaseResultMap">
     SELECT
     qk.question_knowledge_id, qk.question_id, qk.knowledge_id, q.question_title, k.knowledge_name
     FROM

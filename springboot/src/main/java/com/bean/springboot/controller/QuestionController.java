@@ -1,10 +1,14 @@
 package com.bean.springboot.controller;
 
 import com.bean.RSTFul.RSTFulBody;
+import com.bean.dao.KnowledgeMapper;
+import com.bean.model.Knowledge;
 import com.bean.model.Question;
 import com.bean.model.QuestionAnswer;
 import com.bean.model.QuestionKnowledge;
+import com.bean.service.KnowledgeService;
 import com.bean.service.QuestionAnswerService;
+import com.bean.service.QuestionKnowledgeService;
 import com.bean.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +33,9 @@ public class QuestionController {
 
     @Autowired
     private QuestionAnswerService questionAnswerService;
+
+    @Autowired
+    private QuestionKnowledgeService questionKnowledgeService;
 
     @RequestMapping("/add")
     public RSTFulBody add(Question question,HttpServletRequest request) throws SQLException {
@@ -106,19 +113,35 @@ public class QuestionController {
         if(question.getQuestionLevel() != null) map.put("questionLevel",question.getQuestionLevel());
         if(question.getQuestionId() != null) map.put("questionId",question.getQuestionId());
         List<Question> questions = questionService.getListByMap(map);
+
+        return getQuestions(questions,answerType);
+    }
+
+    @RequestMapping("/getQuestionsByKnowledge")
+    public List<Question> getQuestionsByKnowledge(QuestionKnowledge questionKnowledge,Integer answerType) throws SQLException {
+        List<QuestionKnowledge> questionKnowledges = questionKnowledgeService.getListByObj(questionKnowledge);
+        List<Question> questions = questionService.getQuestionListByIds(questionKnowledges);
+        return getQuestions(questions,answerType);
+    }
+
+    @RequestMapping("/getQuestionsBySubject")
+    public List<Question> getQuestionsBySubject(){
+        return null;
+    }
+
+    //将备选答案或参考答案添加进题目List
+    private List<Question> getQuestions(List<Question> questions,Integer answerType) throws SQLException {
         List<QuestionAnswer> questionAnswers =null;
         for (Question q: questions) {
-            if(answerType==1){
-                questionAnswers = questionAnswerService.getRightAnswerListByQuestionId(q.getQuestionId());
-            }else{
+            if(answerType==null || answerType==0){
                 questionAnswers = questionAnswerService.getAnswerListByQuestionId(q.getQuestionId());
+            }else{
+                questionAnswers = questionAnswerService.getRightAnswerListByQuestionId(q.getQuestionId());
             }
-
             q.setQuestionAnswers(questionAnswers);
         }
         return questions;
     }
-
     //组合答案List
     private List<QuestionAnswer> getQuestionAnswer(Question question,HttpServletRequest request){
         List<QuestionAnswer> questionAnswers = new ArrayList<>();
@@ -186,7 +209,6 @@ public class QuestionController {
         }
         return questionAnswers;
     }
-
     //替换填空题()中内容
     private String getFillQuestionTitle(String questionTitle){
         //将题干所有字符转换为半角

@@ -86,4 +86,6 @@ public interface QuestionService {
      */
     @Transactional
     int updateQuestionAnswer(Question question, List<QuestionAnswer> questionAnswers, List<QuestionKnowledge> questionKnowledges) throws SQLException;
+
+    List<Question> getQuestionListByIds(List<QuestionKnowledge> questionknowledges) throws SQLException;
 }

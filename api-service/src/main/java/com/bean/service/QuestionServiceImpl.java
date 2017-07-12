@@ -91,4 +91,9 @@ public class QuestionServiceImpl implements QuestionService {
         questionKnowledgeMapper.insertList(questionKnowledges);
         return questionAnswerMapper.insertList(questionAnswers);
     }
+
+    @Override
+    public List<Question> getQuestionListByIds(List<QuestionKnowledge> questionknowledges) throws SQLException {
+        return questionMapper.getQuestionListByIds(questionknowledges);
+    }
 }
