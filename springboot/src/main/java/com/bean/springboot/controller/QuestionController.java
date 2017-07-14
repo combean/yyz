@@ -127,7 +127,9 @@ public class QuestionController {
     @RequestMapping("/getQuestionsBySubject")
     public List<Question> getQuestionsBySubject(Integer subjectId,Integer answerType) throws SQLException {
         Subject subject = subjectService.getById(subjectId);
-        List<Knowledge> knowledges = getSubjectKnowledge(subject);
+        List<Knowledge> knowledges = new ArrayList<>();
+//        knowledges.addAll(getSubjectKnowledge(subject));
+        knowledges = getSubjectKnowledge(subject,knowledges);
         List<QuestionKnowledge> questionKnowledges = questionKnowledgeService.getListByKnowledgeIds(knowledges);
         List<Question> questions = questionService.getQuestionListByIds(questionKnowledges);
         return getQuestions(questions,answerType);
@@ -142,7 +144,9 @@ public class QuestionController {
             }else{
                 questionAnswers = questionAnswerService.getRightAnswerListByQuestionId(q.getQuestionId());
             }
+            List<QuestionKnowledge> questionKnowledges = questionKnowledgeService.getListByQuestionId(q.getQuestionId());
             q.setQuestionAnswers(questionAnswers);
+            q.setQuestionKnowledges(questionKnowledges);
         }
         return questions;
     }
@@ -225,16 +229,15 @@ public class QuestionController {
         return resTitle;
     }
     //获取指定科目下所有最低级别项目相关联知识点
-    private List<Knowledge> getSubjectKnowledge(Subject subject) throws SQLException {
+    private List<Knowledge> getSubjectKnowledge(Subject subject, List<Knowledge> knowledges) throws SQLException {
         Map<String, Object> map = new HashMap<>();
         map.put("parentId",subject.getSubjectId());
         map.put("del",1);
         List<Subject> childSubjects = subjectService.getListByMap(map);
-        List<Knowledge> knowledges = new ArrayList<>();
         subject.setChildSubject(childSubjects);
         for (Subject s: childSubjects) {
-            List<SubjectKnowledge> subjectKnowledges=subjectKnowledgeService.getListBySubjectId(s.getSubjectId());
             if(s.getSubjectType()==1) {
+                List<SubjectKnowledge> subjectKnowledges=subjectKnowledgeService.getListBySubjectId(s.getSubjectId());
                 for (SubjectKnowledge sk : subjectKnowledges) {
                     Knowledge k = new Knowledge();
                     k.setKnowledgeId(sk.getKnowledgeId());
@@ -242,7 +245,7 @@ public class QuestionController {
                     knowledges.add(k);
                 }
             }
-            getSubjectKnowledge(s);
+            getSubjectKnowledge(s,knowledges);
         }
         return knowledges;
     }

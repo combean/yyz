@@ -54,4 +54,6 @@ public interface QuestionKnowledgeService {
     List<QuestionKnowledge> getListByObj(QuestionKnowledge questionKnowledge) throws SQLException;
 
     List<QuestionKnowledge> getListByKnowledgeIds(List<Knowledge> knowledges) throws SQLException;
+
+    List<QuestionKnowledge> getListByQuestionId(Integer questionId) throws SQLException;
 }

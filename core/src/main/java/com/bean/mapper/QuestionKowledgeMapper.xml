@@ -60,6 +60,15 @@
     INNER JOIN exm_knowledge AS k ON qk.knowledge_id=k.knowledge_id
     <include refid="where" />
   </select>
+  <select id="getListByQuestionId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT
+    qk.question_knowledge_id, qk.question_id, qk.knowledge_id, q.question_title, k.knowledge_name
+    FROM
+    exm_question_knowledge AS qk
+    INNER JOIN exm_question AS q ON qk.question_id=q.question_id
+    INNER JOIN exm_knowledge AS k ON qk.knowledge_id=k.knowledge_id
+    WHERE qk.question_id = #{questionId,jdbcType=INTEGER}
+  </select>
   <select id="getListByKnowledgeIds" parameterType="java.util.List" resultMap="BaseResultMap">
     SELECT
     qk.question_knowledge_id, qk.question_id, qk.knowledge_id, q.question_title, k.knowledge_name
@@ -69,8 +78,8 @@
     INNER JOIN exm_knowledge AS k ON qk.knowledge_id=k.knowledge_id
     WHERE qk.question_id IN
     <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
-      #{item.questionId}
-    </foreach>
+      #{item.knowledgeId}
+    </foreach>  GROUP BY qk.question_id
   </select>
   <delete id="deleteById" parameterType="java.lang.Integer">
     delete from exm_question_knowledge

@@ -59,4 +59,9 @@ public class QuestionKnowledgeServiceImpl implements QuestionKnowledgeService {
     public List<QuestionKnowledge> getListByKnowledgeIds(List<Knowledge> knowledges) throws SQLException {
         return questionKnowledgeMapper.getListByKnowledgeIds(knowledges);
     }
+
+    @Override
+    public List<QuestionKnowledge> getListByQuestionId(Integer questionId) throws SQLException {
+        return questionKnowledgeMapper.getListByQuestionId(questionId);
+    }
 }

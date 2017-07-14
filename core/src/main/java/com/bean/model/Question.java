@@ -32,6 +32,9 @@ public class Question implements Serializable {
      * 被选项/参考答案
      */
     private List<QuestionAnswer> questionAnswers;
+
+    //题目相关知识点
+    private List<QuestionKnowledge> questionKnowledges;
     /**
      * 备注
      */
@@ -130,6 +133,14 @@ public class Question implements Serializable {
 
     public void setQuestionTypeTitle(String questionTypeTitle) {
         this.questionTypeTitle = questionTypeTitle;
+    }
+
+    public List<QuestionKnowledge> getQuestionKnowledges() {
+        return questionKnowledges;
+    }
+
+    public void setQuestionKnowledges(List<QuestionKnowledge> questionKnowledges) {
+        this.questionKnowledges = questionKnowledges;
     }
 
     public String getMemo() {
