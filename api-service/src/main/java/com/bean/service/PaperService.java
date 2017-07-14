@@ -1,6 +1,10 @@
 package com.bean.service;
 
 import com.bean.model.Paper;
+import com.bean.model.PaperQuestion;
+import com.bean.model.PaperQuestionType;
+import com.bean.model.Question;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -47,4 +51,10 @@ public interface PaperService {
     int getCountByMap(Map<String, Object> map) throws SQLException;
 
     Paper getById(Integer id) throws SQLException;
+
+    @Transactional
+    int insertPaperQuestionType(Paper paper, List<PaperQuestionType> paperQuestionTypes, List<PaperQuestion> paperQuestions) throws SQLException;
+
+    @Transactional
+    int updatePaperQuestionType(Paper paper, List<PaperQuestionType> paperQuestionTypes, List<PaperQuestion> paperQuestions) throws SQLException;
 }
