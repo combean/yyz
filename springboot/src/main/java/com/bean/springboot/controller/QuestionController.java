@@ -103,6 +103,13 @@ public class QuestionController {
         return resObject;
     }
 
+    /**
+     * 获取题目列表
+     * @param question 题目对象
+     * @param answerType 答案类型 0:所有答案 1:正确答案
+     * @return 题目列表
+     * @throws SQLException
+     */
     @RequestMapping("/getAllQuestion")
     public List<Question> getAllQuestion(Question question,Integer answerType) throws SQLException {
         Map<String, Object> map = new HashMap<>();
@@ -117,24 +124,54 @@ public class QuestionController {
         return getQuestions(questions,answerType);
     }
 
+    /**
+     * 根据知识点获取题目列表
+     * @param knowledgeIds 知识点ID字符串 1,2,3
+     * @param answerType 答案类型 0:所有答案 1:正确答案
+     * @return 题目列表
+     * @throws SQLException
+     */
     @RequestMapping("/getQuestionsByKnowledge")
-    public List<Question> getQuestionsByKnowledge(QuestionKnowledge questionKnowledge,Integer answerType) throws SQLException {
-        List<QuestionKnowledge> questionKnowledges = questionKnowledgeService.getListByObj(questionKnowledge);
-        List<Question> questions = questionService.getQuestionListByIds(questionKnowledges);
-        return getQuestions(questions,answerType);
-    }
-
-    @RequestMapping("/getQuestionsBySubject")
-    public List<Question> getQuestionsBySubject(Integer subjectId,Integer answerType) throws SQLException {
-        Subject subject = subjectService.getById(subjectId);
+    public List<Question> getQuestionsByKnowledge(String knowledgeIds,Integer answerType) throws SQLException {
+        String[] knowledgeIdArray = knowledgeIds.split(",");
         List<Knowledge> knowledges = new ArrayList<>();
-        knowledges = getSubjectKnowledge(subject,knowledges);
+        for (String kid: knowledgeIdArray) {
+            Knowledge knowledge = new Knowledge();
+            knowledge.setKnowledgeId(Integer.parseInt(kid));
+            knowledges.add(knowledge);
+        }
         List<QuestionKnowledge> questionKnowledges = questionKnowledgeService.getListByKnowledgeIds(knowledges);
         List<Question> questions = questionService.getQuestionListByIds(questionKnowledges);
         return getQuestions(questions,answerType);
     }
 
-    //将备选答案或参考答案、知识点添加进题目List
+    /**
+     * 根据科目获取题目列表
+     * @param subjectIds 科目ID字符串 1,2,3
+     * @param answerType 答案类型 0:所有答案 1:正确答案
+     * @return 题目列表
+     * @throws SQLException
+     */
+    @RequestMapping("/getQuestionsBySubject")
+    public List<Question> getQuestionsBySubject(String subjectIds,Integer answerType) throws SQLException {
+        String[] subjectIdArray = subjectIds.split(",");
+        List<Knowledge> knowledges = new ArrayList<>();
+        for (String sid: subjectIdArray) {
+            Subject subject = subjectService.getById(Integer.parseInt(sid));
+            knowledges.addAll(getSubjectKnowledge(subject,knowledges));
+        }
+        List<QuestionKnowledge> questionKnowledges = questionKnowledgeService.getListByKnowledgeIds(knowledges);
+        List<Question> questions = questionService.getQuestionListByIds(questionKnowledges);
+        return getQuestions(questions,answerType);
+    }
+
+    /**
+     * 将备选答案或参考答案、知识点添加进题目List
+     * @param questions 题目列表
+     * @param answerType 答案类型 0:所有答案 1:正确答案
+     * @return 题目列表
+     * @throws SQLException
+     */
     private List<Question> getQuestions(List<Question> questions,Integer answerType) throws SQLException {
         List<QuestionAnswer> questionAnswers =null;
         for (Question q: questions) {
@@ -149,7 +186,12 @@ public class QuestionController {
         }
         return questions;
     }
-    //组合答案List
+    /**
+     * 添加编辑题目组合答案List
+     * @param question 题目对象
+     * @param request
+     * @return 答案列表
+     */
     private List<QuestionAnswer> getQuestionAnswer(Question question,HttpServletRequest request){
         List<QuestionAnswer> questionAnswers = new ArrayList<>();
         //题目为选择题或多选题
@@ -216,7 +258,11 @@ public class QuestionController {
         }
         return questionAnswers;
     }
-    //替换填空题()中内容
+    /**
+     * 替换填空题()中内容
+     * @param questionTitle 题目题干
+     * @return
+     */
     private String getFillQuestionTitle(String questionTitle){
         //将题干所有字符转换为半角
         String tempStr=Utils.ToDBC(questionTitle);
@@ -227,24 +273,40 @@ public class QuestionController {
         String resTitle = matcher.replaceAll("");
         return resTitle;
     }
-    //获取指定科目下所有最低级别项目相关联知识点
+    /**
+     * 获取指定科目下所有最低级别项目相关联知识点
+     * @param subject 科目对象
+     * @param knowledges 知识点列表
+     * @return 知识点列表
+     * @throws SQLException
+     */
     private List<Knowledge> getSubjectKnowledge(Subject subject, List<Knowledge> knowledges) throws SQLException {
         Map<String, Object> map = new HashMap<>();
         map.put("parentId",subject.getSubjectId());
         map.put("del",1);
-        List<Subject> childSubjects = subjectService.getListByMap(map);
-        subject.setChildSubject(childSubjects);
-        for (Subject s: childSubjects) {
-            if(s.getSubjectType()==1) {
-                List<SubjectKnowledge> subjectKnowledges=subjectKnowledgeService.getListBySubjectId(s.getSubjectId());
-                for (SubjectKnowledge sk : subjectKnowledges) {
-                    Knowledge k = new Knowledge();
-                    k.setKnowledgeId(sk.getKnowledgeId());
-                    k.setKnowledgeName(sk.getKnowledgeName());
-                    knowledges.add(k);
-                }
+        if(subject.getSubjectType()==1){
+            List<SubjectKnowledge> subjectKnowledges=subjectKnowledgeService.getListBySubjectId(subject.getSubjectId());
+            for (SubjectKnowledge sk : subjectKnowledges) {
+                Knowledge k = new Knowledge();
+                k.setKnowledgeName(sk.getKnowledgeName());
+                k.setKnowledgeId(sk.getKnowledgeId());
+                knowledges.add(k);
             }
-            getSubjectKnowledge(s,knowledges);
+        }else{
+            List<Subject> childSubjects = subjectService.getListByMap(map);
+            subject.setChildSubject(childSubjects);
+            for (Subject s: childSubjects) {
+                if(s.getSubjectType()==1) {
+                    List<SubjectKnowledge> subjectKnowledges=subjectKnowledgeService.getListBySubjectId(s.getSubjectId());
+                    for (SubjectKnowledge sk : subjectKnowledges) {
+                        Knowledge k = new Knowledge();
+                        k.setKnowledgeId(sk.getKnowledgeId());
+                        k.setKnowledgeName(sk.getKnowledgeName());
+                        knowledges.add(k);
+                    }
+                }
+                getSubjectKnowledge(s,knowledges);
+            }
         }
         return knowledges;
     }
