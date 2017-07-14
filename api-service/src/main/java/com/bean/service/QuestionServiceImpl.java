@@ -96,4 +96,9 @@ public class QuestionServiceImpl implements QuestionService {
     public List<Question> getQuestionListByIds(List<QuestionKnowledge> questionknowledges) throws SQLException {
         return questionMapper.getQuestionListByIds(questionknowledges);
     }
+
+    @Override
+    public List<Question> getListByIds(String ids) throws SQLException {
+        return questionMapper.getListByIds(ids);
+    }
 }

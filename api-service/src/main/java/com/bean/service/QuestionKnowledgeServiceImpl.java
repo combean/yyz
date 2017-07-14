@@ -31,7 +31,7 @@ public class QuestionKnowledgeServiceImpl implements QuestionKnowledgeService {
     }
 
     @Override
-    public int deleteByQuestionId(Integer managerId) {
+    public int deleteByQuestionId(Integer managerId) throws SQLException {
         return questionKnowledgeMapper.deleteByQuestionId(managerId);
     }
 
@@ -63,5 +63,10 @@ public class QuestionKnowledgeServiceImpl implements QuestionKnowledgeService {
     @Override
     public List<QuestionKnowledge> getListByQuestionId(Integer questionId) throws SQLException {
         return questionKnowledgeMapper.getListByQuestionId(questionId);
+    }
+
+    @Override
+    public List<QuestionKnowledge> getListByIds(String ids) throws SQLException {
+        return questionKnowledgeMapper.getListByIds(ids);
     }
 }

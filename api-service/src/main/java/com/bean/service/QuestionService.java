@@ -88,4 +88,6 @@ public interface QuestionService {
     int updateQuestionAnswer(Question question, List<QuestionAnswer> questionAnswers, List<QuestionKnowledge> questionKnowledges) throws SQLException;
 
     List<Question> getQuestionListByIds(List<QuestionKnowledge> questionknowledges) throws SQLException;
+
+    List<Question> getListByIds(String ids) throws SQLException;
 }

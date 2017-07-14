@@ -12,4 +12,6 @@ import org.apache.ibatis.annotations.Param;
 
 public interface QuestionMapper extends BaseMapper<Question> {
     List<Question> getQuestionListByIds(List<QuestionKnowledge> questionknowledges) throws SQLException;
+
+    List<Question> getListByIds(String ids) throws SQLException;
 }

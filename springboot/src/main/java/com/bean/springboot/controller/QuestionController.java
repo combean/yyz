@@ -89,7 +89,6 @@ public class QuestionController {
         int n = 0;
         List<QuestionAnswer> questionAnswers = getQuestionAnswer(question,request);
         if(question.getQuestionType()==3){
-
             question.setQuestionTitle(getFillQuestionTitle(question.getQuestionTitle()));
         }
 
@@ -133,14 +132,8 @@ public class QuestionController {
      */
     @RequestMapping("/getQuestionsByKnowledge")
     public List<Question> getQuestionsByKnowledge(String knowledgeIds,Integer answerType) throws SQLException {
-        String[] knowledgeIdArray = knowledgeIds.split(",");
-        List<Knowledge> knowledges = new ArrayList<>();
-        for (String kid: knowledgeIdArray) {
-            Knowledge knowledge = new Knowledge();
-            knowledge.setKnowledgeId(Integer.parseInt(kid));
-            knowledges.add(knowledge);
-        }
-        List<QuestionKnowledge> questionKnowledges = questionKnowledgeService.getListByKnowledgeIds(knowledges);
+
+        List<QuestionKnowledge> questionKnowledges = questionKnowledgeService.getListByIds(knowledgeIds);
         List<Question> questions = questionService.getQuestionListByIds(questionKnowledges);
         return getQuestions(questions,answerType);
     }

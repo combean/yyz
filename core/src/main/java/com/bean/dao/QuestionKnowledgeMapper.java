@@ -10,9 +10,11 @@ import java.util.List;
 
 public interface QuestionKnowledgeMapper extends BaseMapper<QuestionKnowledge> {
 
-    int deleteByQuestionId(Integer questionId);
+    int deleteByQuestionId(Integer questionId) throws SQLException;
 
-    List<QuestionKnowledge> getListByKnowledgeIds(List<Knowledge> knowledges);
+    List<QuestionKnowledge> getListByKnowledgeIds(List<Knowledge> knowledges) throws SQLException;
 
     List<QuestionKnowledge> getListByQuestionId(Integer questionId) throws SQLException;
+
+    List<QuestionKnowledge> getListByIds(String ids) throws SQLException;
 }

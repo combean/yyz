@@ -28,7 +28,7 @@ public interface QuestionKnowledgeService {
      * @param questionId 试题ID
      * @return
      */
-    int deleteByQuestionId(Integer questionId);
+    int deleteByQuestionId(Integer questionId) throws SQLException;
 
     /**
      * 根据试题ID获取试题知识点对应关系List
@@ -56,4 +56,6 @@ public interface QuestionKnowledgeService {
     List<QuestionKnowledge> getListByKnowledgeIds(List<Knowledge> knowledges) throws SQLException;
 
     List<QuestionKnowledge> getListByQuestionId(Integer questionId) throws SQLException;
+
+    List<QuestionKnowledge> getListByIds(String ids) throws SQLException;
 }
