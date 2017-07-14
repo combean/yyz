@@ -48,4 +48,9 @@ public class SubjectKnowledgeServiceImpl implements SubjectKnowledgeService {
     public int getCountByMap(Map<String, Object> map) throws SQLException {
         return subjectKnowledgeMapper.getCountByMap(map);
     }
+
+    @Override
+    public List<SubjectKnowledge> getListBySubjectId(Integer subjectId) throws SQLException {
+        return subjectKnowledgeMapper.getListBySubjectId(subjectId);
+    }
 }

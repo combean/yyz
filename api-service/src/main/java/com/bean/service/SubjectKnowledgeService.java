@@ -49,4 +49,6 @@ public interface SubjectKnowledgeService {
      * @return
      */
     int getCountByMap(Map<String, Object> map) throws SQLException;
+
+    List<SubjectKnowledge> getListBySubjectId(Integer subjectId) throws SQLException;
 }

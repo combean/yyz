@@ -5,6 +5,8 @@
     <id column="subject_knowledge_id" jdbcType="INTEGER" property="subjectKnowledgeId" />
     <result column="subject_id" jdbcType="INTEGER" property="subjectId" />
     <result column="knowledge_id" jdbcType="INTEGER" property="knowledgeId" />
+    <result column="knowledge_name" jdbcType="VARCHAR" property="knowledgeName" />
+    <result column="subject_name" jdbcType="INTEGER" property="subjectName" />
   </resultMap>
   <sql id="Base_Column_List">
     subject_knowledge_id, subject_id, knowledge_id
@@ -48,6 +50,15 @@
     INNER JOIN exm_subject AS s ON sk.subject_id=s.subject_id
     INNER JOIN exm_knowledge AS k ON sk.knowledge_id=k.knowledge_id
     <include refid="where" />
+  </select>
+  <select id="getListBySubjectId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT
+    sk.subject_knowledge_id, sk.subject_id, sk.knowledge_id, s.subject_name, k.knowledge_name
+    FROM
+    exm_subject_knowledge  AS sk
+    INNER JOIN exm_subject AS s ON sk.subject_id=s.subject_id
+    INNER JOIN exm_knowledge AS k ON sk.knowledge_id=k.knowledge_id
+    where sk.subject_id = #{subjectId,jdbcType=INTEGER}
   </select>
   <delete id="deleteById" parameterType="java.lang.Integer">
     delete from exm_subject_knowledge

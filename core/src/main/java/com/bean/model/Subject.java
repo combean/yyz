@@ -2,6 +2,7 @@ package com.bean.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author 
@@ -26,6 +27,11 @@ public class Subject implements Serializable {
      * 0:顶级科目 1:章 2:节
      */
     private Integer subjectType;
+
+    /**
+     * 子科目
+     */
+    private List<Subject> childSubject;
 
     private String memo;
 
@@ -96,6 +102,14 @@ public class Subject implements Serializable {
 
     public void setSubjectType(Integer subjectType) {
         this.subjectType = subjectType;
+    }
+
+    public List<Subject> getChildSubject() {
+        return childSubject;
+    }
+
+    public void setChildSubject(List<Subject> childSubject) {
+        this.childSubject = childSubject;
     }
 
     public String getMemo() {
