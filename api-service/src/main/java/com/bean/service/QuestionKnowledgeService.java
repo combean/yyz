@@ -1,5 +1,6 @@
 package com.bean.service;
 
+import com.bean.model.Knowledge;
 import com.bean.model.QuestionKnowledge;
 
 import java.sql.SQLException;
@@ -51,4 +52,6 @@ public interface QuestionKnowledgeService {
     int getCountByMap(Map<String, Object> map) throws SQLException;
 
     List<QuestionKnowledge> getListByObj(QuestionKnowledge questionKnowledge) throws SQLException;
+
+    List<QuestionKnowledge> getListByKnowledgeIds(List<Knowledge> knowledges) throws SQLException;
 }

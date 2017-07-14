@@ -1,6 +1,7 @@
 package com.bean.service;
 
 import com.bean.dao.QuestionKnowledgeMapper;
+import com.bean.model.Knowledge;
 import com.bean.model.QuestionKnowledge;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,5 +53,10 @@ public class QuestionKnowledgeServiceImpl implements QuestionKnowledgeService {
     @Override
     public List<QuestionKnowledge> getListByObj(QuestionKnowledge questionKnowledge) throws SQLException {
         return questionKnowledgeMapper.getListByObj(questionKnowledge);
+    }
+
+    @Override
+    public List<QuestionKnowledge> getListByKnowledgeIds(List<Knowledge> knowledges) throws SQLException {
+        return questionKnowledgeMapper.getListByKnowledgeIds(knowledges);
     }
 }

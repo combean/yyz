@@ -2,14 +2,8 @@ package com.bean.springboot.controller;
 
 import com.bean.RSTFul.RSTFulBody;
 import com.bean.dao.KnowledgeMapper;
-import com.bean.model.Knowledge;
-import com.bean.model.Question;
-import com.bean.model.QuestionAnswer;
-import com.bean.model.QuestionKnowledge;
-import com.bean.service.KnowledgeService;
-import com.bean.service.QuestionAnswerService;
-import com.bean.service.QuestionKnowledgeService;
-import com.bean.service.QuestionService;
+import com.bean.model.*;
+import com.bean.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,6 +30,12 @@ public class QuestionController {
 
     @Autowired
     private QuestionKnowledgeService questionKnowledgeService;
+
+    @Autowired
+    private SubjectService subjectService;
+
+    @Autowired
+    private SubjectKnowledgeService subjectKnowledgeService;
 
     @RequestMapping("/add")
     public RSTFulBody add(Question question,HttpServletRequest request) throws SQLException {
@@ -125,8 +125,12 @@ public class QuestionController {
     }
 
     @RequestMapping("/getQuestionsBySubject")
-    public List<Question> getQuestionsBySubject(){
-        return null;
+    public List<Question> getQuestionsBySubject(Integer subjectId,Integer answerType) throws SQLException {
+        Subject subject = subjectService.getById(subjectId);
+        List<Knowledge> knowledges = getSubjectKnowledge(subject);
+        List<QuestionKnowledge> questionKnowledges = questionKnowledgeService.getListByKnowledgeIds(knowledges);
+        List<Question> questions = questionService.getQuestionListByIds(questionKnowledges);
+        return getQuestions(questions,answerType);
     }
 
     //将备选答案或参考答案添加进题目List
@@ -219,5 +223,27 @@ public class QuestionController {
         //将题干()中内容替换为空
         String resTitle = matcher.replaceAll("");
         return resTitle;
+    }
+    //获取指定科目下所有最低级别项目相关联知识点
+    private List<Knowledge> getSubjectKnowledge(Subject subject) throws SQLException {
+        Map<String, Object> map = new HashMap<>();
+        map.put("parentId",subject.getSubjectId());
+        map.put("del",1);
+        List<Subject> childSubjects = subjectService.getListByMap(map);
+        List<Knowledge> knowledges = new ArrayList<>();
+        subject.setChildSubject(childSubjects);
+        for (Subject s: childSubjects) {
+            List<SubjectKnowledge> subjectKnowledges=subjectKnowledgeService.getListBySubjectId(s.getSubjectId());
+            if(s.getSubjectType()==1) {
+                for (SubjectKnowledge sk : subjectKnowledges) {
+                    Knowledge k = new Knowledge();
+                    k.setKnowledgeId(sk.getKnowledgeId());
+                    k.setKnowledgeName(sk.getKnowledgeName());
+                    knowledges.add(k);
+                }
+            }
+            getSubjectKnowledge(s);
+        }
+        return knowledges;
     }
 }
