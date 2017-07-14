@@ -128,14 +128,13 @@ public class QuestionController {
     public List<Question> getQuestionsBySubject(Integer subjectId,Integer answerType) throws SQLException {
         Subject subject = subjectService.getById(subjectId);
         List<Knowledge> knowledges = new ArrayList<>();
-//        knowledges.addAll(getSubjectKnowledge(subject));
         knowledges = getSubjectKnowledge(subject,knowledges);
         List<QuestionKnowledge> questionKnowledges = questionKnowledgeService.getListByKnowledgeIds(knowledges);
         List<Question> questions = questionService.getQuestionListByIds(questionKnowledges);
         return getQuestions(questions,answerType);
     }
 
-    //将备选答案或参考答案添加进题目List
+    //将备选答案或参考答案、知识点添加进题目List
     private List<Question> getQuestions(List<Question> questions,Integer answerType) throws SQLException {
         List<QuestionAnswer> questionAnswers =null;
         for (Question q: questions) {
