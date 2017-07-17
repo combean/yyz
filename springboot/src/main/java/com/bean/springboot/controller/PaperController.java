@@ -1,11 +1,8 @@
 package com.bean.springboot.controller;
 
 import com.bean.RSTFul.RSTFulBody;
-import com.bean.model.Paper;
-import com.bean.model.PaperQuestion;
-import com.bean.model.PaperQuestionType;
-import com.bean.service.PaperService;
-import com.bean.service.QuestionService;
+import com.bean.model.*;
+import com.bean.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +24,18 @@ public class PaperController {
     @Autowired
     private QuestionService questionService;
 
+    @Autowired
+    private PaperQuestionTypeService paperQuestionTypeService;
+
+    @Autowired
+    private PaperQuestionService paperQuestionService;
+
+    @Autowired
+    private QuestionAnswerService questionAnswerService;
+
+    @Autowired
+    private QuestionKnowledgeService questionKnowledgeService;
+
     @RequestMapping("/add")
     public RSTFulBody add(Paper paper, HttpServletRequest request) throws SQLException {
         RSTFulBody resObject = new RSTFulBody();
@@ -41,8 +50,10 @@ public class PaperController {
             String paperQuestionIds = request.getParameter("paperQuestionIds");
             String[] paperQuestionIdArray = paperQuestionIds.split(",");
             for (String pqid:paperQuestionIdArray) {
+                Question question = questionService.getById(Integer.parseInt(pqid));
                 PaperQuestion paperQuestion = new PaperQuestion();
-                paperQuestion.setQuestionId(Integer.parseInt(pqid));
+                paperQuestion.setQuestionId(question.getQuestionId());
+                paperQuestion.setQuestionType(question.getQuestionType());
                 paperQuestions.add(paperQuestion);
             }
         }
@@ -129,5 +140,43 @@ public class PaperController {
         if(paper.getPaperId() != null) map.put("paperId",paper.getPaperId());
         List<Paper> papers = paperService.getListByMap(map);
         return papers;
+    }
+
+    @RequestMapping("/getPaperQuestions")
+    public Paper getPaperQuestions(String paperId,HttpServletRequest request) throws SQLException{
+
+        List<PaperQuestionType> paperQuestionTypes = paperQuestionTypeService.getListByPaperId(Integer.parseInt(paperId));
+        for (PaperQuestionType pqt: paperQuestionTypes) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("questionType",pqt.getTypeId());
+            map.put("paperId",pqt.getPaperId());
+//            List<Question> questions
+            List<PaperQuestion> paperQuestions = paperQuestionService.getListByMap(map);
+            String questionIds = "";
+            for (PaperQuestion pq: paperQuestions) {
+                questionIds+=pq.getQuestionId()+",";
+            }
+            questionIds = questionIds.substring(0,questionIds.length()-1);
+            List<Question> questions = getQuestions1(questionService.getListByIds(questionIds),0);
+            pqt.setQuestions(questions);
+        }
+        Paper paper = paperService.getById(Integer.parseInt(paperId));
+        paper.setPaperQuestionTypes(paperQuestionTypes);
+        return paper;
+    }
+
+    public List<Question> getQuestions1(List<Question> questions,Integer answerType) throws SQLException {
+        List<QuestionAnswer> questionAnswers =null;
+        for (Question q: questions) {
+            if(answerType==null || answerType==0){
+                questionAnswers = questionAnswerService.getAnswerListByQuestionId(q.getQuestionId());
+            }else{
+                questionAnswers = questionAnswerService.getRightAnswerListByQuestionId(q.getQuestionId());
+            }
+            List<QuestionKnowledge> questionKnowledges = questionKnowledgeService.getListByQuestionId(q.getQuestionId());
+            q.setQuestionAnswers(questionAnswers);
+            q.setQuestionKnowledges(questionKnowledges);
+        }
+        return questions;
     }
 }

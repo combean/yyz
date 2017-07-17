@@ -27,7 +27,7 @@ public interface PaperQuestionTypeService {
      * @param paperId 考卷ID
      * @return
      */
-    int deleteByPaperId(Integer paperId);
+    int deleteByPaperId(Integer paperId) throws SQLException;
 
     /**
      * 根据试题ID获取考卷与试题分类对应关系List
@@ -49,4 +49,12 @@ public interface PaperQuestionTypeService {
      * @return
      */
     Integer getCountByMap(Map<String, Object> map) throws SQLException;
+
+    /**
+     * 根据考卷ID获取分类List
+     * @param paperId 考卷ID
+     * @return
+     * @throws SQLException
+     */
+    List<PaperQuestionType> getListByPaperId(Integer paperId) throws SQLException;
 }

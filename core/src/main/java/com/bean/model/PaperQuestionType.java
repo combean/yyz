@@ -1,6 +1,7 @@
 package com.bean.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author 
@@ -37,6 +38,11 @@ public class PaperQuestionType implements Serializable {
      * 每题分数
      */
     private Integer questionRawScore;
+
+    /**
+     * 分类对应题目列表
+     */
+    private List<Question> questions;
 
     private static final long serialVersionUID = 1L;
 
@@ -94,5 +100,13 @@ public class PaperQuestionType implements Serializable {
 
     public void setQuestionRawScore(Integer questionRawScore) {
         this.questionRawScore = questionRawScore;
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 }

@@ -2,6 +2,7 @@ package com.bean.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author 
@@ -56,6 +57,11 @@ public class Paper implements Serializable {
      * 选题方式 0:随机选题 1:手动选题
      */
     private Integer selectQuestionType;
+
+    /**
+     * 考题分类List
+     */
+    private List<PaperQuestionType> paperQuestionTypes;
 
     /**
      * 备注
@@ -177,6 +183,14 @@ public class Paper implements Serializable {
 
     public void setSelectQuestionType(Integer selectQuestionType) {
         this.selectQuestionType = selectQuestionType;
+    }
+
+    public List<PaperQuestionType> getPaperQuestionTypes() {
+        return paperQuestionTypes;
+    }
+
+    public void setPaperQuestionTypes(List<PaperQuestionType> paperQuestionTypes) {
+        this.paperQuestionTypes = paperQuestionTypes;
     }
 
     public String getMemo() {

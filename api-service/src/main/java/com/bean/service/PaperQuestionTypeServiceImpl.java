@@ -30,7 +30,7 @@ public class PaperQuestionTypeServiceImpl implements PaperQuestionTypeService {
     }
 
     @Override
-    public int deleteByPaperId(Integer paperId) {
+    public int deleteByPaperId(Integer paperId) throws SQLException {
         return qaperQuestionTypeMapper.deleteByPaperId(paperId);
     }
 
@@ -47,5 +47,10 @@ public class PaperQuestionTypeServiceImpl implements PaperQuestionTypeService {
     @Override
     public Integer getCountByMap(Map<String,Object> map) throws SQLException {
         return qaperQuestionTypeMapper.getCountByMap(map);
+    }
+
+    @Override
+    public List<PaperQuestionType> getListByPaperId(Integer paperId) throws SQLException {
+        return qaperQuestionTypeMapper.getListByPaperId(paperId);
     }
 }

@@ -48,6 +48,13 @@
     exm_paper_question_type
     <include refid="where" />
   </select>
+  <select id="getListByPaperId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    SELECT
+    paper_question_type_id, type_sequence, type_id, paper_id, question_level, question_nums, question_raw_score
+    FROM
+    exm_paper_question_type
+    WHERE paper_id = #{paperId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteById" parameterType="java.lang.Integer">
     delete from exm_paper_question_type
     where paper_question_type_id = #{paperQuestionTypeId,jdbcType=INTEGER}

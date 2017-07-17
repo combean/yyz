@@ -21,21 +21,24 @@
             <if test="questionId != null">
                 AND pq.question_id = #{questionId,jdbcType=INTEGER}
             </if>
+            <if test="questionType != null">
+                AND pq.question_type = #{questionType,jdbcType=INTEGER}
+            </if>
         </where>
     </sql>
     <insert id="insertList" parameterType="java.util.List">
-        insert into exm_paper_question (paper_id, question_id
+        insert into exm_paper_question (paper_id, question_id, question_type
         )
         values
         <foreach collection="list" item="item" index="index" separator=",">
-            (#{item.paperId,jdbcType=INTEGER}, #{item.questionId,jdbcType=INTEGER})
+            (#{item.paperId,jdbcType=INTEGER}, #{item.questionId,jdbcType=INTEGER}, #{item.questionType,jdbcType=INTEGER})
         </foreach>
     </insert>
     <insert id="insert" parameterType="com.bean.model.PaperQuestion">
-        insert into exm_paper_question (paper_id, question_id
+        insert into exm_paper_question (paper_id, question_id, question_type
         )
         values
-        (#{paperId,jdbcType=INTEGER}, #{questionId,jdbcType=INTEGER})
+        (#{paperId,jdbcType=INTEGER}, #{questionId,jdbcType=INTEGER}, #{questionType,jdbcType=INTEGER})
     </insert>
     <delete id="deleteByPaperId" parameterType="java.lang.Integer">
         delete from exm_paper_question
