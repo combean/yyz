@@ -6,6 +6,9 @@
     <result column="type_sequence" jdbcType="INTEGER" property="typeSequence" />
     <result column="type_id" jdbcType="INTEGER" property="typeId" />
     <result column="paper_id" jdbcType="INTEGER" property="paperId" />
+    <result column="question_level" jdbcType="BIT" property="questionLevel" />
+    <result column="question_nums" jdbcType="INTEGER" property="questionNums" />
+    <result column="question_raw_score" jdbcType="INTEGER" property="questionRawScore" />
   </resultMap>
   <sql id="where">
     <where>
@@ -21,18 +24,18 @@
     </where>
   </sql>
   <insert id="insertList" parameterType="java.util.List">
-    insert into exm_paper_question_type (type_sequence, type_id, paper_id
+    insert into exm_paper_question_type (type_sequence, type_id, paper_id, question_level, question_nums, question_raw_score
     )
     values
     <foreach collection="list" item="item" index="index" separator=",">
-      (#{item.typeSequence,jdbcType=INTEGER}, #{item.typeId,jdbcType=INTEGER}, #{item.paperId,jdbcType=INTEGER})
+      (#{item.typeSequence,jdbcType=INTEGER}, #{item.typeId,jdbcType=INTEGER}, #{item.paperId,jdbcType=INTEGER}, #{item.questionLevel,jdbcType=BIT}, #{item.questionNums,jdbcType=INTEGER}, #{item.questionRawScore,jdbcType=INTEGER})
     </foreach>
   </insert>
   <insert id="insert" parameterType="com.bean.model.PaperQuestionType">
-    insert into exm_paper_question_type (type_sequence, type_id, paper_id
+    insert into exm_paper_question_type (type_sequence, type_id, paper_id, question_level, question_nums, question_raw_score
     )
     values
-    (#{typeSequence,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER}, #{paperId,jdbcType=INTEGER})
+    (#{typeSequence,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER}, #{paperId,jdbcType=INTEGER}, #{questionLevel,jdbcType=BIT}, #{questionNums,jdbcType=INTEGER}, #{questionRawScore,jdbcType=INTEGER})
   </insert>
   <delete id="deleteByPaperId" parameterType="java.lang.Integer">
     delete from exm_paper_question_type
@@ -40,7 +43,7 @@
   </delete>
   <select id="getListByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
     SELECT
-    paper_question_type_id, type_sequence, type_id, paper_id
+    paper_question_type_id, type_sequence, type_id, paper_id, question_level, question_nums, question_raw_score
     FROM
     exm_paper_question_type
     <include refid="where" />

@@ -23,6 +23,21 @@ public class PaperQuestionType implements Serializable {
      */
     private Integer paperId;
 
+    /**
+     * 题目难易等级 0:易 1:中 2:难
+     */
+    private Integer questionLevel;
+
+    /**
+     * 题目数量
+     */
+    private Integer questionNums;
+
+    /**
+     * 每题分数
+     */
+    private Integer questionRawScore;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getPaperQuestionTypeId() {
@@ -55,5 +70,29 @@ public class PaperQuestionType implements Serializable {
 
     public void setPaperId(Integer paperId) {
         this.paperId = paperId;
+    }
+
+    public Integer getQuestionLevel() {
+        return questionLevel;
+    }
+
+    public void setQuestionLevel(Integer questionLevel) {
+        this.questionLevel = questionLevel;
+    }
+
+    public Integer getQuestionNums() {
+        return questionNums;
+    }
+
+    public void setQuestionNums(Integer questionNums) {
+        this.questionNums = questionNums;
+    }
+
+    public Integer getQuestionRawScore() {
+        return questionRawScore;
+    }
+
+    public void setQuestionRawScore(Integer questionRawScore) {
+        this.questionRawScore = questionRawScore;
     }
 }
