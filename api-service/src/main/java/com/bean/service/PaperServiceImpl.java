@@ -66,10 +66,12 @@ public class PaperServiceImpl implements PaperService {
         for (PaperQuestionType paperQuestionType: paperQuestionTypes) {
             paperQuestionType.setPaperId(paper.getPaperId());
         }
-        for (PaperQuestion paperQuestion: paperQuestions){
-            paperQuestion.setPaperId(paper.getPaperId());
+        if(paperQuestions.size()>0){
+            for (PaperQuestion paperQuestion: paperQuestions){
+                paperQuestion.setPaperId(paper.getPaperId());
+            }
+            paperQuestionTypeMapper.insertList(paperQuestionTypes);
         }
-        paperQuestionTypeMapper.insertList(paperQuestionTypes);
         return paperQuestionMapper.insertList(paperQuestions);
     }
 
@@ -79,12 +81,14 @@ public class PaperServiceImpl implements PaperService {
         for (PaperQuestionType paperQuestionType: paperQuestionTypes) {
             paperQuestionType.setPaperId(paper.getPaperId());
         }
-        for (PaperQuestion paperQuestion: paperQuestions){
-            paperQuestion.setPaperId(paper.getPaperId());
-        }
         paperQuestionTypeMapper.deleteByPaperId(paper.getPaperId());
         paperQuestionMapper.deleteByPaperId(paper.getPaperId());
-        paperQuestionTypeMapper.insertList(paperQuestionTypes);
+        if(paperQuestions.size()>0){
+            for (PaperQuestion paperQuestion: paperQuestions){
+                paperQuestion.setPaperId(paper.getPaperId());
+            }
+            paperQuestionTypeMapper.insertList(paperQuestionTypes);
+        }
         return paperQuestionMapper.insertList(paperQuestions);
     }
 }

@@ -1,12 +1,9 @@
 package com.bean.springboot.controller;
 
 import com.bean.RSTFul.RSTFulBody;
-import com.bean.dao.PaperQuestionMapper;
 import com.bean.model.Paper;
 import com.bean.model.PaperQuestion;
 import com.bean.model.PaperQuestionType;
-import com.bean.model.Question;
-import com.bean.service.PaperQuestionService;
 import com.bean.service.PaperService;
 import com.bean.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,28 +28,38 @@ public class PaperController {
     private QuestionService questionService;
 
     @RequestMapping("/add")
-    public RSTFulBody add(Paper paper, String paperQuestionIds, HttpServletRequest request) throws SQLException {
+    public RSTFulBody add(Paper paper, HttpServletRequest request) throws SQLException {
         RSTFulBody resObject = new RSTFulBody();
         paper.setAddname(request.getSession().getAttribute("userName")+"");
         paper.setAddid(Integer.parseInt(request.getSession().getAttribute("userId")+""));
         paper.setAddtime(new Date());
+//        if(paper.getStartTime() != null && !paper.getStartTime().equals("")) paper.setStartTime(initBinder(paper.getStartTime()));
 
-        //组合考卷考题List
         List<PaperQuestion> paperQuestions = new ArrayList<>();
-        String[] paperQuestionIdArray = paperQuestionIds.split(",");
-        for (String pqid:paperQuestionIdArray) {
-            PaperQuestion paperQuestion = new PaperQuestion();
-            paperQuestion.setQuestionId(Integer.parseInt(pqid));
-            paperQuestions.add(paperQuestion);
+        if(paper.getSelectQuestionType()==1){
+            //组合考卷考题List
+            String paperQuestionIds = request.getParameter("paperQuestionIds");
+            String[] paperQuestionIdArray = paperQuestionIds.split(",");
+            for (String pqid:paperQuestionIdArray) {
+                PaperQuestion paperQuestion = new PaperQuestion();
+                paperQuestion.setQuestionId(Integer.parseInt(pqid));
+                paperQuestions.add(paperQuestion);
+            }
         }
 
         String[] typeSequence=request.getParameterValues("typeSequence");
         String[] typeId=request.getParameterValues("typeId");
+        String[] questionLevel=request.getParameterValues("questionLevel");
+        String[] questionNums=request.getParameterValues("questionNums");
+        String[] questionRawScore=request.getParameterValues("questionRawScore");
         List<PaperQuestionType> paperQuestionTypes = new ArrayList<>();
         for(int i=0;i<typeId.length;i++){
             PaperQuestionType paperQuestionType = new PaperQuestionType();
             paperQuestionType.setTypeId(Integer.parseInt(typeId[i]));
             paperQuestionType.setTypeSequence(Integer.parseInt(typeSequence[i]));
+            paperQuestionType.setQuestionLevel(Integer.parseInt(questionLevel[i]));
+            paperQuestionType.setQuestionNums(Integer.parseInt(questionNums[i]));
+            paperQuestionType.setQuestionRawScore(Integer.parseInt(questionRawScore[i]));
             paperQuestionTypes.add(paperQuestionType);
         }
         int i = paperService.insertPaperQuestionType(paper,paperQuestionTypes,paperQuestions);
@@ -80,11 +87,17 @@ public class PaperController {
 
         String[] typeSequence=request.getParameterValues("typeSequence");
         String[] typeId=request.getParameterValues("typeId");
+        String[] questionLevel=request.getParameterValues("questionLevel");
+        String[] questionNums=request.getParameterValues("questionNums");
+        String[] questionRawScore=request.getParameterValues("questionRawScore");
         List<PaperQuestionType> paperQuestionTypes = new ArrayList<>();
         for(int i=0;i<typeId.length;i++){
             PaperQuestionType paperQuestionType = new PaperQuestionType();
-            paperQuestionType.setTypeSequence(Integer.parseInt(typeSequence[i]));
             paperQuestionType.setTypeId(Integer.parseInt(typeId[i]));
+            paperQuestionType.setTypeSequence(Integer.parseInt(typeSequence[i]));
+            paperQuestionType.setQuestionLevel(Integer.parseInt(questionLevel[i]));
+            paperQuestionType.setQuestionRawScore(Integer.parseInt(questionRawScore[i]));
+            paperQuestionType.setQuestionNums(Integer.parseInt(questionNums[i]));
             paperQuestionTypes.add(paperQuestionType);
         }
         int i = paperService.insertPaperQuestionType(paper,paperQuestionTypes,paperQuestions);

@@ -10,6 +10,8 @@
     <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
     <result column="subject_id" jdbcType="INTEGER" property="subjectId" />
     <result column="subject_name" jdbcType="VARCHAR" property="subjectName" />
+    <result column="option_theory" jdbcType="VARCHAR" property="optionTheory" />
+    <result column="select_question_type" jdbcType="VARCHAR" property="selectQuestionType" />
     <result column="memo" jdbcType="VARCHAR" property="memo" />
     <result column="del" jdbcType="BIT" property="del" />
     <result column="addname" jdbcType="VARCHAR" property="addname" />
@@ -42,14 +44,20 @@
       <if test="subjectId != null">
         AND p.subject_id = #{subjectId,jdbcType=INTEGER}
       </if>
+      <if test="optionTheory != null">
+        AND p.option_theory = #{optionTheory,jdbcType=BIT}
+      </if>
+      <if test="selectQuestionType != null">
+        AND p.select_question_type = #{selectQuestionType,jdbcType=BIT}
+      </if>
     </where>
   </sql>
   <sql id="Base_Column_List">
-    paper_id, paper_name, subject_id, paper_type, exam_minutes, start_time, end_time, memo, del,
+    paper_id, paper_name, subject_id, paper_type, exam_minutes, start_time, end_time, option_theory, select_question_type, memo, del,
     addname, addid, addtime, editname, editid, edittime
   </sql>
   <sql id="Column_List_With_Subject">
-    p.paper_id, p.paper_name, p.subject_id, s.subject_name, p.paper_type, p.exam_minutes, p.start_time, p.end_time, p.memo, p.del,
+    p.paper_id, p.paper_name, p.subject_id, s.subject_name, p.paper_type, p.exam_minutes, p.start_time, p.end_time, p.option_theory, p.select_question_type, p.memo, p.del,
     p.addname, p.addid, p.addtime, p.editname, p.editid, p.edittime
   </sql>
   <insert id="insert" parameterType="com.bean.model.Paper" useGeneratedKeys="true" keyProperty="paperId">
@@ -72,6 +80,12 @@
       </if>
       <if test="subjectId != null">
         subject_id,
+      </if>
+      <if test="optionTheory != null">
+        option_theory,
+      </if>
+      <if test="selectQuestionType != null">
+        select_question_type,
       </if>
       <if test="memo != null">
         memo,
@@ -107,6 +121,12 @@
       </if>
       <if test="subjectId != null">
         #{subjectId,jdbcType=INTEGER},
+      </if>
+      <if test="optionTheory != null">
+        #{optionTheory,jdbcType=BIT},
+      </if>
+      <if test="selectQuestionType != null">
+        #{selectQuestionType,jdbcType=BIT},
       </if>
       <if test="memo != null">
         #{memo,jdbcType=VARCHAR},
@@ -148,6 +168,12 @@
       </if>
       <if test="subjectId != null">
         subject_id = #{subjectId,jdbcType=INTEGER},
+      </if>
+      <if test="optionTheory != null">
+        option_theory = #{optionTheory,jdbcType=BIT},
+      </if>
+      <if test="selectQuestionType != null">
+        select_question_type = #{selectQuestionType,jdbcType=BIT}
       </if>
       <if test="memo != null">
         memo = #{memo,jdbcType=INTEGER},

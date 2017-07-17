@@ -48,6 +48,16 @@ public class Paper implements Serializable {
     private Date endTime;
 
     /**
+     * 0:理论考试 1:实际操作考试
+     */
+    private Integer optionTheory;
+
+    /**
+     * 选题方式 0:随机选题 1:手动选题
+     */
+    private Integer selectQuestionType;
+
+    /**
      * 备注
      */
     private String memo;
@@ -151,6 +161,22 @@ public class Paper implements Serializable {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+    public Integer getOptionTheory() {
+        return optionTheory;
+    }
+
+    public void setOptionTheory(Integer optionTheory) {
+        this.optionTheory = optionTheory;
+    }
+
+    public Integer getSelectQuestionType() {
+        return selectQuestionType;
+    }
+
+    public void setSelectQuestionType(Integer selectQuestionType) {
+        this.selectQuestionType = selectQuestionType;
     }
 
     public String getMemo() {
