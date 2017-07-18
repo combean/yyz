@@ -63,6 +63,10 @@ public class Paper implements Serializable {
      */
     private List<PaperQuestionType> paperQuestionTypes;
 
+    private Integer placeId;
+
+    private String placeName;
+
     /**
      * 备注
      */
@@ -191,6 +195,22 @@ public class Paper implements Serializable {
 
     public void setPaperQuestionTypes(List<PaperQuestionType> paperQuestionTypes) {
         this.paperQuestionTypes = paperQuestionTypes;
+    }
+
+    public Integer getPlaceId() {
+        return placeId;
+    }
+
+    public void setPlaceId(Integer placeId) {
+        this.placeId = placeId;
+    }
+
+    public String getPlaceName() {
+        return placeName;
+    }
+
+    public void setPlaceName(String placeName) {
+        this.placeName = placeName;
     }
 
     public String getMemo() {

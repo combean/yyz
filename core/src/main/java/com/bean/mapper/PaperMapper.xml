@@ -8,6 +8,8 @@
     <result column="exam_minutes" jdbcType="INTEGER" property="examMinutes" />
     <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
     <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="place_id" jdbcType="TIMESTAMP" property="placeId" />
+    <result column="place_name" jdbcType="TIMESTAMP" property="placeName" />
     <result column="subject_id" jdbcType="INTEGER" property="subjectId" />
     <result column="subject_name" jdbcType="VARCHAR" property="subjectName" />
     <result column="option_theory" jdbcType="VARCHAR" property="optionTheory" />
@@ -32,6 +34,9 @@
       <if test="paperType != null">
         AND p.paper_type = #{paperType,jdbcType=BIT}
       </if>
+      <if test="paperType != null">
+        AND p.place_id = #{placeId,jdbcType=INTEGER}
+      </if>
       <if test="examMinutes != null">
         AND p.exam_minutes = #{examMinutes,jdbcType=INTEGER}
       </if>
@@ -53,11 +58,11 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    paper_id, paper_name, subject_id, paper_type, exam_minutes, start_time, end_time, option_theory, select_question_type, memo, del,
+    paper_id, paper_name, subject_id, paper_type, exam_minutes, start_time, end_time, place_id, option_theory, select_question_type, memo, del,
     addname, addid, addtime, editname, editid, edittime
   </sql>
   <sql id="Column_List_With_Subject">
-    p.paper_id, p.paper_name, p.subject_id, s.subject_name, p.paper_type, p.exam_minutes, p.start_time, p.end_time, p.option_theory, p.select_question_type, p.memo, p.del,
+    p.paper_id, p.paper_name, p.subject_id, s.subject_name, p.paper_type, p.place_id, p1.place_name, p.exam_minutes, p.start_time, p.end_time, p.option_theory, p.select_question_type, p.memo, p.del,
     p.addname, p.addid, p.addtime, p.editname, p.editid, p.edittime
   </sql>
   <insert id="insert" parameterType="com.bean.model.Paper" useGeneratedKeys="true" keyProperty="paperId">
@@ -200,6 +205,7 @@
     <include refid="Column_List_With_Subject" />
     FROM exm_paper AS p
     INNER JOIN exm_subject AS s ON p.subject_id=s.subject_id
+    INNER JOIN exm_place AS p1 ON p.place_id=p1.place_id
     <include refid="where" />
   </select>
   <select id="getById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -213,6 +219,7 @@
     <include refid="Column_List_With_Subject" />
     FROM exm_paper AS p
     INNER JOIN exm_subject AS s ON p.subject_id=s.subject_id
+    INNER JOIN exm_place AS p1 ON p.place_id=p1.place_id
     <include refid="where" />
   </select>
   <select id="getCountByMap" parameterType="java.util.Map" resultType="int">
