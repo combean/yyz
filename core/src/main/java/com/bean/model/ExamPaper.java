@@ -38,6 +38,12 @@ public class ExamPaper implements Serializable {
      */
     private Date endTime;
 
+    private String placeName;
+
+    private String placeInfo;
+
+    private String subjectName;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getExamPaperId() {
@@ -102,5 +108,29 @@ public class ExamPaper implements Serializable {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+    public String getPlaceName() {
+        return placeName;
+    }
+
+    public void setPlaceName(String placeName) {
+        this.placeName = placeName;
+    }
+
+    public String getPlaceInfo() {
+        return placeInfo;
+    }
+
+    public void setPlaceInfo(String placeInfo) {
+        this.placeInfo = placeInfo;
+    }
+
+    public String getSubjectName() {
+        return subjectName;
+    }
+
+    public void setSubjectName(String subjectName) {
+        this.subjectName = subjectName;
     }
 }

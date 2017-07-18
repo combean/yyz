@@ -11,4 +11,8 @@ import org.apache.ibatis.annotations.Param;
 
 public interface ExamPaperMapper extends BaseMapper<ExamPaper> {
     int deleteByPaperId(Integer id) throws SQLException;
+
+    int deleteByExamId(Integer id) throws SQLException;
+
+    List<ExamPaper> getListByExamId(Integer id) throws SQLException;
 }

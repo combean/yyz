@@ -1,7 +1,9 @@
 package com.bean.service;
 
 import com.bean.dao.ExamMapper;
+import com.bean.dao.ExamPaperMapper;
 import com.bean.model.Exam;
+import com.bean.model.ExamPaper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utils.MyLogger;
@@ -16,6 +18,9 @@ public class ExamServiceImpl implements ExamService {
 
     @Autowired
     private ExamMapper examMapper;
+
+    @Autowired
+    private ExamPaperMapper examPaperMapper;
 
     private MyLogger LOGGER = new MyLogger(ExamServiceImpl.class);
 
@@ -53,5 +58,24 @@ public class ExamServiceImpl implements ExamService {
     @Override
     public Exam getByObj(Exam exam) throws SQLException {
         return examMapper.getByObj(exam);
+    }
+
+    @Override
+    public int insertExamPaper(Exam exam, List<ExamPaper> examPapers) throws SQLException {
+        examMapper.insert(exam);
+        for (ExamPaper ep: examPapers){
+            ep.setExamId(exam.getExamId());
+        }
+        return examPaperMapper.insertList(examPapers);
+    }
+
+    @Override
+    public int updateExamPaper(Exam exam, List<ExamPaper> examPapers) throws SQLException {
+        examMapper.update(exam);
+        for (ExamPaper ep: examPapers){
+            ep.setExamId(exam.getExamId());
+        }
+        examPaperMapper.deleteByExamId(exam.getExamId());
+        return examPaperMapper.insertList(examPapers);
     }
 }

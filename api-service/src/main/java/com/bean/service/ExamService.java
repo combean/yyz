@@ -1,6 +1,8 @@
 package com.bean.service;
 
 import com.bean.model.Exam;
+import com.bean.model.ExamPaper;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -61,4 +63,10 @@ public interface ExamService {
      * @throws SQLException
      */
     Exam getByObj(Exam exam) throws SQLException;
+
+    @Transactional
+    int insertExamPaper(Exam exam, List<ExamPaper> examPapers) throws SQLException;
+
+    @Transactional
+    int updateExamPaper(Exam exam, List<ExamPaper> examPapers) throws SQLException;
 }

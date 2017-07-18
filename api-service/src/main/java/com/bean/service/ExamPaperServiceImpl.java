@@ -48,4 +48,14 @@ public class ExamPaperServiceImpl implements ExamPaperService {
     public int getCountByMap(Map<String, Object> map) throws SQLException {
         return examPaperMapper.getCountByMap(map);
     }
+
+    @Override
+    public int deleteByExamId(Integer id) throws SQLException {
+        return examPaperMapper.deleteByExamId(id);
+    }
+
+    @Override
+    public List<ExamPaper> getListByExamId(Integer id) throws SQLException {
+        return examPaperMapper.getListByExamId(id);
+    }
 }

@@ -49,4 +49,14 @@ public interface ExamPaperService {
      * @return
      */
     int getCountByMap(Map<String, Object> map) throws SQLException;
+
+    /**
+     * 根据考试ID删除对应关系
+     * @param id 考试ID
+     * @return
+     * @throws SQLException
+     */
+    int deleteByExamId(Integer id) throws SQLException;
+
+    List<ExamPaper> getListByExamId(Integer id) throws SQLException;
 }
