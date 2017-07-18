@@ -1,6 +1,8 @@
 package com.bean.service;
 
+import com.bean.dao.ClassSubjectMapper;
 import com.bean.dao.UClassMapper;
+import com.bean.model.ClassSubject;
 import com.bean.model.UClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,9 @@ public class UClassServiceImpl implements UClassService {
 
     @Autowired
     private UClassMapper uClassMapper;
+
+    @Autowired
+    private ClassSubjectMapper classSubjectMapper;
 
     private MyLogger LOGGER = new MyLogger(UClassServiceImpl.class);
 
@@ -48,5 +53,24 @@ public class UClassServiceImpl implements UClassService {
     @Override
     public UClass getById(int id) throws SQLException{
         return uClassMapper.getById(id);
+    }
+
+    @Override
+    public int insertClassSubject(UClass uClass, List<ClassSubject> classSubjects) throws SQLException {
+        uClassMapper.insert(uClass);
+        for (ClassSubject cs: classSubjects) {
+            cs.setClassId(uClass.getClassId());
+        }
+        return classSubjectMapper.insertList(classSubjects);
+    }
+
+    @Override
+    public int updateClassSubject(UClass uClass, List<ClassSubject> classSubjects) throws SQLException {
+        uClassMapper.update(uClass);
+        for (ClassSubject cs: classSubjects) {
+            cs.setClassId(uClass.getClassId());
+        }
+        classSubjectMapper.deleteByClassId(uClass.getClassId());
+        return classSubjectMapper.insertList(classSubjects);
     }
 }

@@ -1,6 +1,9 @@
 package com.bean.service;
 
+import com.bean.model.ClassSubject;
 import com.bean.model.UClass;
+import org.apache.ibatis.jdbc.SQL;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -52,4 +55,10 @@ public interface UClassService {
      * @return
      */
     UClass getById(int id) throws SQLException;
+
+    @Transactional
+    int insertClassSubject(UClass uClass, List<ClassSubject> classSubjects) throws SQLException;
+
+    @Transactional
+    int updateClassSubject(UClass uClass, List<ClassSubject> classSubjects) throws SQLException;
 }
