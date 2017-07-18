@@ -53,6 +53,10 @@
     delete from exm_user_exam
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteByExamId" parameterType="java.lang.Integer">
+    delete from exm_user_exam
+    where exam_id = #{examId,jdbcType=INTEGER}
+  </delete>
   <select id="getListByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
     SELECT
     ue.user_exam_id, ue.user_id, ue.exam_id,

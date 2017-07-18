@@ -1,10 +1,7 @@
 package com.bean.springboot.controller;
 
 import com.bean.RSTFul.RSTFulBody;
-import com.bean.model.Exam;
-import com.bean.model.ExamPaper;
-import com.bean.model.Paper;
-import com.bean.model.ResultJson;
+import com.bean.model.*;
 import com.bean.service.ExamPaperService;
 import com.bean.service.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +56,16 @@ public class ExamContoller {
             examPaper.setPaperId(Integer.parseInt(pid));
             examPapers.add(examPaper);
         }
-        int i = examService.insertExamPaper(exam,examPapers);
+
+        String userIdsStr = request.getParameter("userIds");
+        String[] userIds = userIdsStr.split(",");
+        List<UserExam> userExams = new ArrayList<>();
+        for (String uid: userIds) {
+            UserExam userExam = new UserExam();
+            userExam.setUserId(Integer.parseInt(uid));
+            userExams.add(userExam);
+        }
+        int i = examService.insertExamPaper(exam,examPapers,userExams);
         if(i>0) resObject.setCode(1);
         else resObject.setCode(0);
         return resObject;
@@ -80,7 +86,15 @@ public class ExamContoller {
             examPaper.setPaperId(Integer.parseInt(pid));
             examPapers.add(examPaper);
         }
-        int i = examService.updateExamPaper(exam,examPapers);
+        String userIdsStr = request.getParameter("userIds");
+        String[] userIds = userIdsStr.split(",");
+        List<UserExam> userExams = new ArrayList<>();
+        for (String uid: userIds) {
+            UserExam userExam = new UserExam();
+            userExam.setUserId(Integer.parseInt(uid));
+            userExams.add(userExam);
+        }
+        int i = examService.updateExamPaper(exam,examPapers,userExams);
         if(i>0) resObject.setCode(1);
         else resObject.setCode(0);
         return resObject;

@@ -2,8 +2,10 @@ package com.bean.service;
 
 import com.bean.dao.ExamMapper;
 import com.bean.dao.ExamPaperMapper;
+import com.bean.dao.UserExamMapper;
 import com.bean.model.Exam;
 import com.bean.model.ExamPaper;
+import com.bean.model.UserExam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utils.MyLogger;
@@ -21,6 +23,9 @@ public class ExamServiceImpl implements ExamService {
 
     @Autowired
     private ExamPaperMapper examPaperMapper;
+
+    @Autowired
+    private UserExamMapper userExamMapper;
 
     private MyLogger LOGGER = new MyLogger(ExamServiceImpl.class);
 
@@ -61,21 +66,30 @@ public class ExamServiceImpl implements ExamService {
     }
 
     @Override
-    public int insertExamPaper(Exam exam, List<ExamPaper> examPapers) throws SQLException {
+    public int insertExamPaper(Exam exam, List<ExamPaper> examPapers, List<UserExam> userExams) throws SQLException {
         examMapper.insert(exam);
         for (ExamPaper ep: examPapers){
             ep.setExamId(exam.getExamId());
         }
+        for (UserExam ue:userExams) {
+            ue.setExamId(exam.getExamId());
+        }
+        userExamMapper.insertList(userExams);
         return examPaperMapper.insertList(examPapers);
     }
 
     @Override
-    public int updateExamPaper(Exam exam, List<ExamPaper> examPapers) throws SQLException {
+    public int updateExamPaper(Exam exam, List<ExamPaper> examPapers, List<UserExam> userExams) throws SQLException {
         examMapper.update(exam);
         for (ExamPaper ep: examPapers){
             ep.setExamId(exam.getExamId());
         }
+        for (UserExam ue:userExams) {
+            ue.setExamId(exam.getExamId());
+        }
+        userExamMapper.deleteByExamId(exam.getExamId());
         examPaperMapper.deleteByExamId(exam.getExamId());
+        userExamMapper.insertList(userExams);
         return examPaperMapper.insertList(examPapers);
     }
 }

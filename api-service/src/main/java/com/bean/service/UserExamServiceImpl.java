@@ -48,4 +48,9 @@ public class UserExamServiceImpl implements UserExamService {
     public int getCountByMap(Map<String,Object> map) throws SQLException {
         return userExamMapper.getCountByMap(map);
     }
+
+    @Override
+    public int deleteByExamId(Integer id) throws SQLException {
+        return userExamMapper.deleteByUserId(id);
+    }
 }

@@ -49,4 +49,6 @@ public interface UserExamService {
      * @return
      */
     int getCountByMap(Map<String,Object> map) throws SQLException;
+
+    int deleteByExamId(Integer id) throws SQLException;
 }
