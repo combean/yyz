@@ -143,7 +143,7 @@ public class PaperController {
     }
 
     @RequestMapping("/getPaperQuestions")
-    public Paper getPaperQuestions(String paperId,HttpServletRequest request) throws SQLException{
+    public Paper getPaperQuestions(String paperId,Integer answerType, HttpServletRequest request) throws SQLException{
 
         List<PaperQuestionType> paperQuestionTypes = paperQuestionTypeService.getListByPaperId(Integer.parseInt(paperId));
         for (PaperQuestionType pqt: paperQuestionTypes) {
@@ -157,7 +157,7 @@ public class PaperController {
                 questionIds+=pq.getQuestionId()+",";
             }
             questionIds = questionIds.substring(0,questionIds.length()-1);
-            List<Question> questions = getQuestions1(questionService.getListByIds(questionIds),0);
+            List<Question> questions = getQuestions1(questionService.getListByIds(questionIds),answerType);
             pqt.setQuestions(questions);
         }
         Paper paper = paperService.getById(Integer.parseInt(paperId));
