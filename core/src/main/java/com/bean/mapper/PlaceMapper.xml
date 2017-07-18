@@ -5,6 +5,7 @@
     <id column="place_id" jdbcType="INTEGER" property="placeId" />
     <result column="place_name" jdbcType="VARCHAR" property="placeName" />
     <result column="place_type" jdbcType="BIT" property="placeType" />
+    <result column="place_info" jdbcType="BIT" property="placeInfo" />
     <result column="memo" jdbcType="VARCHAR" property="memo" />
     <result column="del" jdbcType="BIT" property="del" />
     <result column="addname" jdbcType="VARCHAR" property="addname" />
@@ -15,7 +16,7 @@
     <result column="edittime" jdbcType="TIMESTAMP" property="edittime" />
   </resultMap>
   <sql id="Base_Column_List">
-    place_id, place_name, place_type, memo, del, addname, addid, addtime, editname, editid, edittime
+    place_id, place_name, place_type, place_info memo, del, addname, addid, addtime, editname, editid, edittime
   </sql>
   <sql id="where">
     <where>
@@ -39,6 +40,9 @@
       <if test="placeType != null">
         place_type,
       </if>
+      <if test="placeInfo != null">
+        place_info,
+      </if>
       <if test="memo != null">
         memo,
       </if>
@@ -58,6 +62,9 @@
       </if>
       <if test="placeType != null">
         #{placeType,jdbcType=INTEGER},
+      </if>
+      <if test="placeInfo != null">
+        #{placeInfo,jdbcType=VARCHAR},
       </if>
       <if test="memo != null">
         #{memo,jdbcType=VARCHAR},
@@ -81,6 +88,9 @@
       </if>
       <if test="placeType != null">
         place_type = #{placeType,jdbcType=INTEGER},
+      </if>
+      <if test="placeInfo != null">
+        place_info = #{placeInfo,jdbcType=VARCHAR},
       </if>
       <if test="memo != null">
         memo = #{memo,jdbcType=VARCHAR},

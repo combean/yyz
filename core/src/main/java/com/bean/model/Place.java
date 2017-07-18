@@ -19,6 +19,14 @@ public class Place implements Serializable {
      */
     private Integer placeType;
 
+    /**
+     * 考试地点详细描述
+     */
+    private String placeInfo;
+
+    /**
+     * 备注
+     */
     private String memo;
 
     /**
@@ -81,6 +89,14 @@ public class Place implements Serializable {
 
     public void setPlaceType(Integer placeType) {
         this.placeType = placeType;
+    }
+
+    public String getPlaceInfo() {
+        return placeInfo;
+    }
+
+    public void setPlaceInfo(String placeInfo) {
+        this.placeInfo = placeInfo;
     }
 
     public String getMemo() {
