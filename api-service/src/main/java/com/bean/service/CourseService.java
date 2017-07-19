@@ -1,6 +1,8 @@
 package com.bean.service;
 
 import com.bean.model.Course;
+import com.bean.model.CourseKnowledge;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -47,4 +49,10 @@ public interface CourseService {
     Integer getCountByMap(Map<String, Object> map) throws SQLException;
 
     Course getById(Integer id) throws SQLException;
+
+    @Transactional
+    int insertCourseKnowledge(Course course, List<CourseKnowledge> courseKnowledges) throws SQLException;
+
+    @Transactional
+    int updateCourseKnowledge(Course course, List<CourseKnowledge> courseKnowledges) throws SQLException;
 }

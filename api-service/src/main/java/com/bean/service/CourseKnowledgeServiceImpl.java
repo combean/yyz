@@ -30,7 +30,7 @@ public class CourseKnowledgeServiceImpl implements CourseKnowledgeService {
     }
 
     @Override
-    public int deleteByCourseId(Integer courseId) {
+    public int deleteByCourseId(Integer courseId) throws SQLException {
         return courseKnowledgeMapper.deleteByCourseId(courseId);
     }
 
@@ -47,5 +47,10 @@ public class CourseKnowledgeServiceImpl implements CourseKnowledgeService {
     @Override
     public int getCountByMap(Map<String, Object> map) throws SQLException {
         return courseKnowledgeMapper.getCountByMap(map);
+    }
+
+    @Override
+    public List<CourseKnowledge> getListByCourseId(Integer courseId) throws SQLException {
+        return courseKnowledgeMapper.getListByCourseId(courseId);
     }
 }

@@ -27,7 +27,7 @@ public interface CourseKnowledgeService {
      * @param courseId 课程ID
      * @return
      */
-    int deleteByCourseId(Integer courseId);
+    int deleteByCourseId(Integer courseId) throws SQLException;
 
     /**
      * 根据课程ID获取课程知识点对应关系List
@@ -49,4 +49,6 @@ public interface CourseKnowledgeService {
      * @return
      */
     int getCountByMap(Map<String, Object> map) throws SQLException;
+
+    List<CourseKnowledge> getListByCourseId(Integer courseId) throws SQLException;
 }

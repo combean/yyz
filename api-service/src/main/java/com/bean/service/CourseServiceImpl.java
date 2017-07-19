@@ -1,7 +1,9 @@
 package com.bean.service;
 
+import com.bean.dao.CourseKnowledgeMapper;
 import com.bean.dao.CourseMapper;
 import com.bean.model.Course;
+import com.bean.model.CourseKnowledge;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import utils.MyLogger;
@@ -16,6 +18,9 @@ public class CourseServiceImpl implements CourseService {
 
     @Autowired
     private CourseMapper courseMapper;
+
+    @Autowired
+    private CourseKnowledgeMapper courseKnowledgeMapper;
 
     private MyLogger LOGGER = new MyLogger(CourseServiceImpl.class);
 
@@ -48,5 +53,24 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course getById(Integer id) throws SQLException {
         return courseMapper.getById(id);
+    }
+
+    @Override
+    public int insertCourseKnowledge(Course course, List<CourseKnowledge> courseKnowledges) throws SQLException {
+        courseMapper.insert(course);
+        for (CourseKnowledge ck: courseKnowledges) {
+            ck.setCourseId(course.getCourseId());
+        }
+        return courseKnowledgeMapper.insertList(courseKnowledges);
+    }
+
+    @Override
+    public int updateCourseKnowledge(Course course, List<CourseKnowledge> courseKnowledges) throws SQLException {
+        courseMapper.update(course);
+        for (CourseKnowledge ck: courseKnowledges) {
+            ck.setCourseId(course.getCourseId());
+        }
+        courseKnowledgeMapper.deleteByCourseId(course.getCourseId());
+        return courseKnowledgeMapper.insertList(courseKnowledges);
     }
 }

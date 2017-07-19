@@ -2,6 +2,7 @@ package com.bean.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author 
@@ -26,6 +27,8 @@ public class Course implements Serializable {
      * 课程类型 0:分配可见 1:公开课程
      */
     private Integer courseType;
+
+    private List<CourseKnowledge> courseKnowledges;
 
     private String memo;
 
@@ -96,6 +99,14 @@ public class Course implements Serializable {
 
     public void setCourseType(Integer courseType) {
         this.courseType = courseType;
+    }
+
+    public List<CourseKnowledge> getCourseKnowledges() {
+        return courseKnowledges;
+    }
+
+    public void setCourseKnowledges(List<CourseKnowledge> courseKnowledges) {
+        this.courseKnowledges = courseKnowledges;
     }
 
     public String getMemo() {
